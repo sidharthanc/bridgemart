@@ -365,7 +365,7 @@ GEM
       activesupport (>= 3.0.0)
     query_diet (0.6.2)
     raabro (1.1.5)
-    rack (2.0.5)
+    rack (2.1.2)
     rack-attack (6.0.0)
       rack (>= 1.0, < 3)
     rack-heartbeat (1.1.0)
