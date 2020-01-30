@@ -1,0 +1,7 @@
+<section class="payment-details">
+  <% if payment_method.payment_type == :credit %>
+    <%= render 'credit', payment_method: payment_method %>
+  <% elsif payment_method.payment_type == :ach %>
+    <%= render 'ach', payment_method: payment_method %>
+  <% end %>
+</section>

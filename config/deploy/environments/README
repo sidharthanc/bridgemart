@@ -1,0 +1,1 @@
+Each file in here represent a distict env set up in azure, the values are used in the manifest creation to pass of to the individual pods

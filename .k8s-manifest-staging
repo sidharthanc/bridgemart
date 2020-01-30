@@ -1,0 +1,133 @@
+---
+# Rails Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: "bridgepurchasing.azurecr.io/bridge-rails-orders-csv-correction:b3a25c434678cf43fdff3ad30c10e11405fb14fb"
+        resources:
+          requests:
+            memory: "800Mi"
+          limits:
+            memory: "1Gi"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RAILS_MASTER_KEY
+          value: "75bb9055a57efe2c671cc5cf39950c72"
+        - name: RAILS_ENV
+          value: "staging"
+        - name: AZURE_STORAGE_CONTAINER
+          value: "staging"
+        - name: CONFIGURED_HOSTNAME
+          value: "bridge-purchasing-staging.eastus.cloudapp.azure.com"
+        - name: RAILS_LOG_TO_STDOUT
+          value: "1"
+        - name: MALLOC_ARENA_MAX
+          value: "2"
+        envFrom:
+        - secretRef:
+            name: env-credentials  
+        readinessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 20
+          timeoutSeconds: 2
+          successThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 3000
+      imagePullSecrets:
+      - name: acr-auth
+---
+# Internal service to provide access to the Rails containers
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+spec:
+  ports:
+  - port: 3000
+  selector:
+    app: webapp
+---
+# Sidekiq Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sidekiq
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sidekiq
+    spec:
+      containers:
+      - name: sidekiq
+        image: "bridgepurchasing.azurecr.io/bridge-rails-orders-csv-correction:b3a25c434678cf43fdff3ad30c10e11405fb14fb"
+        command: ["bin/sidekiq", "-e", "staging", "-c", "10"]
+        env:
+        - name: RAILS_MASTER_KEY
+          value: "75bb9055a57efe2c671cc5cf39950c72"
+        - name: RAILS_ENV
+          value: "staging"
+        - name: AZURE_STORAGE_CONTAINER
+          value: "staging"
+        - name: CONFIGURED_HOSTNAME
+          value: "bridge-purchasing-staging.eastus.cloudapp.azure.com"
+        - name: MALLOC_ARENA_MAX
+          value: "2"
+        envFrom:
+        - secretRef:
+            name: env-credentials              
+      imagePullSecrets:
+      - name: acr-auth
+---
+# NGINX Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: "metova/nginx:1.0.7"
+        ports:
+        - containerPort: 80
+          name: nginx
+---
+# Load balancer config (port 80 -> NGINX)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - port: 80
+  selector:
+    app: nginx

@@ -1,0 +1,28 @@
+<section class="enrollment-header">
+  <div class="container">
+    <%= render 'shared/enrollment/nav', navigation: navigation %>
+    <h1><%= t '.header' %></h1>
+  </div>
+</section>
+
+<div class="container">
+  <section class="enrollment-section enrollment-section--top">
+    <div class="section-name">
+    </div>
+    <div class="section-content">
+      <a name="mode-choices"></a>
+      <div class="enrollment-card-choices">
+        <%= render 'mode_choice', mode: :manual %>
+        <%= render 'mode_choice', mode: :csv %>
+        <%= render 'mode_choice', mode: :search %>
+      </div>
+    </div>
+  </section>
+</div>
+
+<a name="member-form"></a>
+<%= render layout: params.fetch(:mode, 'manual') do %>
+ <div id="enable_complete_billing_button">
+  <%= link_to t('.complete'), navigation.next_path, class: "btn btn-wide btn-primary #{'disabled' unless @order&.has_members?}" %>
+ </div>
+<% end %>

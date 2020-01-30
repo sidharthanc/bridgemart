@@ -1,0 +1,16 @@
+attributes:
+  - content
+  - foreign_key
+disconnected: true
+filename: bridge-purchasing-platform-erd
+filetype: pdf
+indirect: true
+inheritance: false
+orientation: horizontal
+polymorphism: false
+sort: false
+warn: true
+title: Bridge Purchasing
+exclude: Audited::Audit, ActiveStorage::Attachment, ActiveStorage::Blob, ActiveAdmin::Comment
+prepend_primary: true
+cluster: true

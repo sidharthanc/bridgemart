@@ -1,0 +1,17 @@
+@import 'colors';
+
+.has-error {
+  color: $red-error-color;
+}
+
+input.invalid-input-error {
+  border-color: $red-error-color;
+}
+
+.user-search {
+  @include search-form;
+
+  select {
+    width: 50em;
+  }
+}

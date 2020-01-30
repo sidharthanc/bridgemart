@@ -1,0 +1,7 @@
+<%= semantic_form_for [:admin, @division], builder: ActiveAdmin::FormBuilder do |f| %>
+  <% f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :logo, as: :file %>
+    <%= f.actions %>
+  <% end %>
+<% end %>

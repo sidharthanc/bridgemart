@@ -1,0 +1,28 @@
+.enrollment-header {
+  background-color: $white;
+  padding: 2em 0;
+
+  span.text-space {
+    margin-left: .50rem;
+  }
+
+  h1 {
+    font-size: 2em;
+    font-weight: normal;
+    margin: 0;
+  }
+
+  nav {
+    @include make-row();
+    margin-bottom: 1rem;
+
+    :first-child, :last-child {
+      @include make-col-ready();
+      @include make-col(6);
+    }
+
+    :last-child {
+      text-align: left;
+    }
+  }
+}

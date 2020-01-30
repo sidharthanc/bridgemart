@@ -1,0 +1,12 @@
+<div class="dashboard-header">
+  <nav>
+    <ul>
+      <li>
+        <%= active_link_to t('layouts.dashboard.nav.billing'), organization_orders_path(current_organization), activate: [:self, organization_orders_path(current_organization)] %>
+      </li>
+      <li>
+        <%= active_link_to t('layouts.dashboard.nav.payment_methods'), organization_payment_methods_path(current_organization), activate: [:self, organization_payment_methods_path(current_organization)] %>
+      </li>
+    </ul>
+  </nav>
+</div>

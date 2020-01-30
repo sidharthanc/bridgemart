@@ -1,0 +1,17 @@
+== Plans
+bundle exec rake erd filename=bridge-plans\
+  title='Bridge - Plans'\
+  only=Plan,Organization,PlanProductCategory,ProductCategory,Division,PricePoint,SpecialOffer,RedemptionInstruction,Order,LineItem
+== Users/Organization
+bundle exec rake erd filename=bridge-organization\
+  title='Bridge - Users/Organization'\
+  only=User,Permission,PermissionGroup,PermissionGroupOwnership,Organization,OrganizationUser,Signature,CommercialAgreement,Plan
+== Purchasing
+bundle exec rake erd filename=bridge-purchasing\
+  title='Bridge - Purchasing'\
+  only=Organization,Order,Plan,Fee,PaymentMethod,BillingContact,CreditPurchase,Credit,Member,Address,Code
+
+
+== Full
+bundle exec rake erd filename=bridge-full\
+  title='Bridge Platform'\

@@ -1,0 +1,9 @@
+<%= semantic_form_for [:admin, @organization], builder: ActiveAdmin::FormBuilder do |f| %>
+  <% f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :logo, as: :file, input_html: { accept: 'image/*' } %>
+    <%= f.input :purchase_instructions %>
+    <%= f.input :primary_user %>
+    <%= f.actions %>
+  <% end %>
+<% end %>

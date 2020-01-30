@@ -1,0 +1,36 @@
+<%= in_layout :application do %>
+  <% content_for :header do %>
+    <nav class="navbar navbar-expand-lg enrollment-nav">
+      <%= link_to root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'bridge-tri-color-logo.png' %>
+      <% end %>
+
+      <div class="page-title">
+        <span><%= current_user.present? ? (t '.create_order') : (t '.page_title') %></span>
+      </div>
+
+      <% if signed_in? %>
+        <%= render 'shared/user_controls' %>
+      <% else %>
+        <div class="customer-care">
+          <span>
+            <em><%= t '.customer_care' %></em> <%= t '.customer_care_phone' %>
+          </span>
+        </div>
+      <% end %>
+    </nav>
+
+    <div class="enrollment-progress container">
+      <ul>
+        <li><%= link_to t('.nav.organization'), new_enrollment_sign_up_path if @plan %></li>
+        <% if @order %>
+          <li><%= link_to t('.nav.products'), edit_enrollment_order_path(@order) %></li>
+          <li><%= (@order.ends_on?) ? (link_to t('.nav.members'), new_enrollment_order_member_path(@order)) : (t('.nav.members')) %></li>
+          <li><%= (@order.has_members?) ? (link_to t('.nav.billing'), new_enrollment_order_payment_path(@order)) : (t('.nav.billing')) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= yield %>
+<% end %>

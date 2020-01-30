@@ -1,0 +1,32 @@
+logan:
+  first_name: Logan
+  middle_name: Coyote
+  last_name: Serman
+  email: logan.serman@metova.com
+  order: metova
+  authentication_token: logan123
+  phone: (123) 456-7890
+
+kaleb:
+  first_name: Kaleb
+  middle_name: Thor
+  last_name: Lape
+  email: kaleb.lape@metova.com
+  order: metova
+  authentication_token: kaleb123
+  phone: (234) 567-8901
+
+angelita:
+  first_name: Angelita
+  last_name: Graves
+  email: angelita.graves@metova.com
+  order: metova
+  authentication_token: angelita123
+
+bread:
+  first_name: Brad
+  middle_name: Rye-Bread
+  last_name: Jones
+  email: brad.jones@metova.com
+  order: 
+

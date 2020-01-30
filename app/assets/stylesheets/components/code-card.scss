@@ -1,0 +1,88 @@
+@import 'colors';
+
+$code-card-max-width: 400px;
+$code-card-min-width: 270px;
+
+.code-cards {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  a {
+    display: block;
+    margin-bottom: 1em;
+    width: 100%;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.multiple-code-cards {
+  display: flex;
+  flex-direction: row;
+
+  ul, ol {
+    margin-left: 1rem;
+  }
+
+  .card-section {
+    box-shadow: 0px 1px 3px 0px rgba(215, 230, 235, 1);
+    max-width: 50%;
+    min-width: 50%;
+    padding: 1rem;
+  }
+}
+
+.code-card {
+  @extend .card;
+  box-shadow: 0px 1px 3px 0px rgba(215, 230, 235, 1);
+  max-width: $code-card-max-width;
+  min-width: $code-card-min-width;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem;
+
+  .code-card-content {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .code-title {
+    font-size: 1.9rem;
+  }
+
+  .code-buys-header {
+    margin-top: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .price-point-verbiage {
+    margin-bottom: 0.5rem;
+  }
+
+  .code-pricing {
+    .code-limit {
+      font-size: 1.75rem;
+    }
+
+    .code-exp-date {
+      display: block;
+      color: $light-gray-font-color;
+      font-size: $small-font-size;
+      font-weight: bold;
+
+      &:before {
+        content: 'EXP ';
+      }
+    }
+  }
+
+  .code-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

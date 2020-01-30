@@ -1,0 +1,19 @@
+<h2 class="login-welcome">Edit <%= resource_name.to_s.humanize %></h2>
+
+<div class="login-backsplash">
+  <div class="login-form">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+      <%= f.input :password, autocomplete: "new-password", hint: I18n.t('devise.registrations.new_password_hint') %>
+
+      <%= f.input :password_confirmation, autocomplete: "new-password" %>
+
+      <%= f.input :current_password, autocomplete: "current-password", hint: I18n.t('devise.registrations.old_password_hint') %>
+
+      <div class="actions">
+        <%= link_to I18n.t('devise.registrations.back'), :back, class: 'btn btn-gray btn-wide btn-red-text' %>
+        <%= f.submit I18n.t('devise.registrations.update'), class: 'btn btn-gray btn-wide' %>
+      </div>
+    <% end %>
+  </div>
+</div>

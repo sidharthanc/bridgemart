@@ -1,0 +1,12 @@
+<div class="dashboard-header">
+  <header>
+    <%= current_organization.name %>
+  </header>
+  <nav>
+    <ul>
+      <% if policy(member).edit? %>
+        <li><%= active_link_to t('.details'), edit_member_path(member), activate: [:self, member_path(member)] %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,27 @@
+payment_job_success:
+  service: PaymentJob
+  action: authorize
+  successful_at: 2019-01-03T09:20:19-08:00
+
+payment_job_failure:
+  service: PaymentJob
+  action: authorize
+  failure_at: 2019-01-03T09:20:19-08:00
+
+eml:
+  service: Eml
+  action: freeze
+  successful_at: 2019-01-03T09:20:19-08:00
+
+closed_loop_activate_success:
+  service: ClosedLoop
+  action: activate
+  message: OK
+  successful_at: 2019-01-03T09:20:19-08:00
+
+closed_loop_activate_failure:
+  service: ClosedLoop
+  action: activate
+  message: success
+  failure_at: 2019-01-03T09:20:19-08:00
+  metadata: '{"error_message": "Invalid MID"}'

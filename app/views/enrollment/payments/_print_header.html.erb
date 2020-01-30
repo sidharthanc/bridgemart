@@ -1,0 +1,26 @@
+<div class="container print-header">
+  <div class="row">
+    <div class="col-md-6">
+      <%= image_tag 'bridge-tri-color-logo.png' %>
+    </div>
+    <div class="col-md-6 text-right">
+      <% if order %>
+        <h3><%= t('layouts.enrollment.print_form.invoice') %></h3>
+        <p><%= t('layouts.enrollment.print_form.invoice_no', id: order.id) %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 address">
+      <p><%= t('layouts.enrollment.print_form.address.bridge_mart') %><br>
+      <%= t('layouts.enrollment.print_form.address.po_box') %><br>
+      <%= t('layouts.enrollment.print_form.address.city_state') %><br>
+      <%= t('layouts.enrollment.print_form.address.country') %></p>
+    </div>
+    <div class="col-md-6 text-right">
+      <% if order %>
+        <p><%= order.balance_due.format %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="dropdown">
+  <button class="btn-pill dropdown-toggle" type="button" data-toggle="dropdown">
+    <%= policy(code).lock? ? (t 'codes.lock') : (t 'codes.unlock') %>
+  </button>
+  <div class="dropdown-menu">
+    <h6 class="dropdown-header"><%= t '.reason' %></h6>
+    <% (policy(code).lock? ? Code::LOCK_REASONS : Code::UNLOCK_REASONS).each do |reason| %>
+      <%= link_to t("codes.#{reason}"), policy(code).lock? ? lock_code_path(code, reason: reason) : unlock_code_path(code, reason: reason), method: :post, class: 'dropdown-item', data: { behavior: 'no-expand', confirm: t('confirm') } %>
+    <% end %>
+  </div>
+</div>
+
+<% if policy(code).deactivate? && code.active? %>
+  <%= link_to t("codes.deactivate"), deactivate_code_path(code), method: :patch, class: 'btn-pill btn-outline-danger', data: { behavior: 'no-expand', confirm: t('confirm') } %>
+<% end %>

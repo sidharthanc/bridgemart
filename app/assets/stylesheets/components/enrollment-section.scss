@@ -1,0 +1,171 @@
+@import '../colors';
+
+.enrollment-section {
+  @include make-row();
+  padding-bottom: 4em;
+
+  &--top {
+    padding-top: 4em;
+  }
+
+  .section-name, .section-content {
+    @include make-col-ready();
+    display: flex;
+    flex-direction: column;
+
+    .product-description, .redemption-instruction {
+      font-size: 125%;
+
+      .bi-tooltip, .ri-tooltip {
+        position: relative;
+        display: inline-block;
+        color: white;
+        background-color: $primary-color;
+        border-radius: 50%;
+        font-weight: bolder;
+        text-align: center;
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+
+      .bi-tooltip .bi-tooltiptext, .ri-tooltip .ri-tooltiptext {
+        visibility: hidden;
+        width: 15rem;
+        background-color: $primary-color;
+        color: white;
+        text-align: left;
+        padding: 0.5rem;
+        box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+        border-radius: 0.25rem;
+
+        /* Position the tooltip */
+        position: absolute;
+        top: 2rem;
+        left: -0.185rem;
+        z-index: 1;
+      }
+
+      .bi-tooltip:hover .bi-tooltiptext, .ri-tooltip:hover .ri-tooltiptext {
+        visibility: visible;
+      }
+    }
+  }
+
+  .section-name {
+    @include make-col(4);
+
+    & > * {
+      flex-basis: 0;
+      flex-grow: 1;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    &__logo {
+      align-items: center;
+      justify-content: center;
+
+      img {
+        flex: none;
+        width: 100px;
+      }
+    }
+  }
+
+  .section-content {
+    @include make-col(8);
+
+    .special-offer {
+      @include make-row();
+      @include make-col-ready();
+
+      .check-box-content {
+        @include make-col(8);
+      }
+
+      .image {
+        @include make-col(4);
+      }
+    }
+
+    &--right {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.enrollment-footer {
+  padding-top: 4em;
+  background-color: $white;
+  @extend .enrollment-section--top;
+
+  .enrollment-footer-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.print-header {
+  display: none;
+}
+
+.print-btn {
+  min-width: 60px;
+
+  &.btn {
+      border: none;
+
+    &:hover {
+      border: none;
+    }
+  }
+
+  &__icon {
+    font-size: 2em;
+  }
+}
+
+@media print {
+  .enrollment-nav .page-title,
+  .enrollment-progress.container,
+  nav a,
+  .current-user,
+  .billing-method,
+  .billing-contact,
+  hr.my-4,
+  .section-content.billing-methods,
+  .payment_email,
+  .payment_first_name,
+  .payment_last_name,
+  .enrollment-terms-conditions,
+  .print-btn,
+  .enrollment-footer,
+  .section-content.billing-content,
+  .dashboard-nav,
+  abbr {
+    display: none;
+  }
+  input#payment_po_number,
+  #payment_street1,
+  #payment_street2,
+  #payment_city,
+  #payment_state,
+  #payment_zip {
+    background-color: #f6f9fa;
+    border: none;
+  }
+  .print-header {
+    display: block;
+    img {
+      height: 74px;
+    }
+  }
+  .address p {
+    float: left;
+  }
+}

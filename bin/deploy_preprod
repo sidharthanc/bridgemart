@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# FIXME: Move bridge-rails,bridge into ENV or somethin
+az aks get-credentials --resource-group bridge-pre-prod --name bridge-k8s-pre-prod
+kubectl apply -f -

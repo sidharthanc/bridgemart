@@ -1,0 +1,26 @@
+<div class="index-table-container">
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= sort_link(@search, :id, (t 'organizations.codes.id'), { action: "codes" }, { remote: true }) %></th>
+        <th><%= t 'organizations.codes.external_id' %></th>
+        <th><%= t 'organizations.codes.invoice_id' %></th>
+        <th><%= t 'organizations.codes.product_category' %></th>
+        <th><%= sort_link(@search, :created_at, (t 'organizations.codes.purchase_date'), { action: "codes" }, { remote: true }) %></th>
+        <th><%= t 'organizations.codes.balance' %></th>
+        <th><%= t 'organizations.codes.status' %></th>
+        <th><%= t 'organizations.codes.delivered' %></th>
+        <th><%= t 'organizations.codes.actions' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @codes.none? %>
+      <tr>
+        <td colspan="99"><%= t('organizations.codes.no_codes') %></td>
+      </tr>
+      <% end %>
+      <%= render partial: 'codes/codes', collection: @codes, as: :code, cached: true %>
+    </tbody>
+  </table>
+</div>
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

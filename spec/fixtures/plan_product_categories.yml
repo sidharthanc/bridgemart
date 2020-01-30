@@ -1,0 +1,15 @@
+DEFAULTS: &DEFAULTS
+  plan: metova
+  product_category: $LABEL
+
+exam:
+  <<: *DEFAULTS
+  budget_cents: 6000
+
+fashion:
+  <<: *DEFAULTS
+  budget_cents: 14500
+
+safety:
+  <<: *DEFAULTS
+  budget_cents: 9000

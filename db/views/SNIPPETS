@@ -1,0 +1,18 @@
+
+
+# Pending Orders
+COALESCE(pending_orders.status, ) as account_status
+RIGHT OUTER JOIN (SELECT 'pending' as status, orders.id
+                      FROM orders 
+                      INNER JOIN plans ON plans.id = orders.plan_id
+                      WHERE orders.plan_id = plans.id
+                        AND orders.processed_at IS NOT NULL
+                        AND orders.paid_at IS NULL) as pending_orders
+
+
+
+
+# Member Import Errors
+      COALESCE(sum(member_import_errors.unacknowledged_error_count), 0) as member_import_errors,
+    
+    LEFT OUTER JOIN (SELECT count(id) as unacknowledged_error_count, order_id FROM member_imports WHERE member_imports.acknowledged is FALSE AND member_imports.problems IS NOT NULL GROUP BY order_id) member_import_errors ON orders.id = member_import_errors.order_id 

@@ -1,0 +1,27 @@
+:queues:
+  - high
+  - default
+  - mailers
+  - low
+  - scheduled
+:schedule:
+  eml_transaction_history:
+    enabled: <%= ENV.fetch('SIDEKIQ_SCHEDULED_JOBS_ENABLED', true) %>
+    cron: '0 0 7 * * *' # Every day at 7AM
+    class: EML::BatchTransactionHistoryJob
+  activate_orders:
+    enabled: <%= ENV.fetch('SIDEKIQ_SCHEDULED_JOBS_ENABLED', true) %>
+    cron: '0 0 4 * * *' # Every day at 4AM
+    class: Orders::GenerateCodesForActiveOrdersJob
+  eml_code_expirator:
+    enabled: <%= ENV.fetch('SIDEKIQ_SCHEDULED_JOBS_ENABLED', true) %>
+    cron: '0 0 1 * * *' # Every day at 1AM
+    class: EML::BatchExpireCardJob
+  first_data_balance_inquiry:
+    enabled: <%= ENV.fetch('SIDEKIQ_SCHEDULED_JOBS_ENABLED', true) %>
+    cron: '0 0 6 * * *' # Every day at 6AM
+    class: FirstData::BatchBalanceInquiryJob
+  orders_delete_pending_orders:
+    enabled: false
+    cron: '0 0 2 * * *' # Every day at 2AM
+    class: Orders::DeletePendingOrdersJob

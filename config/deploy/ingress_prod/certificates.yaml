@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: tls-secret
+spec:
+  secretName: tls-secret
+  dnsNames:
+  - bridgevision-prod.eastus.cloudapp.azure.com
+  - order.bridgepo.com
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - bridgevision-prod.eastus.cloudapp.azure.com
+      - order.bridgepo.com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

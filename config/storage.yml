@@ -1,0 +1,30 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+staging:
+  service: AzureStorage
+  storage_account_name: bridgestaging
+  storage_access_key: <%= Rails.application.credentials.dig(Rails.env.to_sym, :azure, :storage_key) %>
+  container: <%= ENV['AZURE_STORAGE_CONTAINER'] || 'staging' %>
+
+release:
+  service: AzureStorage
+  storage_account_name: bridgerelease
+  storage_access_key: <%= Rails.application.credentials.dig(Rails.env.to_sym, :azure, :storage_key) %>
+  container: release
+
+production:
+  service: AzureStorage
+  storage_account_name: bridgestorageprod
+  storage_access_key: <%= Rails.application.credentials.dig(Rails.env.to_sym, :azure, :storage_key) %>
+  container: production
+
+# mirror:
+#   service: Mirror
+#   primary: local
+#   mirrors: [ amazon, google, microsoft ]

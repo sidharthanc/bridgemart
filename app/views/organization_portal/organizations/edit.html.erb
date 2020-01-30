@@ -1,0 +1,80 @@
+<%= simple_form_for @organization, url: organization_organization_path(current_organization) do |f| %>
+  <div class="dashboard-form">
+    <fieldset class="organization-section organization-section--top">
+      <legend class="no-scroll"><%= t('.billing_contact') %></legend>
+      <div class="inputs-50">
+        <%= f.input :contact_phone, input_html: { class: 'masked-phone' }, required: false, disabled: @disable_fields %>
+      </div>
+    </fieldset>
+
+    <fieldset class="organization-section">
+      <legend>
+        <%= t('.organization_info') %>
+      </legend>
+      <div class="inputs-span-33">
+        <%= f.input :organization_name, disabled: @disable_fields %>
+      </div>
+      <div class="inputs-span-33">
+        <%= f.input :organization_industry, as: :select, collection: SignUp::INDUSTRIES, disabled: @disable_fields %>
+      </div>
+      <div class="inputs-50">
+        <%= f.input :organization_number_of_employees, as: :select, collection: SignUp::EMPLOYEE_COUNT_RANGES, required: false, disabled: @disable_fields %>
+      </div>
+      <div class="inputs-50">
+        <%= f.input :number_of_employees_with_safety_rx_eyewear, as: :select, collection: SignUp::EMPLOYEE_COUNT_RANGES, required: false, disabled: @disable_fields %>
+      </div>
+    </fieldset>
+
+    <fieldset class="organization-section">
+      <legend>
+        <%= t('.organization_address') %>
+      </legend>
+      <div class="inputs-span-100">
+        <%= f.input :street1  %>
+      </div>
+      <div class="inputs-span-100">
+        <%= f.input :street2, required: false %>
+      </div>
+      <div class="inputs-50">
+        <%= f.input :city %>
+        <%= f.input :state, as: :states %>
+      </div>
+      <div class="inputs-50">
+        <%= f.input :zip %>
+      </div>
+    </fieldset>
+
+
+    <% unless @disable_fields %>
+      <hr class="my-4"/>
+
+      <section class="organization-footer">
+        <div class="container">
+          <div class="organization-section">
+            <div class="section-name">
+            </div>
+            <div class="section-content">
+              <div class="organization-footer-actions">
+                <%= f.submit class: 'btn btn-wide btn-primary' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <% end %>
+  </div>
+<% end %>
+<script>
+  $('#organization_portal_organization_organization_number_of_employees').on("change", function () {
+    update_approx_employees_with_safety_prescription_eyewear_count();
+  });
+  function update_approx_employees_with_safety_prescription_eyewear_count(){
+    var count_index = $('#organization_portal_organization_organization_number_of_employees option:selected').index();
+    var count_option = ['Less than 100', '100-500', '500-1000', '1000-5000', '5000+'].slice(0, count_index);
+    $('#organization_portal_organization_number_of_employees_with_safety_rx_eyewear').empty();
+    $.each(count_option, function (key, value) {
+      $('#organization_portal_organization_number_of_employees_with_safety_rx_eyewear').append($("<option></option>").attr("value", key).text(value));
+    });
+  }
+  update_approx_employees_with_safety_prescription_eyewear_count();
+</script>

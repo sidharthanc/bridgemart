@@ -1,0 +1,59 @@
+@import '../colors';
+
+.input_hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.selected {
+  background-color: #ccc;
+}
+
+.enrollment-organization-product-categories {
+  @include make-row();
+
+  .inline {
+    @include make-col-ready();
+    @include make-col(4);
+  }
+
+  label {
+    display: inline-block;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $white;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-weight: bold;
+    border-radius: $border-radius;
+    border: 2px solid $white;
+
+    &.selected {
+      border: 2px solid $primary-color;
+    }
+  }
+}
+
+.error-message {
+  color: #dc3545;
+}
+
+.tooltip.product-category-tooltip {
+  &.show {
+    opacity: 1;
+  }
+
+  .tooltip-inner {
+    box-shadow: 0px 1px 3px 0px #d7e6eb;
+    background-color: white;
+    color: black;
+    text-align: left;
+    max-width: 400px;
+  }
+}
+
+.organization-search {
+  @include search-form;
+}

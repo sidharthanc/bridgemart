@@ -1,0 +1,30 @@
+<section class="credit-history">
+  <h2 class="credit-history__header">
+    <%= t '.header' %>
+  </h2>
+
+  <div class="credit-history__controls">
+    <div class="credit-history__advanced-search-form">
+      <%= search_form_for @search, url: advanced_search_organization_credits_path(current_organization) do |f| %>
+        <div class="form-group">
+          <%=  f.label t '.labels.created_at' %>
+          <div class="row">
+            <div class="col">
+              <%=  f.label :created_at_gteq, t('.labels.start_date') %>
+              <%= f.search_field :created_at_gteq, class: 'form-control input-sm', type: :date, value: params.dig(:q, :created_at_gteq) %>
+            </div>
+            <div class="col">
+              <%=  f.label :created_at_lteq, t('.labels.end_date') %>
+              <%= f.search_field :created_at_lteq, class: 'form-control input-sm', type: :date, value: params.dig(:q, :created_at_lteq)&.to_date %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" id="credit-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'search_table', results: @history %>
+</section>

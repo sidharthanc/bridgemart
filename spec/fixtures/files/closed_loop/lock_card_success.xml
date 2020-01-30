@@ -1,0 +1,12 @@
+<!DOCTYPE Response SYSTEM "dwxmlapi3.dtd">
+<Response Version="3">
+ <RespClientID>
+  <DID>00033232230868286473</DID>
+  <ClientRef>99026809996</ClientRef>
+ </RespClientID>
+ <Status StatusCode="OK"></Status>
+ <TransactionResponse>
+  <ReturnCode>000</ReturnCode>
+  <Payload>40|1C0900|1C11528130|1C38212546|1C3900|1C75500|1C76500|1C707777165452249042|1CA001013025|1C42990268099968594|1C4400000000000|1CF62003|1C7FTaco|1CB00|1C780|1CC0840</Payload>
+ </TransactionResponse>
+</Response>

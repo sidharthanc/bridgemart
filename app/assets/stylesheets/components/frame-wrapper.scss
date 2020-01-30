@@ -1,0 +1,32 @@
+.frame-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  max-width: 400px;
+  width: 100%;
+
+  &--white {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+    background-color: #fff;
+
+    @media print {
+      border: 0;
+    }
+  }
+
+  .barcode-iframe {
+    width: 336px;
+    height: 115px;
+    margin: 40px auto 0;
+  }
+
+  .card-iframe {
+    width: 100%;
+    height: 100px;
+  }
+
+  iframe {
+    border: 0;
+  }
+}

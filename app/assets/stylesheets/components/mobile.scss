@@ -1,0 +1,23 @@
+.mobile-header {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-size: 1.33rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-style: italic;
+  }
+
+  .page-logo {
+    img {
+      height: 50px;
+      width: auto;
+    }
+  }
+}

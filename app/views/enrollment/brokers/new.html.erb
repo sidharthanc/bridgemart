@@ -1,0 +1,45 @@
+<section class="enrollment-header">
+  <div class="container">
+    <h1><%= t('.create_broker_account') %></h1>
+    <div><i><%= t('.employer_redirect') %></i><span class="text-space"><%= link_to t('.create_employer_account_link'), new_enrollment_sign_up_path %></span></div>
+  </div>
+</section>
+
+<%= simple_form_for [:enrollment, @broker] do |f| %>
+  <div class="container">
+    <section class="enrollment-section enrollment-section--top">
+      <div class="section-name">
+        <h2 class="no-scroll"><%= t('.your_info') %></h2>
+      </div>
+      <div class="section-content">
+        <div class="inputs-33">
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+        </div>
+        <div class="inputs-span-33">
+          <%= f.input :email %>
+        </div>
+        <div class="inputs-50">
+          <%= f.input :broker_organization_name %>
+        </div>
+        <div class="inputs-50">
+          <%= f.input :phone, input_html: { class: 'optional-field masked-phone' }, hint: t('users.phone_number_hint') %>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="enrollment-footer">
+    <div class="container">
+      <div class="enrollment-section">
+        <div class="section-name">
+        </div>
+        <div class="section-content">
+          <div class="enrollment-footer-actions">
+            <%= f.submit t('enrollment.create_account'), class: 'btn btn-wide btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

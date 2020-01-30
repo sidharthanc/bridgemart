@@ -1,0 +1,29 @@
+<h2><%= t('.header') %></h2>
+
+<%= link_to t('.buttons.new'), new_organization_credit_purchase_path(@organization), class: 'btn btn-gray' %>
+
+<div class="index-table-container">
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t '.labels.po_number' %></th>
+        <th><%= t '.labels.payment_method' %></th>
+        <th><%= t '.labels.amount' %></th>
+        <th><%= t '.labels.updated' %></th>
+        <th><%= t '.labels.error_message' %></th>
+        <th><%= t '.labels.processing' %></th>
+        <th><%= t '.labels.status' %></th>
+        <th><%= t '.labels.actions' %></th>
+      </tr>
+    </thead>
+    <tbody id="credit-purchase-records">
+      <%= render @credit_purchases %>
+    </tbody>
+  </table>
+</div>
+
+<% if current_organization.credit_purchases.any? %>
+  <%= link_to t('.export'), export_organization_credit_purchases_path(current_organization, format: :csv, params: request.query_parameters), class: 'add-action btn btn-outline-primary' %>
+<% end %>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

@@ -1,0 +1,95 @@
+<div class="container dashboard-cards">
+  <h2><%= t('multiple_organizations', count: @overview.count, enrolled: @overview.enrolled) %></h2>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col dashboard-cards__credits">
+      <span>
+        <%= t '.credits_available' %>
+      </span>
+      <span class="dashboard-cards__credits-amount">
+        <%= @overview.credit_total.format %>
+      </span>
+    </div>
+  </div>
+  <div class="dashboard-cards__row">
+    <div class="col-md-6 budget-card-container">
+      <%= render 'card', title: t('.budget.title'), feature: t('.budget.total', amount: @overview.budget_total_formatted) do %>
+        <pie-chart v-bind:categories="<%= @overview.budget_json %>"></pie-chart>
+        <pie-chart-legend v-bind:categories="<%= @overview.budget_json %>"></pie-chart-legend>
+      <% end %>
+    </div>
+
+    <div class="col-md-6 billing-card-container">
+      <%= render 'full_width_card', title: t('.billing.title'), feature: t('.billing.due', amount: humanized_money_with_symbol(@overview.unpaid_orders_total)) do %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= t('orders.customer') %></th>
+              <th><%= t('orders.status') %></th>
+              <th><%= t('orders.due') %></th>
+              <th><%= t('orders.amount') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @overview.orders[0..3].each do |order| %>
+              <tr>
+                <td><%= order.organization.name %></td>
+                <td><%= order.status %></td>
+                <td><%= order.starts_on %></td>
+                <td><%= humanized_money_with_symbol(order.amount) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="dashboard-cards__row">
+    <div class="col-md-12 members-card-container" id="members-card">
+      <%= render 'card', title: t('members.overall_usage'), feature: t('members.overall_ytd') do %>
+        <div class="dashboard-cards__row">
+          <div class="col-md-5 card-subtitle">
+            <div class="used-funds">
+              <%= t('members.used_funds', used: "<span class='standout'>#{@overview.usage_percentage}</span>").html_safe %>
+            </div>
+            <div class="average_days">
+              <%= t('members.average_days', average_days: "<span class='standout'>#{@overview.days_into_period}</span>").html_safe %>
+            </div>
+          </div>
+          <div class="col-md-7 usage-data-column">
+            <div class="dashboard-cards__row usage-data-chart">
+              <single-bar v-bind:usage="<%= @overview.members_usage_percentage_as_decimal %>"></single-bar>
+            </div>
+            <div class="dashboard-cards__row member-usage-legend">
+              <div class="col-md-5">
+                <%= t('members.count_html', count: @overview.members.with_usage.count) %>
+                <div class="usage-verbiage">
+                  <%= t('members.have_usage', count: @overview.members.with_usage.count) %>
+                </div>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-5">
+                <%= t('members.count_html', count: @overview.members_without_usage_count) %>
+                <div class="usage-verbiage">
+                  <%= t('members.have_no_usage', count: @overview.members_without_usage_count) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="dashboard-cards__row">
+    <div class="col-md-12 transactions-card-container" id="transactions-card">
+      <%= render 'card', title: t('.transactions.title'), feature: '' do %>
+        <stacked-area v-bind:usages="<%= @overview.usages_build_stacked_area_data.to_json %>"></stacked-area>
+        <stacked-area-legend v-bind:usage_types="<%= @overview.usages_get_types %>"></stacked-area-legend>
+      <% end %>
+
+      <%= render 'customer_card_load', orders: @overview.orders %>
+    </div>
+  </div>
+</div>

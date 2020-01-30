@@ -1,0 +1,25 @@
+@import "../variables";
+
+.enrollment-nav {
+  & > * {
+    flex: 1 1 100% !important;
+  }
+
+  .page-title, .customer-care {
+    height: $nav-logo-height;
+    @extend .nav;
+    @extend .navbar-nav;
+    flex-direction: row;
+  }
+
+  .page-title {
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 1.5em;
+  }
+
+  .customer-care {
+    justify-content: flex-end;
+    font-size: 80%;
+  }
+}

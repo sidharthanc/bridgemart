@@ -1,0 +1,9 @@
+en:
+  admin:
+    product_categories:
+      destroy:
+        errors:
+          invalid_foreign_key: 'Delete failed: Product Category is in use.'
+    organizations: Organizations
+    service_activity:
+      label: Service Activity

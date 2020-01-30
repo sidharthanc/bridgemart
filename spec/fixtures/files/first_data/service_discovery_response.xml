@@ -1,0 +1,21 @@
+<Response>
+  <RespClientID>
+    <DID>DID</DID>
+    <ClientRef>CLIENT_REF</ClientRef>
+  </RespClientID>
+  <Status StatusCode="OK" />
+  <ServiceDiscoveryResponse>
+    <ServiceProvider>
+      <URL>https://staging1.datawire.net/sd</URL>
+      <MaxTransactionsInPackage>38</MaxTransactionsInPackage>
+    </ServiceProvider>
+    <ServiceProvider>
+      <URL>https://staging2.datawire.net/sd</URL>
+      <MaxTransactionsInPackage>38</MaxTransactionsInPackage>
+    </ServiceProvider>
+    <ServiceProvider>
+      <URL>https://staging3.datawire.net/sd</URL>
+      <MaxTransactionsInPackage>38</MaxTransactionsInPackage>
+    </ServiceProvider>
+  </ServiceDiscoveryResponse>
+</Response>

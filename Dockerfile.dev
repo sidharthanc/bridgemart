@@ -1,0 +1,16 @@
+FROM bridgepurchasing.azurecr.io/bridge-rails-build:latest
+# This file is tracked by the build pipeline and will automatically
+# build the image on updates
+# Use this line to bump: 2019-04-12.0
+
+# This image includes libraries and assets in order to be able to run the full CI process
+# and is not intended for deployment
+
+RUN apk add --no-cache --update qt5-qtbase-dev qt5-qtwebkit-dev wget nodejs yarn xvfb dbus
+RUN dbus-uuidgen > /etc/machine-id
+
+# Install bundler (and capybara gem)
+RUN QMAKE=/usr/bin/qmake-qt5 gem install bundler capybara-webkit 
+RUN gem install bundler
+
+CMD ["bin/ash"] # alpine's default shell is ash, not bash

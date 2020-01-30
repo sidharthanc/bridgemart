@@ -1,0 +1,37 @@
+<h2 class="plans-header">
+  Plans
+</h2>
+
+<div class="plans-body">
+  <% @plans.each do |plan| %>
+    <div class="row">
+      <% plan.plan_product_categories.each do |plan_product_category| %>
+        <div class="col-md-4">
+          <div class="plan-product-category-card">
+            <div class="background-slant-wrapper">
+              <div class="background-slant <%= plan_product_category.background_color %>" ></div>
+              <div class="plan-product-category-card-content row">
+                <div class="col-md-9">
+                  <h5 class="card-title">
+                    <b><%= plan_product_category.name %></b>
+                  </h5>
+                  <div class="card-body">
+                    <div class="plan-product-category-price">
+                      <span class="plan-product-category-price-digits"><%= plan_product_category.budget.format(:no_cents_if_whole) %></span> Limit
+                    </div>
+                    <div class="plan-product-category-end-date">
+                      <%= t('layouts.plan.label.expires') %> <%= l(plan.ends_on, format: :mmddyyyy) if plan.ends_on %>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-image col-md-3">
+                  <%= attached_image_tag plan_product_category.icon %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://staging2.datawire.net/sd
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><Request Version="3"><ReqClientID><DID>00033746370969070150</DID><App>BRIDGEPINCVLKXML</App><Auth>99026809996|00000008594</Auth><ClientRef>0938322V001000</ClientRef></ReqClientID><Transaction><ServiceID>104</ServiceID><Payload>SV.99026809996|1C402102|1C12180938|1C1302052019|1C42990268099968594|1C4400000008594|1CEA30|1CF236386|1C1542|1C045000|1C081|1CC0840|1CF3108|1C7FTaco</Payload></Transaction></Request>
+    headers:
+      User-Agent:
+      - vxnapi_xml_3_2_0_19
+      Connection:
+      - Keep-Alive
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - text/xml
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Feb 2019 18:09:38 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '564'
+      Keep-Alive:
+      - timeout=30, max=100
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - text/xml
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE Response SYSTEM "dwxmlapi3.dtd">
+        <Response Version="3">
+         <RespClientID>
+          <DID>00033746370969070150</DID>
+          <ClientRef>0938322V001000</ClientRef>
+         </RespClientID>
+         <Status StatusCode="OK"></Status>
+         <TransactionResponse>
+          <ReturnCode>000</ReturnCode>
+          <Payload>40|1C0900|1C11007005|1C38447871|1C3900|1C750|1C765000|1C707777165452282816|1CA001013025|1C1542|1C42990268099968594|1C4400000008594|1CF62102|1C7FTaco|1CB00|1C780|1C34AA58ACC6FF9E694BC937DF9EE974A87E|1CC0840</Payload>
+         </TransactionResponse>
+        </Response>
+    http_version: 
+  recorded_at: Tue, 05 Feb 2019 18:09:38 GMT
+recorded_with: VCR 4.0.0

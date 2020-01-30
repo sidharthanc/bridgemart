@@ -1,0 +1,28 @@
+<%= in_layout :application do %>
+  <% content_for :header do %>
+    <div class="mobile-header container">
+      <div class="page-titles">
+        <h1><%= content_for :page_title %></h1>
+        <h2><%= content_for :page_subtitle %></h2>
+        <% if content_for?(:back_button) %>
+          <a href="#" onclick="history.back()">Back</a>
+        <% end %>
+      </div>
+      <div class="page-logo">
+        <% if @member.organization.logo.attached? %>
+          <%= image_tag @member.organization.logo %>
+        <% else %>
+          <%= image_tag 'bridge-tri-color-logo.png' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+<% end %>
+
+<% if Rails.env.production? %>
+  <%= render partial: 'shared/google_analytics' %>
+<% end %>

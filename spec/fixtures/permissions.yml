@@ -1,0 +1,123 @@
+DEFAULTS: &DEFAULTS
+  update_permitted: true
+  create_permitted: true
+
+admin_plan:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: plan
+
+admin_product_category:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: product_category
+
+admin_user:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: user
+
+admin_location:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: location
+
+admin_order:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: order
+
+admin_organization:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: organization
+
+admin_payment_method:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: payment_method
+
+admin_permission_group:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: permission_group
+
+admin_permission:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: permission
+
+admin_usage_import:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: usage_import
+
+admin_redemption_instruction:
+  <<: *DEFAULTS
+  permission_group: admin
+  target: redemption_instruction
+
+organization_plan:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: plan
+
+organization_user:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: user
+
+organization_member:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: member
+
+organization_code:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: code
+
+organization_location:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: location
+
+organization_order:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: order
+
+organization_organization:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: organization
+
+organization_payment_method:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: payment_method
+
+organization_redemption_instruction:
+  <<: *DEFAULTS
+  permission_group: organization
+  target: redemption_instruction
+
+finance_payment_method:
+  <<: *DEFAULTS
+  permission_group: finance
+  target: payment_method
+
+broker_organization:
+  <<: *DEFAULTS
+  permission_group: broker
+  target: organization
+
+broker_redemption_instruction:
+  <<: *DEFAULTS
+  permission_group: broker
+  target: redemption_instruction
+
+broker_order:
+  <<: *DEFAULTS
+  permission_group: broker
+  target: order

@@ -1,0 +1,11 @@
+<section class="enrollment-header" id="payment-confirmer"
+  async-url="<%= process_order_enrollment_order_payments_path(@order, format: :json) %>"
+  redirect-url="<%= confirm_enrollment_order_payments_path(@order) %>">
+  <div class="container enrollment-confirm">
+    <h1><%= t '.header' %></h1>
+    <p>
+      <span class="enrollment-confirm__spinner fas fa-circle-notch"></span>
+      <%= t '.message' %>
+    </p>
+  </div>
+</section>

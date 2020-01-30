@@ -1,0 +1,11 @@
+.orders-table-container {
+  .orders-index-table {
+    &__order {
+      &--failed {
+        td {
+          color: $red-error-color;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+@import '../colors';
+
+.enrollment-card-choices {
+  padding: 1em;
+  @include make-row();
+  flex-wrap: nowrap;
+  align-items: center;
+
+  .enrollment-card {
+    @include make-col-ready();
+    width: auto;
+    max-width: auto;
+    flex: 1;
+  }
+
+  a.enrollment-card {
+    cursor: pointer;
+    color: $gray-font-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .choice-separator {
+    @include make-col-ready();
+    width: auto;
+    max-width: auto;
+    flex: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 70%;
+    padding: 0 1rem;
+  }
+}
+
+.enrollment-card {
+  background-color: $white;
+  border: 2px solid $white;
+  border-radius: $border-radius;
+  padding: 1em;
+
+  &.active {
+    border: 2px solid lighten($primary-color, 10%);
+  }
+}
+
+.enrollment-card--list-item {
+  padding: .5em;
+  margin-bottom: .5em;
+  display: flex;
+
+  span {
+    flex: 1;
+  }
+
+  &:last-child {
+    font-weight: bold;
+    padding-left: 0;
+  }
+
+  & + li {
+    list-style: none;
+  }
+}
+
+.enrollment-section {
+  .single-option {
+    label {
+      input {
+        display: none;
+      }
+
+      span {
+        margin-left: 0;
+      }
+    }
+  }
+}

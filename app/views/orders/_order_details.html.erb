@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+      <p class="mb-0"><%= t '.thank_you' %></p>
+      <% if @order.payment_method %>
+        <% if @order.payment_method.payment_type == :ach %>
+          <p class="mb-0"><%= t '.paid_with_ach' %></p>
+          <p class="mb-0"><%= t('.ach_info', name: @order.payment_method.ach_account_name, acct_number: @order.payment_method.ach_account_number ) %></p>
+        <% else %>
+          <p class="mb-0"><%= t '.paid_with_credit' %></p>
+          <p class="mb-0"><%= t('.credit_info', acct_number:  @order.payment_method.credit_card_number) %></p>
+        <% end %>
+      <% end %>
+      <p class="mb-0"><%= t '.order_processing' %></p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="mb-0"><%= t '.subtotal' %></p>
+          <p class="mb-0"><%= t '.administration_fee' %></p>
+          <p class="mb-0"><%= t '.total_invoice' %></p>
+          <p class="mb-0"><%= t '.credits' %></p>
+          <p class="mb-0"><%= t '.total_due' %></p>
+        </div>
+        <div class="col-sm6">
+          <p class="mb-0"><%= @order.total_charges.format %></p>
+          <p class="mb-0"><%= @order.total_fees.format %></p>
+          <p class="mb-0"><%= @order.total.format %></p>
+          <p class="mb-0"><%= (-@order.total_credits).format(sign_before_symbol: true) %></p>
+          <p class="mb-0"><%= @order.balance_due.format %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

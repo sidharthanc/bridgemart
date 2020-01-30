@@ -1,0 +1,55 @@
+<%= simple_form_for organization_payment_methods_path(current_organization, @payment_method), method: :post, html: { id: 'payment-form', '@submit' => 'submit' } do |f| %>
+  <fieldset class="billing-method">
+    <legend>
+      <%= t('.payment_information') %>
+    </legend>
+    <div class="inputs-100">
+      <div class="form-details">
+        <aside>
+          <h3>
+            <%= t '.headers.current_details' %>
+          </h3>
+          <%= render 'details', payment_method: @payment_method %>
+        </aside>
+      </div>
+    </div>
+  </fieldset>
+
+  <%= simple_fields_for @payment_method.billing_contact do |bf| %>
+    <fieldset class="billing-method">
+      <legend>
+        <%= t('.billing_contact') %>
+      </legend>
+      <div class="inputs-span-100">
+        <%= bf.input :email, hint: t('.email_address_hint', { user_email: @primary_user.email }) %>
+      </div>
+      <div class="inputs-50">
+        <%= bf.input :first_name %>
+        <%= bf.input :last_name %>
+      </div>
+    </fieldset>
+  <% end %>
+
+  <%= simple_fields_for @payment_method.address do |af| %>
+    <fieldset class="billing-method">
+      <legend>
+        <%= t('.address') %>
+      </legend>
+      <div class="inputs-span-100">
+        <%= af.input :street1 %>
+      </div>
+      <div class="inputs-span-100">
+        <%= af.input :street2 %>
+      </div>
+      <div class="inputs-50">
+        <%= af.input :city %>
+        <%= af.input :state, as: :states %>
+      </div>
+      <div class="inputs-50">
+        <%= af.input :zip %>
+      </div>
+    </fieldset>
+  <% end %>
+
+<%= f.submit t('.submit'), class: 'btn btn-wide btn-primary' %>
+<% end %>

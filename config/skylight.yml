@@ -1,0 +1,4 @@
+---
+# The authentication token for the application.
+authentication: vOgNLI97vQJbSZjcDfJuOL40xs9pM9LiWM-6yC9HIaw
+enable_sidekiq: true

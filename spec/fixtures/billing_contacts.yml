@@ -1,0 +1,11 @@
+metova:
+  first_name: John
+  last_name: Doe
+  email: john.doe@test.com
+  billable: credit (PaymentMethod)
+
+metova_ach:
+  first_name: John
+  last_name: Doe
+  email: john.doe@test.com
+  billable: ach (PaymentMethod)

@@ -1,0 +1,30 @@
+metova:
+  plan: metova
+  starts_on: <%= Date.current %>
+  ends_on: <%= Date.current + 1.year %>
+  po_number: po number
+  paid_at: <%= Date.current %>
+
+bridge:
+  plan: bridge
+  starts_on: <%= Date.current %>
+  ends_on: <%= Date.current + 1.year %>
+  paid_at: <%= Date.current %>
+
+metova_unpaid:
+  plan: metova
+  starts_on: <%= Date.current %>
+  ends_on: <%= Date.current + 1.year %>
+  po_number: po number
+
+metova_credit:
+  plan: new_order
+  payment_method: credit
+  starts_on: <%= Date.current %>
+  ends_on: <%= Date.current + 1.year %>
+
+metova_ach:
+  plan: new_order
+  payment_method: ach
+  starts_on: <%= Date.current %>
+  ends_on: <%= Date.current + 1.year %>

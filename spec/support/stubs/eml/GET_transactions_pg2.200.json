@@ -1,0 +1,15 @@
+{
+  "count": 3,
+  "transactions": [
+    {
+      "timestamp": "/Date(1497389181353)/",
+      "activity": "Purchase",
+      "location": "Location",
+      "reason": "014X55",
+      "result": "Reconciled",
+      "amount": -5.01,
+      "currency": "EUR",
+      "system_transaction_id": 89248394
+    }
+  ]
+}

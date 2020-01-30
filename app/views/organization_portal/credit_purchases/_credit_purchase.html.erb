@@ -1,0 +1,15 @@
+<tr id="credit_purchase_<%= credit_purchase.id %>">
+  <td><%= credit_purchase.po_number %></td>
+  <td><%= t "payment_methods.index.labels.payment_types.#{credit_purchase.payment_method.payment_type}" %></td>
+  <td><%= credit_purchase.amount.format %></td>
+  <td><%= credit_purchase.updated_at %></td>
+  <td><%= credit_purchase.error_message %></td>
+  <td><%= t ".processing.#{credit_purchase.processing}" %></td>
+  <td><%= t ".status.#{credit_purchase.status}" %></td>
+  <td class="index-table-actions">
+    <%= link_to_credit_purchase_print(@organization, credit_purchase) %>
+    <%= link_to_credit_purchase_edit(@organization, credit_purchase) %>
+    <%= link_to_credit_purchase_pay(@organization, credit_purchase) %>
+    <%= link_to_credit_purchase_void(@organization, credit_purchase) %>
+  </td>
+</tr>

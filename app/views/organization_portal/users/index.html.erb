@@ -1,0 +1,53 @@
+<h2><%= t('.title') %></h2>
+
+<div class="index-table-controls">
+  <div class="user-search">
+    <%= search_form_for @search, url: organization_users_path(current_organization) do |f| %>
+      <div class="form-group">
+        <%= f.search_field :user_cont, placeholder: t('helpers.search.placeholder'), class: "form-control" %>
+        <div class="action-group">
+          <button class="btn btn-primary" id="user-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <%= link_to t('helpers.search.clear'), organization_users_path(current_organization), class: 'btn btn-outline-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if policy(User).new? %>
+    <div class="table-action">
+      <%= link_to t('.new_user'), new_organization_user_path(current_organization), class: 'add-action btn btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="index-table-container">
+  <header>
+    <%= t('.header') %>
+    <small><%= t '.subheader', count: @users_count %></small>
+  </header>
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t '.columns.id' %></th>
+        <th><%= t '.columns.name' %></th>
+        <th><%= t '.columns.phone_number' %></th>
+        <th><%= t '.columns.email' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.full_name %></td>
+          <td><%= user.phone_number %></td>
+          <td><%= user.email %></td>
+          <td colspan="2" class="tr-options">
+            <%= link_to t('.actions.view'), organization_user_path(current_organization, user) if policy(user).show? %>
+            <%= link_to t('.actions.edit'), edit_organization_user_path(current_organization, user) if policy(user).edit? %>
+          </td>
+        </tr>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

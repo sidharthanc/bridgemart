@@ -1,0 +1,40 @@
+<%= render 'enrollment/payments/print_header', order: @order %>
+<h5><%= @order.organization.name.titleize %></h5>
+<div class="row mb-2">
+  <div class="col-sm-11">
+    <div class="card">
+      <div class="card-body">
+        <%= render 'order_header', order: @order %>
+      </div>
+
+      <div class="index-table-container orders-table-container">
+        <table class="orders-index-table mb-5">
+          <thead>
+            <tr>
+              <th><%= t '.quantity' %></th>
+              <th><%= t '.description' %></th>
+              <th><%= t '.amount' %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- TODO update this to use line items since they reflect the prices at the time of purchase -->
+            <% @order.charges.each do |charge| %>
+              <tr>
+                <td class="row-quantity"><%= charge.quantity %></td>
+                <td class="row-description"><%= charge.description %></td>
+                <td class="row-amount"><%= charge.price.format %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= render 'order_details', order: @order %>
+      </div>
+    </div>
+    <div class="inputs-span-25" style="float: right;">
+      <button id="print-btn" class="btn btn-outline-primary print-btn" type="button" onclick="print()" title="<%= t('layouts.enrollment.print_form.print_button') %>">
+        <%= t '.print_button' %>
+      </button>
+    </div>
+  </div>
+</div>
+<%= link_to t('.nav.back'), organization_orders_path(current_organization) %>

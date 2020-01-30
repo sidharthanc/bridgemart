@@ -1,0 +1,24 @@
+.login-backsplash {
+  background-color: white;
+  width: 60%;
+  margin: 2em auto auto auto;
+  border-radius: 6px;
+  box-shadow: 0px 1px 3px 0px #d7e6eb;
+
+  .login-form {
+    padding: 4em;
+
+    .actions {
+      padding-top: 6em;
+
+      .btn {
+        margin: 0 3em 0 3em;
+      }
+    }
+  }
+}
+
+.login-welcome {
+  text-align: center;
+  margin-top: 1em;
+}

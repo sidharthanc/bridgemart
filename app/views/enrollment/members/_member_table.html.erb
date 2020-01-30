@@ -1,0 +1,24 @@
+<div class="pb4">
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t('.first_name') %></th>
+        <th><%= t('.last_name') %></th>
+        <th><%= t('.email') %></th>
+        <th><%= t('.external_id') %></th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% members.each do |member| %>
+        <tr>
+          <td><%= member.first_name %></td>
+          <td><%= member.last_name %></td>
+          <td><%= member.email %></td>
+          <td></td>
+          <td><%= link_to 'Add to Order', enrollment_order_member_add_path(order_id: @order.id, member_id: member.id), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,55 @@
+DEFAULTS: &DEFAULTS
+  authentication_token: $LABEL
+  token_expires_at: <%= 1.week.from_now %>
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+test:
+  email: 'test@metova.com'
+  first_name: 'Billy'
+  last_name: 'Billyson'
+  role: Member
+  permission_groups: organization
+  <<: *DEFAULTS
+
+test_two:
+  email: 'test_two@metova.com'
+  first_name: 'Billie'
+  last_name: 'Billison'
+  role: Member
+  permission_groups: none
+  <<: *DEFAULTS
+
+test_three:
+  email: 'test_three@metova.com'
+  first_name: 'Billie'
+  last_name: 'Billison'
+  role: Member
+  <<: *DEFAULTS
+
+joseph:
+  email: joseph.gannon@metova.com
+  first_name: 'Joseph'
+  last_name: 'Gannon'
+  permission_groups: organization
+  <<: *DEFAULTS
+
+andrew:
+  email: andrew@bridgemart.com
+  first_name: 'Andrew'
+  last_name: 'Halliburton'
+  permission_groups: admin
+  <<: *DEFAULTS
+
+broker:
+  email: broker@metova.com
+  first_name: Person
+  last_name: McPerson
+  permission_groups: broker
+  <<: *DEFAULTS
+
+admin:
+  email: admin@metova.com
+  first_name: Adminnie
+  last_name: McAdmin
+  permission_groups: admin
+  <<: *DEFAULTS

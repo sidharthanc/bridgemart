@@ -1,0 +1,116 @@
+<%= simple_form_for [:enrollment, order] do |f| %>
+  <div class="container">
+    <section class="enrollment-section enrollment-section--top">
+      <div class="section-name">
+        <h2><%= t('.start_date') %></h2>
+      </div>
+      <div class="section-content">
+        <medium><%= t('.start_and_end_date_info') %></medium>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <section class="enrollment-section">
+      <div class="section-name">
+      </div>
+      <div class="section-content">
+        <div class="inputs-33">
+          <%= f.input :starts_on, as: :string, input_html: { value: l(f.object.starts_on || Date.current, format: :mmddyyyy), data: { provide: 'datepicker', content: 'calendar' } } %>
+          <%= f.input :ends_on, as: :string, input_html: { value: f.object.ends_on || Date.current+1.year, format: :mmddyyyy, data: { provide: 'datepicker', content: 'calendar' }, readonly:true } %>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-4" />
+  </div>
+
+  <%= render 'code_amount', f: f %>
+
+  <% if order.plan.special_offers.any? %>
+    <%= render 'special_offers', f: f %>
+  <% end %>
+
+  <section class="enrollment-footer">
+    <div class="container">
+      <div class="enrollment-section">
+        <div class="section-name">
+        </div>
+        <div class="section-content">
+          <div class="enrollment-footer-actions">
+            <%= f.submit class: 'btn btn-wide btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+<%= render 'enrollment/redemption_instructions/new' %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var start_date = $('#order_starts_on').val();
+    $('#order_starts_on').datepicker('setStartDate', new Date());
+    var min_date = new Date(start_date);
+    var max_date = new Date(start_date);
+    min_date.setDate(min_date.getDate() + 30)
+    max_date.setFullYear(max_date.getFullYear() + 1);
+    max_date.setDate(max_date.getDate());
+    var max_start_date = new Date();
+    max_start_date.setFullYear(max_start_date.getFullYear() + 1);
+    max_start_date.setDate(max_start_date.getDate());
+    $('#order_starts_on').datepicker('setEndDate', max_start_date);
+    $('#order_ends_on').datepicker('setStartDate', min_date);
+    $('#order_ends_on').datepicker('setEndDate', max_date);
+    $("#order_starts_on").datepicker({
+    dateFormat: 'mm/dd/yyyy',
+    forceParse: false
+}).on("changeDate", function (e) {
+
+
+  if ($('#order_starts_on').val()!='')
+  { 
+    start_date = $('#order_starts_on').val();
+    
+  }
+
+    min_start_date = new Date(start_date);
+    max_end_date = new Date(start_date);
+    min_start_date.setDate(min_start_date.getDate() + 30)
+    max_end_date.setFullYear(max_end_date.getFullYear() + 1);
+    max_end_date.setDate(max_end_date.getDate());
+    $('#order_starts_on').datepicker('setEndDate', max_start_date);
+    $('#order_ends_on').datepicker('setStartDate', min_start_date);
+    $('#order_ends_on').datepicker('setEndDate', max_end_date);
+    $('#order_ends_on').datepicker('setDate', max_end_date);
+});
+
+$("#order_ends_on").datepicker({
+   dateFormat: 'mm/dd/yyyy'
+}).on("changeDate", function (e) {
+
+ $('#order_ends_on').value($(this).val());
+
+});
+
+$("#order_starts_on").on("input", function(e) {
+  
+  if ($(e.target).val()=='')
+  {
+    $('#order_starts_on').datepicker('setDate', new Date(start_date));
+  }
+  else
+  {
+    if(new Date($(e.target).val())<=max_date && new Date($(e.target).val())>=min_date)
+    {
+      
+      $('#order_starts_on').datepicker('setDate', new Date($(e.target).val()));
+    }
+    else
+    {
+      $('#order_starts_on').datepicker('setDate', new Date(start_date));
+    }
+  }
+});
+   
+});
+</script>

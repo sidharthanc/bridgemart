@@ -1,0 +1,73 @@
+label {
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
+.inputs-25, .inputs-33, .inputs-50, .inputs-50-25-25, .inputs-100, .inputs-with-details {
+  @include make-row();
+
+  .form-group {
+    @include make-col-ready();
+  }
+
+  .form-details {
+    aside {
+      background-color: $body-bg-color;
+      padding: 10px;
+      border-radius: 5px;
+
+      h3 {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.inputs-25 .form-group {
+  @include make-col(3);
+}
+
+.inputs-25 .form-details {
+  @include make-col(9);
+}
+
+.inputs-33 .form-group {
+  @include make-col(4);
+}
+
+.inputs-33 .form-details {
+  @include make-col(8);
+}
+
+.inputs-50 .form-group {
+  @include make-col(6);
+}
+
+.inputs-50 .form-details {
+  @include make-col(6);
+}
+
+.inputs-100 .form-details {
+  padding-left: 15px;
+  margin-right: 15px;
+  width: 100%;
+}
+
+.inputs-span-33 {
+  width: 66.666667%;
+}
+
+.inputs-50-25-25 {
+  .form-group {
+    @include make-col(3);
+
+    &:first-child {
+      @include make-col(6);
+    }
+  }
+}
+
+.inputs-information {
+  line-height: 6em;
+  opacity: .6;
+}

@@ -1,0 +1,111 @@
+<div class="container dashboard-cards">
+  <div class="d-flex justify-content-between">
+    <div><h2><%= @dashboard.organization.name %></h2></div>  
+    <div class="col dashboard-cards__credits">
+      <% if @dashboard.organization.credit_total.positive? %>
+          <%= t '.credits_available' %> 
+        <span class="dashboard-cards__credits-amount">
+          <%= @dashboard.organization.credit_total.format %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <div class="dashboard-cards__row">
+    <% if show_extended_dashboard? %>
+    <div class="col-md-6 budget-card-container">
+      <% cache @dashboard.organization do %>
+        <%= render 'card', title: t('.budget.title'), feature: t('.budget.total', amount: @dashboard.budget.total_formatted) do %>
+          <pie-chart v-bind:categories="<%= @dashboard.budget.to_json %>"></pie-chart>
+          <pie-chart-legend v-bind:categories="<%= @dashboard.budget.to_json %>"></pie-chart-legend>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="col-md-6 billing-card-container">
+      <%= render 'full_width_card', title: t('.billing.title'), feature: t('.billing.due', amount: humanized_money_with_symbol(@dashboard.orders.billing_due)) do %>
+        <table class="table">
+          <thead class="text-center">
+            <tr>
+              <th><%= t('orders.index.columns.id') %></th>
+              <th><%= t('orders.index.columns.order_date') %></th>
+              <th><%= t('orders.status') %></th>
+              <th><%= t('orders.amount') %></th>
+            </tr>
+          </thead>
+            <tbody>
+            <% @dashboard.orders.orders.has_members.order(created_at: :desc).limit(5).each do |order| %>
+              <tr class="text-center">
+                <td><%= order.order_identifier %></td>
+                <td><%= l(order.starts_on, format: :mmddyyyy) %></td>
+                <td><%= link_to order.status, order.has_no_due? ? organization_order_path(current_organization, order) : new_enrollment_order_payment_path(order) %></td>
+                <td><%= order.formatted_total %></td>
+              </tr>
+            <% end %>
+            </tbody>
+            <% unless @dashboard.orders.orders.nil? %>
+            <tfoot>
+              <tr>
+                <td colspan="8" align="center">
+                  <%= active_link_to t('orders.view_all'), organization_orders_path(current_organization), activate: [:self], class: 'btn btn-lock' %>
+                </td>
+              </tr>
+            </tfoot>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+  </div>
+  <div class="dashboard-cards__row">
+    <% if show_extended_dashboard? %>
+      <div class="col-md-12 members-card-container" id="members-card">
+        <%= render 'card', title: t('.members.overall_usage'), feature: t('pages.dashboard.members.overall_ytd') do %>
+          <div class="dashboard-cards__row">
+            <div class="col-md-5 card-subtitle">
+              <div class="used-funds">
+                <%= t('pages.dashboard.members.used_funds', used: "<span class='standout'>#{@dashboard.organization.usage_percentage_ytd}</span>").html_safe %>
+              </div>
+              <div class="average_days">
+                <%= t('pages.dashboard.members.average_days', average_days: "<span class='standout'>#{@dashboard.organization.days_into_period}</span>").html_safe %>
+              </div>
+            </div>
+            <div class="col-md-7 usage-data-column">
+              <div class="dashboard-cards__row usage-data-chart">
+                <single-bar v-bind:usage="<%= @dashboard.members.usage_percentage_as_decimal %>"></single-bar>
+              </div>
+              <div class="dashboard-cards__row member-usage-legend">
+                <div class="col-md-5">
+                  <%= t('pages.dashboard.members.count_html', count: @dashboard.members.with_usage_count) %>
+                  <div class="usage-verbiage">
+                    <%= t('pages.dashboard.members.have_usage', count: @dashboard.members.with_usage_count) %>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                  <%= t('pages.dashboard.members.count_html', count: @dashboard.members.without_usage_count) %>
+                  <div class="usage-verbiage">
+                    <%= t('pages.dashboard.members.have_no_usage', count: @dashboard.members.without_usage_count) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="dashboard-cards__row">
+    <% if show_extended_dashboard? %>
+      <div class="col-md-12 transactions-card-container" id="transactions-card">
+        <%= render 'card', title: t('.transactions.title'), feature: '' do %>
+          <stacked-area v-bind:usages="<%= @dashboard.usages.build_stacked_area_data.to_json %>"></stacked-area>
+          <stacked-area-legend v-bind:usage_types="<%= @dashboard.usages.get_types %>"></stacked-area-legend>
+
+          <div class="index-table-container">
+            <%= link_to t('members.all'), organization_members_path(@dashboard.organization), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

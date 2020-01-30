@@ -1,0 +1,57 @@
+<% if member.usages.any? %>
+  <div class="alert alert-warning" role="alert">
+    <%= t 'members.usages_alert' %>
+  </div>
+<% end %>
+
+<%= simple_form_for member, url: member.persisted? ? enrollment_order_member_path(@order, member, mode: params[:mode]) : enrollment_order_members_path(@order, member, mode: params[:mode]) do |f| %>
+  <fieldset class="pb-4">
+    <legend>
+      <% if f.object.persisted? %>
+        <%= t '.legend.edit_member' %>
+      <% else %>
+        <%= t '.legend.new_member' %>
+      <% end %>
+    </legend>
+    <div class="inputs-33">
+      <%= f.input :first_name %>
+      <%= f.input :middle_name %>
+      <%= f.input :last_name %>
+    </div>
+  </fieldset>
+
+  <fieldset class="pb-4">
+    <div class="inputs-50">
+      <%= f.input :external_member_id %>
+    </div>
+  </fieldset>
+
+  <fieldset class="pb-4">
+    <legend><%= t '.legend.contact' %></legend>
+    <div class="inputs-50">
+      <%= f.input :email, required: true %>
+    </div>
+    <div class="inputs-50">
+      <%= f.input :phone, input_html: { class: 'optional-field masked-phone' }, hint: t('users.phone_number_hint') %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <%= f.simple_fields_for :address do |ff| %>
+      <%= ff.input :id, as: :hidden %>
+      <legend><%= t '.legend.address' %></legend>
+      <div class="inputs-50">
+        <%= ff.input :street1, label: t('.address'), required: member.require_address? %>
+      </div>
+      <div class="inputs-50-25-25">
+        <%= ff.input :city, required: member.require_address? %>
+        <%= ff.input :state, as: :states, required: member.require_address? %>
+        <%= ff.input :zip, required: member.require_address? %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <div class="text-center py-4">
+    <%= f.submit t('users.save'), class: 'btn btn-gray btn-wide' %>
+  </div>
+<% end %>

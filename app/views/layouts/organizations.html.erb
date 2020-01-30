@@ -1,0 +1,16 @@
+<%= in_layout :application do %>
+  <% content_for :header do %>
+    <nav class="navbar navbar-expand-lg enrollment-nav">
+      <%= link_to root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'bridge-tri-color-logo.png' %>
+      <% end %>
+
+      <%= render 'shared/user_controls' %>
+    </nav>
+  <% end %>
+  <div class="dashboard container-fluid">
+    <div class="pb-3">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>

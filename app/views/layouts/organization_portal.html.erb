@@ -1,0 +1,28 @@
+<%= in_layout :dashboard do %>
+  <div class="dashboard-header">
+    <header>
+      <%= current_organization.name %>
+    </header>
+    <nav>
+      <ul>
+        <li>
+          <%= active_link_to t('.nav.details'), edit_organization_organization_path(current_organization), activate: [:self, edit_organization_organization_path(current_organization)] %>
+        </li>
+        <li>
+          <%= active_link_to t('.nav.users'), organization_users_path(current_organization), activate: [:self, organization_users_path(current_organization)] %>
+        </li>
+        <li>
+          <%= active_link_to t('.nav.commercial_agreements'), organization_commercial_agreements_path(current_organization), activate: [:self, organization_commercial_agreements_path(current_organization)] %>
+        </li>
+        <li>
+          <%= active_link_to t('.nav.credits'), organization_credits_path(current_organization), activate: [:self, organization_credits_path(current_organization)] %>
+        </li>
+        <li>
+          <%= active_link_to t('.nav.redemption_instructions'), organization_redemption_instructions_path(current_organization), activate: [:self, organization_redemption_instructions_path(current_organization)] %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <%= yield %>
+<% end %>

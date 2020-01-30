@@ -1,0 +1,20 @@
+admin:
+  name: 'Bridge Admin'
+  admin: true
+
+organization:
+  name: 'Organization Primary Contact'
+  admin: false
+  default_for: organization
+
+broker:
+  name: Broker/TPA
+  admin: false
+  default_for: broker
+
+finance:
+  name: Bridge Finance
+  admin: false
+
+none:
+  name: 'No Permissions'

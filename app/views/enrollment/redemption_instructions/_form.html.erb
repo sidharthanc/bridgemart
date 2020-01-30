@@ -1,0 +1,21 @@
+<fieldset class="pb-3">
+  <div class="inputs-80">
+    <%= f.input :title %>
+    <span id="title-error" class="help-block"></span>
+  </div>
+</fieldset>
+<br>
+<fieldset class="pb-3">
+  <div class="inputs-80">
+    <%= f.input :description, as: :text, maxlength: 200, required: true %>
+    <span id="description-error" class="help-block"></span>
+  </div>
+
+  <%= f.hidden_field :product_category_id %>
+  <%= hidden_field_tag :attributes_index, '' %>
+
+</fieldset>
+
+<div class="text-center py-4">
+  <%= f.submit t('.create'), class: 'btn btn-gray btn-wide' %>
+</div>

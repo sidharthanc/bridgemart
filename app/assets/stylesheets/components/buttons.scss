@@ -1,0 +1,48 @@
+@import "../colors";
+
+$btn-height: 48px;
+$btn-min-width: 145px;
+
+.btn {
+  font-weight: bold;
+  height: $btn-height;
+  min-width: $btn-min-width;
+}
+
+.btn-wide {
+  $padding: 3rem;
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+.btn-pill {
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-outline-secondary;
+  height: auto;
+  min-width: auto;
+}
+
+a.btn-primary:not([href]):not([tabindex]) {
+  color: $white;
+}
+
+.btn-white {
+  background-color: #fff;
+  color: $primary-color;
+
+  &:hover {
+    color: #fff;
+    background-color: $primary-color;
+  }
+}
+
+.btn-gray {
+  background-color: $dark-gray;
+  color: $primary-color;
+
+  &:hover {
+    color: #fff;
+    background-color: $primary-color;
+  }
+}

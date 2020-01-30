@@ -1,0 +1,59 @@
+<h2><%= t('codes.search.advanced') %></h2>
+
+<div class="dashboard-form">
+  <div class="advanced-codes-search">
+    <%= search_form_for @search, url: search_organization_member_code_index_path(current_organization, @member), method: :post do |f| %>
+      <fieldset class="form-group">
+        <label for="q[external_id_cont]"><%= t('helpers.search.codes.external_id') %></label>
+        <%= f.search_field :external_id_cont, placeholder: t('helpers.search.placeholder'), class: "form-control" %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[order_id_cont]"><%= t('helpers.search.codes.invoice_id') %></label>
+        <%= f.search_field :order_id_cont, class: "form-control" %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[created_at_gt]"><%= t('helpers.search.codes.purchase_date_between') %></label>
+        <%= f.search_field :created_at_gteq, class: :datepicker %>
+        <%= f.search_field :created_at_lteq, class: :datepicker %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[status_eq]"><%= t('helpers.search.codes.status') %></label>
+        <%= f.select :status_eq, @codes.map(&:status).uniq, { include_blank: true }, { class: "form-control" } %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[product_category_name_eq]"><%= t('helpers.search.codes.product_category') %></label>
+        <%= f.collection_select :product_category_name_eq, ProductCategory.all, :name, :name, { include_blank: true }, { class: "form-control" } %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[deactivated_at_gteq]"><%= t('helpers.search.codes.expiration_date_between') %></label>
+        <%= f.search_field :deactivated_at_gteq, class: :datepicker %>
+        <%= f.search_field :deactivated_at_lteq, class: :datepicker %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[amount_used_gteq]"><%= t('helpers.search.codes.amount_used_between') %></label>
+        <%= f.search_field :amount_used_gteq %>
+        <%= f.search_field :amount_used_lteq %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[balance_gteq]"><%= t('helpers.search.codes.balance_between') %></label>
+        <%= f.search_field :balance_gteq %>
+        <%= f.search_field :balance_lteq %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[limit_gteq]"><%= t('helpers.search.codes.amount_credited_between') %></label>
+        <%= f.search_field :limit_gteq %>
+        <%= f.search_field :limit_lteq %>
+      </fieldset>
+
+      <%= f.submit t('helpers.search.apply_filter'), class: 'btn btn-wide btn-gray' %>
+    <% end %>
+  </div>
+</div>

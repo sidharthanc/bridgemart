@@ -1,0 +1,21 @@
+<h2><%= @user.full_name %></h2>
+<div class="row">
+  <div class="col-10">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="text">
+            <dl>
+              <dt><%= t('.email') %></dt>
+              <dd><%= @user.email %></dd>
+              <dt><%= t('.permission_groups') %></dt>
+              <dd><%= @user.permission_group_names %></dd>
+            </dl>
+
+            <%= link_to t('.edit_link'), edit_organization_user_path(current_organization, @user) if policy(@user).edit? %>
+          </div>
+        </div>
+      </div>
+      <%= link_to t('.nav.back'), organization_users_path(current_organization) %>
+    </div>
+  </div>
+</div>

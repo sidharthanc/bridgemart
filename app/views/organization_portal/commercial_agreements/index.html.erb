@@ -1,0 +1,29 @@
+<div class="index-table-container">
+  <header>
+    <%= t('.header') %>
+  </header>
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t '.columns.file' %></th>
+        <th><%= t '.columns.date_signed' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @signatures.each do |signature| %>
+        <tr>
+          <td>
+            <% if signature.commercial_agreement.present? %>
+              <%= link_to url_for(signature.commercial_agreement.pdf) do %>
+              <i class="far fa-file-pdf"></i> <%= signature.commercial_agreement.pdf.filename %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= signature.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

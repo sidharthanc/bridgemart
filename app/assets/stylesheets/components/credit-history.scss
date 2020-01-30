@@ -1,0 +1,21 @@
+.credit-history {
+  margin-top: 20px;
+  
+  &__table tbody tr.credit-history__row--used td {
+    color: $gray-font-color;
+  }
+
+  &__table tbody tr.credit-history__row--cancelled td {
+    color: $gray-font-color;
+  }
+
+  &__money-column {
+    text-align: right;
+  }
+
+  &__search-form {
+    @include search-form;
+
+    margin-bottom: 0.5rem;
+  }
+}

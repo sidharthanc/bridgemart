@@ -1,0 +1,4 @@
+.badge-inactive {
+  @extend .badge-warning;
+  text-transform: uppercase;
+}

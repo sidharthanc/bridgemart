@@ -1,0 +1,18 @@
+FROM bridgepurchasing.azurecr.io/bridge-rails-build:latest
+RUN apk update && apk add --no-cache --update yarn
+
+COPY Gemfile* yarn.lock package.json $APP_PATH/
+RUN bundle install --jobs 2 --retry 3 --deployment --without development test
+
+COPY vendor/bundle $APP_PATH/vendor/bundle
+COPY . $APP_PATH
+
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY $RAILS_MASTER_KEY
+
+RUN yarn
+RUN RAILS_ENV=production bin/rake assets:precompile
+
+ENV RAILS_SERVE_STATIC_FILES 1
+EXPOSE 3000
+CMD bin/rake db:migrate && bin/puma -C config/puma.rb

@@ -1,0 +1,130 @@
+<% content_for :page_title, @code.member.name %>
+<% content_for :page_subtitle, @code.member.organization.name %>
+<% content_for :back_button, true %>
+<% @options ||= {} %>
+
+<div class="code-card m-auto">
+  <%= render 'shared/mobile/code_card', code: @code, options: @options %>
+  <div class="cardInfoElement code-card-content">
+    <div class="cardInfoBody">
+      <div id="cardNumber" class="cardNumberSegment">
+        <%= @code.card_number_formatted %>
+      </div>
+      <% unless @options.fetch(:hide_card_id, false) %>
+      <div id="code-id">
+        <%= @code.id %>&nbsp;
+      </div>
+      <% end %>
+      <div id="pin">
+        <%= @code.pin %>&nbsp;
+      </div>
+      <% unless @options.fetch(:hide_expiration_date, false) %>
+      <div id="expirationDate">
+        <%= @code.expiration_date %>&nbsp;
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="code-card-content barcode-container">
+    <div class="barcode-content">
+      <% if @code.virtual_card_provider == "first_data" || @code.product_category.card_type == "first_data" %>
+        <%= @code.send(:generate_barcode, @code.card_number, true).gsub(/\n/, '').html_safe %>
+        <br><%= @code.send(:barcode_prefix_card_comb_value, @code.card_number) %> </br>
+      <% elsif @code.virtual_card_provider == "eml" || @code.product_category.card_type == "eml"%>
+           <%if @code.pan.present? %>
+             <%= @code.send(:generate_barcode, @code.pan, false).gsub(/\n/, '').html_safe %>
+             <br><%= @code.pan %> </br>
+              <% else %>
+                <%= image_tag @code.send(:retrieve_barcode_image_from_eml_show_view) %>
+           <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="multiple-code-cards">
+  <div class="card-section">
+    <div class="redemption-instruction">
+      <%= @code.redemption_instructions.last.description.html_safe if @code.redemption_instructions.present? %>
+    </div>
+  </div>
+  <div class="card-section">
+    <div class="code-product-category">
+      <%= @code.product_category.product_description.html_safe if @code.product_category.product_description.present? %>
+    </div>
+  </div>
+</div>
+  <% if @code&.show_organization_logo? %>
+    <p>Powered by Bridge Vision</p>
+  <% end %>
+
+<style>
+  .barcode-container{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  .barcode-content{
+    width: 336px;
+    height: 115px;
+    margin: 40px auto 0 auto;
+    text-align: center;
+  }
+  .cardInfoElement, #cardNumber {
+    color: #444 !important;
+    font-style: normal !important;
+    text-align: left !important;
+    font-weight: normal !important;
+    font-size: 1rem !important;
+    font-family: "mr-eaves-xl-sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+                "Segoe UI Symbol" !important;
+  }
+
+  .cardInfoBody{
+    margin: 0 auto 0 auto;
+    width: 400px;
+    padding: 1rem;
+  }
+
+  #cardNumber {
+    width: 100% !important;
+    margin: 1em 0 !important;
+  }
+
+  #cardNumber .cardNumberSegment {
+    font-size: 1.25em !important;
+  }
+
+  #pin, #code-id {
+    width: 25% !important;
+    float: left;
+  }
+
+  #code-id::before,
+  #pin::before,
+  #expirationDate::before {
+    display: block;
+    color: #8f979a;
+    font-size: 75%;
+    text-transform: uppercase;
+  }
+
+  #code-id::before {
+    content: 'ID';
+  }
+
+  #pin::before {
+    content: 'PIN';
+  }
+
+  #expirationDate::before {
+    content: 'Expires';
+  }
+</style>

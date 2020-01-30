@@ -1,0 +1,26 @@
+<%= simple_form_for user, url: user.persisted? ? organization_user_path(current_organization, @user) : organization_users_path(current_organization) do |f| %>
+  <fieldset class="pb-4">
+    <div class="inputs-33">
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+    </div>
+  </fieldset>
+
+  <fieldset class="pb-4">
+    <legend><%= t '.legend.contact' %></legend>
+    <div class="inputs-50">
+      <%= f.input :email, disabled: user.persisted? %>
+    </div>
+    <div class="inputs-50">
+      <%= f.input :phone_number, input_html: { class: 'optional-field masked-phone' }, hint: t('users.phone_number_hint') %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="inputs-50">
+      <%= f.association :permission_groups, as: :check_boxes, collection: policy_scope(PermissionGroup) unless user == current_user %>
+    </div>
+  </fieldset>
+
+  <%= f.submit class: 'btn btn-wide btn-gray' %>
+<% end %>

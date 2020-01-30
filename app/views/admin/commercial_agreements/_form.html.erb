@@ -1,0 +1,7 @@
+<%= semantic_form_for [:admin, @commercial_agreement], builder: ActiveAdmin::FormBuilder do |f| %>
+  <% f.inputs do %>
+    <%= f.input :pdf, as: :file %>
+    <%= f.input :organization %>
+    <%= f.actions %>
+  <% end %>
+<% end %>

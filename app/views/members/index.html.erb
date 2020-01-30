@@ -1,0 +1,74 @@
+<h2><%= current_organization.name %></h2>
+
+<% if current_organization.member_import_errors? %>
+  <div class="alert alert-danger">
+    <%= link_to t('.member_import_errors'), organization_member_imports_path(current_organization), class: 'alert-link' %>
+  </div>
+<% end %>
+
+<div class="index-table-controls">
+  <div class="member-search">
+    <%= search_form_for @search, url: organization_members_path(current_organization) do |f| %>
+      <div class="form-group">
+        <%= f.search_field :member_cont, placeholder: t('helpers.search.placeholder'), class: "form-control" %>
+        <div class="action-group">
+          <button class="btn btn-primary" id="member-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <%= link_to t('helpers.search.clear'), organization_members_path(current_organization), class: 'btn btn-outline-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if policy(Member).new? %>
+    <div class="table-action">
+      <%= link_to t('.new_member'), new_organization_enrollment_sign_up_path, class: 'add-action btn btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>
+<div class="row" style="margin-bottom: 20px;" id="buttons-div">
+  <div class="col-md-2">
+    <%= link_to  t('.nav.members'), organization_members_path(current_organization), :class => "btn btn-primary" %>
+   </div>
+  <div class="col-md-2">
+    <%= link_to t('.nav.codes'), codes_organization_path(current_organization.id), :class => "btn btn-primary", method: :get, remote: true, :onclick => "$('#members_action_id').hide();$('#status_codes_dropdown').show();" %>
+  </div>
+ <div class="col-md-2" id="status_codes_dropdown" style="display: none;margin-top: 5px;">
+    <%= select_tag "code_status", options_for_select([["Used Codes", "used"], ["Unused Codes", "unused"]], ""), class: "form-control is-valid select optional", :prompt => "--Select--",  :onchange => "get_code_status();" %>
+  </div>
+</div>
+<div class="index-table-container">
+  <header>
+    <%= t('.header') %>
+    <small><%= t '.subheader', count: current_organization.members_count  %></small>
+  </header>
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= sort_link @search, :id %></th>
+        <th><%= t '.columns.name' %></th>
+        <th><%= t '.columns.phone' %></th>
+        <th><%= t '.columns.email' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'member', collection: @members  %>
+    </tbody>
+  </table>
+</div>
+<span id="members_action_id">
+<% if @members.any? %>
+  <%= link_to t('.export.members'), organization_members_path(current_organization, format: :csv, params: request.query_parameters), class: 'add-action btn btn-outline-primary' %>
+  <%= link_to t('.export.usages'), usages_export_organization_members_path(current_organization, format: :csv, params: request.query_parameters), class: 'add-action btn btn-outline-primary' %>
+<% end %>
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+</span>
+<script type="text/javascript">
+  function get_code_status(){
+    code_status = $("#code_status").val();
+    if(code_status != ""){
+      $.ajax({
+        url: "<%= codes_organization_path(current_organization.id) %>",
+        data: {"code_status": code_status}
+      });
+    }
+  }
+</script>

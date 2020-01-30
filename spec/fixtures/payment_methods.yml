@@ -1,0 +1,20 @@
+credit:
+  customer_vault_id: '1325125123145'
+  billing_id: '8675308eien'
+  organization: metova
+  credit_card_token: '9418594164541111'
+  credit_card_expiration_date: '10/25'
+
+ach:
+  customer_vault_id: '1325125123145'
+  billing_id: '8675307eien'
+  organization: metova
+  ach_account_name: 'test-account'
+  ach_account_token: '9418594164543123'
+
+savings:
+  customer_vault_id: '1325125123145'
+  billing_id: '8675306eien'
+  organization: bridge
+  ach_account_name: 'test-account'
+  ach_account_token: '9418594164542123'

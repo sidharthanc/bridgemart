@@ -1,0 +1,60 @@
+<div class="status-container">
+  <div class="row">
+    <div class="col-md-5">
+      <header>
+        <%= current_organization.name %>
+      </header>
+    </div>
+
+    <div class="col-md-1 text-center">
+      <div class="status-label">
+        <%= t('.members') %>
+      </div>
+      <div>
+        <%= current_organization.members_count %>
+      </div>
+    </div>
+
+    <div class="col-md-2 text-center">
+      <div class="status-label">
+        <%= t('.account_status') %>
+      </div>
+      <div class="<%= current_organization.account_status %>">
+        <%= t("organizations.statuses.#{current_organization.account_status}") %>
+      </div>
+    </div>
+
+    <div class="col-md-2 text-center">
+      <div class="status-label">
+        <%= t('.first_order_date') %>
+      </div>
+      <% if current_organization.orders.any? %>
+      <div>
+        <%= l(current_organization.orders.first.starts_on, format: :mmddyyyy) %>
+      </div>
+      <% end %>
+
+      <div class="status-label">
+        <%= t('.sign_up_date') %>
+      </div>
+      <div>
+        <%= l(current_organization.created_at, format: :mmddyyyy) %>
+      </div>
+    </div>
+
+    <div class="col-md-2 text-center">
+      <div class="status-label">
+        <%= t('.ytd_load') %>
+      </div>
+      <div>
+        <%= current_organization.ytd_load.format %>
+      </div>
+      <div class="status-label">
+        <%= t('.lifetime_load') %>
+      </div>
+      <div>
+        <%= current_organization.lifetime_load.format %>
+      </div>
+    </div>
+  </div>
+</div>

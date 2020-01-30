@@ -1,0 +1,168 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.sendgrid.com/v3/templates/d-76481a7c3fe743d0aad0f7f409eedcb6/versions
+    body:
+      encoding: UTF-8
+      string: '{"active":1,"html_content":"\u003c!doctype html\u003e\n\u003chtml xmlns=\"http://www.w3.org/1999/xhtml\"
+        xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"\u003e\n\n\u003chead\u003e\n  \u003ctitle\u003e\n  \u003c/title\u003e\n  \u003c!--[if
+        !mso]\u003e\u003c!-- --\u003e\n  \u003cmeta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge\"\u003e\n  \u003c!--\u003c![endif]--\u003e\n  \u003cmeta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"\u003e\n  \u003cmeta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1\"\u003e\n  \u003cstyle
+        type=\"text/css\"\u003e\n    #outlook a {\n      padding: 0;\n    }\n\n    .ReadMsgBody
+        {\n      width: 100%;\n    }\n\n    .ExternalClass {\n      width: 100%;\n    }\n\n    .ExternalClass
+        * {\n      line-height: 100%;\n    }\n\n    body {\n      margin: 0;\n      padding:
+        0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td
+        {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace:
+        0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height:
+        100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode:
+        bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  \u003c/style\u003e\n  \u003c!--[if
+        !mso]\u003e\u003c!--\u003e\n  \u003cstyle type=\"text/css\"\u003e\n    @media
+        only screen and (max-width:480px) {\n      @-ms-viewport {\n        width:
+        320px;\n      }\n\n      @viewport {\n        width: 320px;\n      }\n    }\n  \u003c/style\u003e\n  \u003c!--\u003c![endif]--\u003e\n  \u003c!--[if
+        mso]\u003e\n        \u003cxml\u003e\n        \u003co:OfficeDocumentSettings\u003e\n          \u003co:AllowPNG/\u003e\n          \u003co:PixelsPerInch\u003e96\u003c/o:PixelsPerInch\u003e\n        \u003c/o:OfficeDocumentSettings\u003e\n        \u003c/xml\u003e\n        \u003c![endif]--\u003e\n  \u003c!--[if
+        lte mso 11]\u003e\n        \u003cstyle type=\"text/css\"\u003e\n          .outlook-group-fix
+        { width:100% !important; }\n        \u003c/style\u003e\n        \u003c![endif]--\u003e\n  \u003cstyle
+        type=\"text/css\"\u003e\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100
+        {\n        width: 100% !important;\n        max-width: 100%;\n      }\n    }\n  \u003c/style\u003e\n  \u003cstyle
+        type=\"text/css\"\u003e\n  \u003c/style\u003e\n\u003c/head\u003e\n\n\u003cbody\u003e\n  \u003cdiv
+        style=\"\"\u003e\n    \u003c!--[if mso | IE]\u003e\n      \u003ctable\n         align=\"center\"
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" style=\"width:600px;\"
+        width=\"600\"\n      \u003e\n        \u003ctr\u003e\n          \u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\n      \u003c![endif]--\u003e\n    \u003cdiv
+        style=\"Margin:0px auto;max-width:600px;\"\u003e\n      \u003ctable align=\"center\"
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\"\u003e\n        \u003ctbody\u003e\n          \u003ctr\u003e\n            \u003ctd
+        style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\"\u003e\n              \u003c!--[if
+        mso | IE]\u003e\n                  \u003ctable role=\"presentation\" border=\"0\"
+        cellpadding=\"0\" cellspacing=\"0\"\u003e\n                \n        \u003ctr\u003e\n      \n            \u003ctd\n               class=\"\"
+        style=\"vertical-align:top;width:600px;\"\n            \u003e\n          \u003c![endif]--\u003e\n              \u003cdiv
+        class=\"mj-column-per-100 outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\n                \u003ctable
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\"
+        width=\"100%\"\u003e\n                  \u003ctr\u003e\n                    \u003ctd
+        style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\n                      \u003cp
+        style=\"border-top:solid 4px #F45E43;font-size:1;margin:0px auto;width:100%;\"\u003e\n                      \u003c/p\u003e\n                      \u003c!--[if
+        mso | IE]\u003e\n        \u003ctable\n           align=\"center\" border=\"0\"
+        cellpadding=\"0\" cellspacing=\"0\" style=\"border-top:solid 4px #F45E43;font-size:1;margin:0px
+        auto;width:550px;\" role=\"presentation\" width=\"550px\"\n        \u003e\n          \u003ctr\u003e\n            \u003ctd
+        style=\"height:0;line-height:0;\"\u003e\n              \u0026nbsp;\n            \u003c/td\u003e\n          \u003c/tr\u003e\n        \u003c/table\u003e\n      \u003c![endif]--\u003e\n                    \u003c/td\u003e\n                  \u003c/tr\u003e\n                  \u003ctr\u003e\n                    \u003ctd
+        align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\n                      \u003cdiv
+        style=\"font-family:helvetica;font-size:20px;line-height:1;text-align:left;color:#F45E43;\"\u003eHello
+        World 12\u003c/div\u003e\n                    \u003c/td\u003e\n                  \u003c/tr\u003e\n                \u003c/table\u003e\n              \u003c/div\u003e\n              \u003c!--[if
+        mso | IE]\u003e\n            \u003c/td\u003e\n          \n        \u003c/tr\u003e\n      \n                  \u003c/table\u003e\n                \u003c![endif]--\u003e\n            \u003c/td\u003e\n          \u003c/tr\u003e\n        \u003c/tbody\u003e\n      \u003c/table\u003e\n    \u003c/div\u003e\n    \u003c!--[if
+        mso | IE]\u003e\n          \u003c/td\u003e\n        \u003c/tr\u003e\n      \u003c/table\u003e\n      \u003c![endif]--\u003e\n  \u003c/div\u003e\n\u003c/body\u003e\n\n\u003c/html\u003e","name":"0dcc4fcda2de75c9c2f32574644400ee","plain_content":"
+        Hello World 12 ","subject":"random subject 2","template_id":"d-76481a7c3fe743d0aad0f7f409eedcb6"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - sendgrid/5.3.0;ruby
+      Authorization:
+      - Bearer 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
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 18 Jul 2019 17:50:59 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '5980'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 9a04e5cb-a984-11e9-a8cd-19d9ce20e95a
+      X-Amz-Apigw-Id:
+      - dCCskGiyiYcF4cg=
+      X-Amzn-Trace-Id:
+      - Root=1-5d30b183-0d508a98920330a33ae9c014;Sampled=0
+      X-Amzn-Remapped-Date:
+      - Thu, 18 Jul 2019 17:50:59 GMT
+      Access-Control-Allow-Methods:
+      - HEAD, GET, PATCH, PUT, POST, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '21600'
+      Access-Control-Expose-Headers:
+      - Link, Location
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source
+      Content-Security-Policy:
+      - default-src https://api.sendgrid.com; frame-src 'none'; object-src 'none'
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Ratelimit-Remaining:
+      - '599'
+      X-Ratelimit-Limit:
+      - '600'
+      X-Ratelimit-Reset:
+      - '1563472260'
+      Powered-By:
+      - Mako
+    body:
+      encoding: UTF-8
+      string: '{"id":"7b2a45a5-efbb-4b7d-8c4a-b0138127be58","template_id":"d-76481a7c3fe743d0aad0f7f409eedcb6","active":1,"name":"0dcc4fcda2de75c9c2f32574644400ee","html_content":"\u003c!doctype
+        html\u003e\n\u003chtml xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\"
+        xmlns:o=\"urn:schemas-microsoft-com:office:office\"\u003e\n\n\u003chead\u003e\n  \u003ctitle\u003e\n  \u003c/title\u003e\n  \u003c!--[if
+        !mso]\u003e\u003c!-- --\u003e\n  \u003cmeta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge\"\u003e\n  \u003c!--\u003c![endif]--\u003e\n  \u003cmeta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"\u003e\n  \u003cmeta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1\"\u003e\n  \u003cstyle
+        type=\"text/css\"\u003e\n    #outlook a {\n      padding: 0;\n    }\n\n    .ReadMsgBody
+        {\n      width: 100%;\n    }\n\n    .ExternalClass {\n      width: 100%;\n    }\n\n    .ExternalClass
+        * {\n      line-height: 100%;\n    }\n\n    body {\n      margin: 0;\n      padding:
+        0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td
+        {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace:
+        0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height:
+        100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode:
+        bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  \u003c/style\u003e\n  \u003c!--[if
+        !mso]\u003e\u003c!--\u003e\n  \u003cstyle type=\"text/css\"\u003e\n    @media
+        only screen and (max-width:480px) {\n      @-ms-viewport {\n        width:
+        320px;\n      }\n\n      @viewport {\n        width: 320px;\n      }\n    }\n  \u003c/style\u003e\n  \u003c!--\u003c![endif]--\u003e\n  \u003c!--[if
+        mso]\u003e\n        \u003cxml\u003e\n        \u003co:OfficeDocumentSettings\u003e\n          \u003co:AllowPNG/\u003e\n          \u003co:PixelsPerInch\u003e96\u003c/o:PixelsPerInch\u003e\n        \u003c/o:OfficeDocumentSettings\u003e\n        \u003c/xml\u003e\n        \u003c![endif]--\u003e\n  \u003c!--[if
+        lte mso 11]\u003e\n        \u003cstyle type=\"text/css\"\u003e\n          .outlook-group-fix
+        { width:100% !important; }\n        \u003c/style\u003e\n        \u003c![endif]--\u003e\n  \u003cstyle
+        type=\"text/css\"\u003e\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100
+        {\n        width: 100% !important;\n        max-width: 100%;\n      }\n    }\n  \u003c/style\u003e\n  \u003cstyle
+        type=\"text/css\"\u003e\n  \u003c/style\u003e\n\u003c/head\u003e\n\n\u003cbody\u003e\n  \u003cdiv
+        style=\"\"\u003e\n    \u003c!--[if mso | IE]\u003e\n      \u003ctable\n         align=\"center\"
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" style=\"width:600px;\"
+        width=\"600\"\n      \u003e\n        \u003ctr\u003e\n          \u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\n      \u003c![endif]--\u003e\n    \u003cdiv
+        style=\"Margin:0px auto;max-width:600px;\"\u003e\n      \u003ctable align=\"center\"
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\"\u003e\n        \u003ctbody\u003e\n          \u003ctr\u003e\n            \u003ctd
+        style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\"\u003e\n              \u003c!--[if
+        mso | IE]\u003e\n                  \u003ctable role=\"presentation\" border=\"0\"
+        cellpadding=\"0\" cellspacing=\"0\"\u003e\n                \n        \u003ctr\u003e\n      \n            \u003ctd\n               class=\"\"
+        style=\"vertical-align:top;width:600px;\"\n            \u003e\n          \u003c![endif]--\u003e\n              \u003cdiv
+        class=\"mj-column-per-100 outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\n                \u003ctable
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\"
+        width=\"100%\"\u003e\n                  \u003ctr\u003e\n                    \u003ctd
+        style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\n                      \u003cp
+        style=\"border-top:solid 4px #F45E43;font-size:1;margin:0px auto;width:100%;\"\u003e\n                      \u003c/p\u003e\n                      \u003c!--[if
+        mso | IE]\u003e\n        \u003ctable\n           align=\"center\" border=\"0\"
+        cellpadding=\"0\" cellspacing=\"0\" style=\"border-top:solid 4px #F45E43;font-size:1;margin:0px
+        auto;width:550px;\" role=\"presentation\" width=\"550px\"\n        \u003e\n          \u003ctr\u003e\n            \u003ctd
+        style=\"height:0;line-height:0;\"\u003e\n              \u0026nbsp;\n            \u003c/td\u003e\n          \u003c/tr\u003e\n        \u003c/table\u003e\n      \u003c![endif]--\u003e\n                    \u003c/td\u003e\n                  \u003c/tr\u003e\n                  \u003ctr\u003e\n                    \u003ctd
+        align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\n                      \u003cdiv
+        style=\"font-family:helvetica;font-size:20px;line-height:1;text-align:left;color:#F45E43;\"\u003eHello
+        World 12\u003c/div\u003e\n                    \u003c/td\u003e\n                  \u003c/tr\u003e\n                \u003c/table\u003e\n              \u003c/div\u003e\n              \u003c!--[if
+        mso | IE]\u003e\n            \u003c/td\u003e\n          \n        \u003c/tr\u003e\n      \n                  \u003c/table\u003e\n                \u003c![endif]--\u003e\n            \u003c/td\u003e\n          \u003c/tr\u003e\n        \u003c/tbody\u003e\n      \u003c/table\u003e\n    \u003c/div\u003e\n    \u003c!--[if
+        mso | IE]\u003e\n          \u003c/td\u003e\n        \u003c/tr\u003e\n      \u003c/table\u003e\n      \u003c![endif]--\u003e\n  \u003c/div\u003e\n\u003c/body\u003e\n\n\u003c/html\u003e","plain_content":"
+        Hello World 12 ","generate_plain_content":false,"subject":"random subject
+        2","editor":"code"}
+
+'
+    http_version: 
+  recorded_at: Thu, 18 Jul 2019 17:50:59 GMT
+recorded_with: VCR 4.0.0

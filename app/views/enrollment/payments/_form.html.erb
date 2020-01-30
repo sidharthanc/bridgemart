@@ -1,0 +1,273 @@
+<%= render 'print_header', order: nil %>
+<span id="organization-address" data-address="<%= @order.organization.address.to_json %>"></span>
+<%= simple_form_for [:enrollment, @order, @payment], method: :post, html: { id: 'payment-form', '@submit' => 'submit' } do |f| %>
+  <div class="container">
+    <section class="enrollment-section enrollment-section--top pb-0">
+      <div class="section-name">
+        <h2 class="no-scroll">
+          <%= t '.billing_amount' %>
+        </h2>
+      </div>
+      <div class="section-content section-content--right">
+        <%= render 'shared/print_button' %>
+      </div>
+    </section>
+
+    <hr class="my-4"/>
+
+    <section class="enrollment-section">
+      <div class="section-name">
+      </div>
+      <div class="section-content">
+        <table class="pre-plan-charges-table">
+          <thead>
+            <tr>
+              <th><%= t '.description' %></th>
+              <th><%= t '.rate' %></th>
+              <th><%= t '.qty' %></th>
+              <th><%= t '.amount' %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% f.object.order.charges.each do |charge| %>
+              <tr>
+                <td class="row-description"><%= charge.description %></td>
+                <td class="row-rate"><%= charge.rate.format %></td>
+                <td class="row-quantity"><%= charge.quantity %></td>
+                <td class="row-total"><%= charge.price.format %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+
+        <% if f.object.order.fees.any? %>
+          <div class="order-fees">
+            <span class="order-fees__label">
+              <%= t('.fees') %>
+            </span>
+            <span class="order-fees__total">
+              <%= f.object.order.total_fees.format %>
+            </span>
+          </div>
+        <% end %>
+
+        <% if f.object.order.credits.any? %>
+          <div class="applied-credits">
+            <span class="applied-credits__label">
+              <%= t('.applied_credits') %>
+            </span>
+            <span class="applied-credits__total">
+              -<%= (f.object.order.total_credits).format %>
+            </span>
+          </div>
+        <% end %>
+
+        <div class="pre-plan-charges-total-wrapper mt-3">
+          <div class="pre-plan-charges-total">
+            <b><%= t('.total') %></b>
+            <span class="total-dollars" id="order-total" data-amount="<%= f.object.order.total_with_credits %>">
+              <%= f.object.order.total_with_credits.format %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="enrollment-section pb-0 billing-method">
+      <div class="section-name">
+        <h2 class="no-scroll"><%= t '.billing_method' %></h2>
+      </div>
+
+      <div class="section-content">
+        <%= t '.billing_method_body' %>
+      </div>
+    </section>
+
+    <hr class="my-4"/>
+
+    <section class="enrollment-section">
+      <div class="section-name">
+      </div>
+
+      <div class="section-content billing-methods">
+        <%= f.input :payment_type, as: :hidden, input_html: { 'v-model' => 'paymentType' } %>
+        <div class="nav nav-pills btn-group">
+          <a data-toggle="pill" class="btn" href="#tab0" role="button" @click="selectACHAccount()"><%= t('.billing_methods.buttons.ach_bank_draft') %></a>
+          <a data-toggle="pill" class="btn active" href="#tab1" role="button" @click="selectCreditCard()"><%= t('.billing_methods.buttons.credit_card') %></a>
+          <a data-toggle="pill" class="btn" href="#tab2" role="button" @click="selectCredits()"><%= t('.billing_methods.buttons.credits') %></a>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-body tab-content">
+            <div id="tab0" class="tab-pane payment-card fade hide-this">
+              <div class="inputs-span-33">
+                <%= f.input :ach_account_name, required: true, input_html: { 'v-model' => 'achAccountName', ':disabled' => '!payingWithACH' } %>
+              </div>
+              <div class="inputs-span-33">
+                <%= f.input :ach_account_type,
+                            collection: Payment::ACH_ACCOUNT_TYPES,
+                            as: :radio_buttons,
+                            required: true,
+                            item_wrapper_class: 'custom-control custom-radio custom-control-inline',
+                            input_wrapper_class: 'custom-control-input',
+                            input_html: {
+                              'v-model' => 'achAccountType',
+                              ':disabled' => '!payingWithACH'
+                            } %>
+              </div>
+              <div class="inputs-span-33">
+                <label for="payment_ach_number" class="form-control-label string required"><%= t('.ach_account_token') %><span title="required">*</span></label>
+                <small class="form-text text-muted"><%= t('.ach_account_token_hint_html') %></small>
+                <iframe id="ach_token_frame" name="ach_token_frame" frameborder="0" scrolling="no" height="50"
+                  style="display:block; width=100%; "
+                  src="<%= card_connect_iframe_src('achToken') %>">
+                </iframe>
+                <%= f.input :ach_account_token, as: :hidden, input_html: { 'v-bind:value' => 'achToken', 'id' => 'ach_token', ':disabled' => '!payingWithACH' } %>
+              </div>
+            </div>
+            <div id="tab1" class="tab-pane payment-card fade show active">
+              <div class="inputs-span-33">
+                <label for="payment_credit_card_number" class="form-control-label string required"><%= t('.credit_card_token') %> <span title="required">*</span></label>
+                <iframe id="cc_token_frame" name="cc_token_frame" frameborder="0" scrolling="no" height="50"
+                  style="display:block; width=100%; "
+                  src="<%= card_connect_iframe_src('ccToken') %>">
+                </iframe>
+                <%= f.input :credit_card_token, as: :hidden, input_html: { 'v-bind:value' => 'ccToken', 'id' => 'credit_card_token', ':disabled' => '!payingWithCredit' } %>
+              </div>
+              <div class="inputs-33">
+                <%= f.input :credit_card_expiration_date, required: true, input_html: { 'v-model' => 'ccExp', ':disabled' => '!payingWithCredit' }, hint: t('.credit_card_expiry_hint') %>
+                <%= f.input :credit_card_cvv, required: true, input_html: { 'v-model' => 'cvv', ':disabled' => '!payingWithCredit' } %>
+              </div>
+            </div>
+
+            <div id="tab2" class="tab-pane payment-card fade">
+              <div class="mb-4"><%= t '.billing_methods.credits.body_html' %></div>
+              <h4 class="mb-2" id="total-credits" data-credits-available="<%= @order.organization.credit_total %>">
+                <%= t '.billing_methods.credits.accounts_available_html' %>: <%= @order.organization.credit_total.format %>
+              </h4>
+
+              <div class="row mt-4">
+                <div class="col-sm-8">
+                  <h5><%= t '.credits_to_apply' %></h5>
+                </div>
+                <div class="col-sm-4 text-right">
+                  <input v-model.number="creditAmount" class="form-control" @keydown.enter.prevent="addCredit()" name="credit-amount">
+                  <button type="button" @click="addCredit()" :disabled="unableToAddCredit()" class="btn btn-primary mt-3"><%= t '.apply_credit' %></button>
+                  <input v-model="appliedCredit" hidden="true" name="applied_credit">
+                </div>
+              </div>
+
+              <ul class="list-group mt-2" v-show="appliedCredit > 0">
+                <li class="list-group-item">
+                  ${{ appliedCredit }}
+                <span @click="deleteCredit(index)" class="close">&times;</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="enrollment-section pb-0 billing-contact">
+      <div class="section-name">
+        <h2 class="no-scroll"><%= t '.billing_contact' %></h2>
+      </div>
+
+      <div class="section-content">
+        <%= t '.billing_contact_body' %>
+      </div>
+    </section>
+
+    <hr class="my-4"/>
+
+    <section class="enrollment-section">
+      <div class="section-name">
+      </div>
+
+      <div class="section-content">
+        <div class="inputs-span-33">
+          <%= f.input :email, hint: t('.email_address_hint', { user_email: f.object.order.primary_user.email }) %>
+        </div>
+        <div class="inputs-33">
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+        </div>
+        <div class="inputs-span-33">
+          <%= f.input :po_number, input_html: { 'v-model' => 'poNumber' } %>
+        </div>
+        <div class="inputs-span-33">
+          <%= f.input :notes,:as => :text, input_html: { 'v-model' => 'Notes',:maxlength=>200 } %>
+        </div>
+      </div>
+    </section>
+
+    <section class="enrollment-section pb-0" v-if="billing_address">
+      <div class="section-name">
+        <h2 class="no-scroll"><%= t '.billing_address' %></h2>
+      </div>
+      <%= f.input :billing_id, as: :hidden %>
+      <div class="section-content billing-content">
+        <%= t '.billing_address_body' %>
+      </div>
+    </section>
+
+    <hr class="my-4" v-if="billing_address"/>
+
+    <section class="enrollment-section"  v-if="billing_address">
+      <div class="section-name">
+      </div>
+
+      <div class="section-content">
+        <div class="inputs-span-33">
+          <%= f.input :street1, input_html: { 'v-model' => 'address1' } %>
+        </div>
+        <div class="inputs-span-33">
+          <%= f.input :street2 %>
+        </div>
+        <div class="inputs-33">
+          <%= f.input :city, input_html: { 'v-model' => 'city' } %>
+          <%= f.input :state, as: :states, input_html: { 'v-model' => 'state' } %>
+        </div>
+        <div class="inputs-33">
+          <%= f.input :zip, input_html: { 'v-model' => 'zip' } %>
+        </div>
+      </div>
+    </section>
+
+    <% unless payment.terms_and_conditions %>
+      <section class="enrollment-section">
+        <div class="section-name">
+        </div>
+        <div class="section-content">
+          <modal-template
+            :disabled-element="'input#payment_terms_and_conditions'">
+            <template slot="modal-text"><%= t('.view_terms_and_conditions_html') %></template>
+            <template slot="title-text"><%= t('.terms_and_conditions.title_html') %></template>
+            <template slot="body">
+              <% if current_organization.active_agreement.pdf.attached? %>
+                <embed class="commercial-agreement" src="<%= url_for(current_organization.active_agreement.pdf) %>" />
+              <% end %>
+            </template>
+            <template slot="button-text"><%= t('.terms_and_conditions.button_text') %></template>
+          </modal-template>
+          <%= f.input :terms_and_conditions, as: :boolean, label: t('.terms_and_conditions_agreement'), input_html: { 'v-model' => 'bridgeTerms' } %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+
+  <section class="enrollment-footer">
+    <div class="container">
+      <div class="enrollment-section">
+        <div class="section-name">
+        </div>
+        <div class="section-content">
+          <div class="enrollment-footer-actions">
+            <%= f.submit class: 'btn btn-wide btn-primary', ':disabled' => 'disableForm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

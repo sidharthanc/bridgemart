@@ -1,0 +1,27 @@
+logan:
+  street1: 3301 Aspen Grove Dr
+  city: Franklin
+  state: TN
+  zip: 37067
+  addressable: logan (Member)
+
+franklin:
+  street1: 3301 Aspen Grove Dr, Suite 301
+  city: Franklin
+  state: TN
+  zip: 37067
+  addressable: credit (PaymentMethod)
+
+franklin_ach:
+  street1: 3301 Aspen Grove Dr
+  city: Franklin
+  state: TN
+  zip: 37067
+  addressable: ach (PaymentMethod)
+
+bridge:
+  street1: 1234 Main St
+  city: Evergreen
+  state: WA
+  zip: 12345
+  addressable: savings (PaymentMethod)

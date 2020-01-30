@@ -1,0 +1,23 @@
+@import "../colors";
+@import "../variables";
+
+nav.navbar {
+  .navbar-brand {
+    flex: 1;
+
+    img {
+      height: $nav-logo-height;
+    }
+  }
+
+  a {
+    text-transform: uppercase;
+    color: $primary-color;
+    font-weight: bold;
+    font-size: .85em;
+  }
+}
+
+nav.navbar-white {
+  background-color: $white;
+}

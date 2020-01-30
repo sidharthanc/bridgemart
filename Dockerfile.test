@@ -1,0 +1,18 @@
+FROM bridgepurchasing.azurecr.io/bridge-rails-dev:latest
+# This image includes libraries and assets in order to be able to run the full CI process
+# and is not intended for deployment
+
+COPY ./docker/bin/xvfb-run /usr/bin/
+
+# Since this is run for each PR, we can't cache anything else, since a PR 
+# could easily change the Gemfile, yarn, or package lock files
+# Watch this space, because there may be a way comming
+# https://andrewlock.net/caching-docker-layers-on-serverless-build-hosts-with-multi-stage-builds---target,-and---cache-from/
+
+COPY Gemfile* yarn.lock package.json $APP_PATH/
+RUN bundle install --jobs 2 --retry 3
+RUN yarn
+
+COPY vendor/bundle $APP_PATH/vendor/bundle
+COPY . $APP_PATH
+RUN mkdir -p $APP_PATH/coverage

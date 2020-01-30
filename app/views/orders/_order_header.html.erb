@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <p class="mb-0"><%= t '.bill_to' %></p>
+      <% if @order.address %>
+        <p class="mb-0"><%= @order.address.street1 %></p>
+        <p class="mb-0"><%= @order.address.street2 %></p>
+        <p class="mb-0"><%= @order.address.city %>, <%= @order.address.state %> <%= @order.address.zip %></p>
+      <% end %>
+    </div>
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-4">
+          <p class="mb-0"><%= t '.invoice_date' %></p>
+          <p class="mb-0"><%= t '.terms' %></p>
+          <p class="mb-0"><%= t '.due_date' %></p>
+          <p class="mb-0"><%= t '.purchase_order' %></p>
+          <p class="mb-0"><%= t '.purchase_note' %></p>
+          <% if order.legacy? %>
+            <p class="mb-0 alert alert-warning"><%= t '.legacy' %></p>
+          <% end %>
+        </div>
+        <div class="col-sm-8">
+          <p class="mb-0"><%= l(@order.created_at, format: :mmddyyyy) %></p>
+          <p class="mb-0"><%= t('.terms_verbiage') %></p>
+          <p class="mb-0"><%= l(@order.starts_on, format: :mmddyyyy) %></p>
+          <p class="mb-0"><%= @order.po_number %></p>
+         <% if @order.po_number.blank? %>
+          <br>
+          <% end %>
+          <p class="mb-0"><%= @order.notes %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

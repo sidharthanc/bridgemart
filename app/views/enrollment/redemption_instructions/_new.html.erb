@@ -1,0 +1,6 @@
+<% content_for :form do %>
+  <%= simple_form_for :redemption_instruction, url: enrollment_order_redemption_instructions_path(@order), html: { id: 'new-redemption-instruction-form', data: { front_anchor_tag: '#order_plan_product_categories_attributes_', back_anchor_tag: '_redemption_instruction_instruction', index_url: enrollment_order_redemption_instructions_path(@order), type: :json } }, remote: true, validate: true do |f| %>
+    <%= render 'enrollment/redemption_instructions/form', organization: @order.organization, f: f %>
+  <% end %>
+<% end %>
+<%= render 'enrollment/redemption_instructions/modal' %>

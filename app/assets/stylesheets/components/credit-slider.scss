@@ -1,0 +1,22 @@
+.credit-adjuster {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  &__slider {
+    width: 100%;
+  }
+
+  &__field {
+    width: 200px;
+  }
+}
+
+td.credit-name {
+  width: 15%;
+  padding:  1rem 0;
+}
+
+td.credit-value {
+  width: 15%;
+}

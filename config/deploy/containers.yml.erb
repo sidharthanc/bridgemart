@@ -1,0 +1,133 @@
+---
+# Rails Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: <%= env['K8S_CLUSTER_WEB_REPLICA_COUNT'].to_i %>
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: "<%= env['IMAGE'] %>"
+        resources:
+          requests:
+            memory: "<%= env['K8S_CLUSTER_WEB_MEMORY_REQUEST'] %>"
+          limits:
+            memory: "<%= env['K8S_CLUSTER_WEB_MEMORY_LIMIT'] %>"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RAILS_MASTER_KEY
+          value: "<%= env['RAILS_MASTER_KEY'] %>"
+        - name: RAILS_ENV
+          value: "<%= env['RAILS_ENV'] %>"
+        - name: AZURE_STORAGE_CONTAINER
+          value: "<%= env['AZURE_STORAGE_CONTAINER'] %>"
+        - name: CONFIGURED_HOSTNAME
+          value: "<%= env['CONFIGURED_HOSTNAME'] %>"
+        - name: RAILS_LOG_TO_STDOUT
+          value: "1"
+        - name: MALLOC_ARENA_MAX
+          value: "2"
+        envFrom:
+        - secretRef:
+            name: env-credentials  
+        readinessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 20
+          timeoutSeconds: 2
+          successThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 3000
+      imagePullSecrets:
+      - name: acr-auth
+---
+# Internal service to provide access to the Rails containers
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+spec:
+  ports:
+  - port: 3000
+  selector:
+    app: webapp
+---
+# Sidekiq Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sidekiq
+spec:
+  replicas: <%= env['K8S_CLUSTER_WORKER_REPLICA_COUNT'] %>
+  template:
+    metadata:
+      labels:
+        app: sidekiq
+    spec:
+      containers:
+      - name: sidekiq
+        image: "<%= env['IMAGE'] %>"
+        command: ["bin/sidekiq", "-e", "<%= env['RAILS_ENV'] %>", "-c", "10"]
+        env:
+        - name: RAILS_MASTER_KEY
+          value: "<%= env['RAILS_MASTER_KEY'] %>"
+        - name: RAILS_ENV
+          value: "<%= env['RAILS_ENV'] %>"
+        - name: AZURE_STORAGE_CONTAINER
+          value: "<%= env['AZURE_STORAGE_CONTAINER'] %>"
+        - name: CONFIGURED_HOSTNAME
+          value: "<%= env['CONFIGURED_HOSTNAME'] %>"
+        - name: MALLOC_ARENA_MAX
+          value: "2"
+        envFrom:
+        - secretRef:
+            name: env-credentials              
+      imagePullSecrets:
+      - name: acr-auth
+---
+# NGINX Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: <%= env['K8S_CLUSTER_HTTP_REPLICA_COUNT'] %>
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: "metova/nginx:1.0.7"
+        ports:
+        - containerPort: 80
+          name: nginx
+---
+# Load balancer config (port 80 -> NGINX)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - port: 80
+  selector:
+    app: nginx

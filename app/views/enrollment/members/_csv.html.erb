@@ -1,0 +1,22 @@
+<div>
+  <div class="container">
+    <section class="enrollment-section pb-0">
+      <div class="section-name">
+        <h2><%= t '.name' %></h2>
+      </div>
+      <div class="section-content">
+        <%= t '.instructions' %>
+        <div id="csv-templates">
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-4" />
+  </div>
+
+  <div id="batch-member-importer">
+    <batch-member-importer form-action="<%= enrollment_order_member_imports_path(@order) %>">
+      <%= yield %>
+    </batch-member-importer>
+  </div>
+</div>

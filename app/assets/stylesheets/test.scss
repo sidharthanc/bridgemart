@@ -1,0 +1,13 @@
+// This file is only included in the test environment using something like:
+// <%= stylesheet_link_tag 'test', media: 'all', 'data-turbolinks-track' => true if Rails.env.test? %>
+
+// Disable bootstrap fade animation so we don't have to use `sleep` to wait for it to go away
+.modal.fade,
+.modal-backdrop.fade,
+.modal.fade .modal-dialog {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}

@@ -1,0 +1,65 @@
+<div class="container">
+  <section class="enrollment-section">
+    <div class="section-name">
+      <h2><%= t('.special_offers') %></h2>
+    </div>
+    <div class="section-content">
+      <medium><%= t('.special_offers_info') %></medium>
+    </div>
+  </section>
+  <hr class="my-4" />
+</div>
+
+<div class="container">
+  <section class="enrollment-section">
+    <div class="section-name">
+    </div>
+    <div class="section-content">
+      <%= f.collection_check_boxes(:special_offer_ids, f.object.plan.special_offers, :id, :name) do |check| %>
+        <div class="inputs-33">
+          <div class="special-offer">
+            <div class="check-box-content">
+            <%=
+              check.label do
+                check.check_box(
+                  class:'special-offer-check',
+                  disabled: f.object.special_offers.any?,
+                  checked: f.object.special_offers.find_by(id: check.value).present?
+                ) +
+                content_tag(:span, check.object.name, class: 'usage-type-title') +
+                content_tag(:p, content_tag(:em, check.object.description)).html_safe
+              end
+            %>
+          </div>
+            <div class="image">
+              <%= attached_image_tag(check.object.image, class: 'title-img') %>
+            </div>
+          </div>
+        </div>
+        <% if check.object.usage_instructions.present? %>
+          <div class="product-description">
+            <%= t('.usage_instructions') %>
+            <span class="ri-tooltip"><%= t('.usage_instructions_anchor') %>
+              <span class="ri-tooltiptext"><%= check.object.usage_instructions %></span>
+            </span>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="inputs-33">
+        <div class="special-offer">
+          <div class="check-box-content">
+            <%=
+              check_box_tag(
+                :decline_special_offers,
+                nil,
+                f.object.special_offers.none? && f.object.paid_at?,
+                disabled: f.object.special_offers.any?
+              )
+            %>
+            <span class="usage-type-title"><%= t('.decline_special_offers') %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

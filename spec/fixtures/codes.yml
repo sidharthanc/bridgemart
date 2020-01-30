@@ -1,0 +1,29 @@
+logan:
+  member: logan
+  balance_cents: 5000
+  limit_cents: 5000
+  external_id: LOGAN_CODE
+  plan_product_category: exam
+  authentication_token: logan123
+  status: generated
+
+angelita:
+  member: angelita
+  balance_cents: 5000
+  limit_cents: 5000
+  external_id: ANGELITA_CODE
+  plan_product_category: exam
+  authentication_token: angelita123
+  status: generated
+  legacy_identifier: LEGACYIDENTIFIER
+
+kaleb:
+  member: kaleb
+  balance_cents: 5000
+  limit_cents: 5000
+  external_id: KALEB_CODE
+  plan_product_category: fashion
+  authentication_token: kaleb123
+  status: generated
+  fields:
+    extended_account_number: 94a312d74cdbc75cc58b96ff5f24d6e8

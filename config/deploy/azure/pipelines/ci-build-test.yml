@@ -1,0 +1,30 @@
+variables:
+  azureContainerRegistry: '{"loginServer":"bridgepurchasing.azurecr.io", "id" : "/subscriptions/9590c724-1e29-4d73-98fa-22059c66f597/resourceGroups/bridge/providers/Microsoft.ContainerRegistry/registries/bridgepurchasing"}'
+  RAILS_MASTER_KEY: $(railsMasterKey)
+steps:
+- task: DockerCompose@0
+  displayName: 'Docker Compose - Build'
+  inputs:
+      azureSubscription: 'Bridge Purchasing Service Endpoint'
+      azureContainerRegistry: $(azureContainerRegistry)
+      dockerComposeFile: 'docker-compose-ci.yml'
+      dockerComposeFileArgs: 'RAILS_MASTER_KEY=$(railsMasterKey)'
+      dockerComposeCommand: build --pull test postgres redis
+- task: DockerCompose@0
+  displayName: 'Docker Compose - Run Tests'
+  inputs:
+      azureSubscription: 'Bridge Purchasing Service Endpoint'
+      azureContainerRegistry: $(azureContainerRegistry)
+      dockerComposeFile: 'docker-compose-ci.yml'
+      dockerComposeFileArgs: 'RAILS_MASTER_KEY=$(railsMasterKey)'
+      dockerComposeCommand: 'run test docker/bin/run-tests.sh'
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+      testResultsFiles: 'log/**/test-rspec*.xml'
+      testRunTitle: 'Specs'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: 'log/coverage/coverage.xml'
+    reportDirectory: 'log/coverage'

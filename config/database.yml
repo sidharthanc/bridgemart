@@ -1,0 +1,27 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: utf8
+  url: <%= ENV['DATABASE_URL'] %> # Rails Bug, needed for now to allow it to override
+  database: bridgemart
+
+test:
+  <<: *defaults
+  database: bridgemart-test
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+  sslmode: "require"
+  pool: 10
+
+release:
+  <<: *defaults
+  sslmode: "require"
+  pool: 25
+
+production:
+  <<: *defaults
+  sslmode: "require"
+  pool: 25

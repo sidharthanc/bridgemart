@@ -1,0 +1,19 @@
+.enrollment-progress {
+  padding: 0 0 1em 0;
+
+  ul {
+    @include make-row();
+    list-style: none;
+
+    li {
+      @include make-col-ready();
+      @include make-col(3);
+
+      a {
+        padding: .5em 0;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}

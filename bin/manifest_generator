@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+require_relative '../lib/manifest_generator'
+
+environment_name = ARGV[0]
+begin
+  raise ArgumentError, "Environment Name is required. eg. bin/manifest_generator staging" unless environment_name
+  puts ManifestGenerator.new(environment_name).generate
+rescue => e
+  STDERR.puts e.message 
+end

@@ -1,0 +1,12 @@
+﻿@media print {
+	body {
+		-webkit-print-color-adjust: exact;
+	}
+}
+#print-btn {
+	float: right;
+	bottom: 30px;
+	background: #0c9c4a;
+	color: white;
+	position: relative;
+}

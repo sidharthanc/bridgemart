@@ -1,0 +1,1007 @@
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            phone_number:
+              phone_format_error: Invalid
+        credit_purchase:
+          attributes:
+            voided_at:
+              cannot_void: Cannot void a paid Credit Purchase
+            amount: must be greater than 0
+
+  datetime: &datetime
+    formats:
+      mddyyyy: "%D"
+      mmddyyyy: "%m/%d/%Y"
+      Mddyyyy: "%b %d, %Y"
+      mmyy: "%m/%y"
+  time:
+    <<: *datetime
+  date:
+    <<: *datetime
+
+  enumerize:
+    plan_product_category:
+      usage_type:
+        multi_use: Multi-Use
+        single_use: Single Use
+      subtitle:
+        multi_use: Can be used multiple times for products allowed
+        single_use: Is automatically deactivated and unloaded after first use
+
+  flash:
+    actions:
+      create:
+        notice: "%{resource_name} was successfully created."
+        alert: "%{resource_name} could not be created."
+      update:
+        notice: "%{resource_name} was successfully updated."
+        alert: "%{resource_name} could not be updated."
+      destroy:
+        notice: "%{resource_name} was successfully deleted."
+        alert: "%{resource_name} could not be deleted."
+
+  helpers:
+    new_redemption_instruction: Add New Redemption Instruction
+    search:
+      advanced: Advanced Search
+      apply_filter: Apply Filter
+      clear: Clear Search
+      placeholder: Search
+      codes:
+        external_id: External ID
+        purchase_date_between: Purchase Date between
+        invoice_id: Order ID
+        status: Status
+        product_category: Product Category
+        expiration_date_between: Expiration Date between
+        amount_used_between: Amount Used between
+        balance_between: Initial Load Value between
+        amount_credited_between: Amount Credited between
+      orders:
+        due_date_between: Due Date Between
+        status: Status
+        order_id: Order ID
+    submit:
+      organization_portal_organization:
+        update: Update
+      order:
+        update: Save & Continue
+      payment:
+        create: Submit Order
+        update: Submit Order
+      member: &member
+        create: Add Member
+        update: Save Member
+      enrollment:
+        sign_up:
+          create: Save & Continue
+          update: Save & Continue
+
+  errors:
+    access_denied: You are not authorized to perform this action.
+    messages:
+      must_be_attached: must be attached
+
+  inactive: Inactive
+  na: N/A
+  confirm: Are you sure?
+  edit: Edit
+  void: Void
+  pay: Pay
+  print: Print
+  balance_discrepancy: Balance Discrepancy
+
+  layouts:
+    mobile:
+      branding: Powered by Bridge Vision
+    application:
+      title:
+        Login | Bridge Purchasing Solutions
+    credit:
+      edit: Edit Credits
+    enrollment:
+      page_title: Sign Up
+      create_order: Create Order
+      customer_care: Customer Care
+      customer_care_phone: 1-800-555-1234
+      sign_out: Sign Out
+      nav:
+        organization: Your Organization
+        products: Product Details
+        members: Add Members
+        billing: Billing
+      print_form:
+        invoice: Order
+        invoice_no: 'Order #: %{id}'
+        balance_due: 'Balance Due: %{balance}'
+        address:
+          bridge_mart: BridgeMart
+          po_box: P.O. Box 10950
+          city_state: Fayetteville, Ar. 72703
+          country: USA
+        print_button: Print Form
+        print: Print
+    dashboard:
+      sign_out: Sign Out
+      nav:
+        overview: Overview
+        account: Account
+        admin: Admin
+        billing: Billing
+        dashboard: Dashboard
+        locator: Locate a Provider
+        members: Members
+        plans: Plans
+        products: Products
+        payment_methods: Payment Methods
+        organizations: Organizations
+    plan:
+      label:
+        expires: EXP
+    organization_portal:
+      nav:
+        commercial_agreements: Contracts
+        details: Details
+        users: Users
+        credits: Credits
+        redemption_instructions: Redemption Instructions
+    organizations:
+      sign_out: Sign Out
+      nav:
+        admin: Admin
+
+  mailers:
+    invoice_mailer:
+      pre_plan_invoice:
+        subject: Enrollment invoice email
+
+  shared:
+    header:
+      nav:
+        sign_up: Sign Up
+    user_controls:
+      admin: Admin
+      new_order: New Order
+      sign_out: Sign Out
+
+  active_admin:
+    payment_methods:
+      delete_message: Payment Method Deleted Successfully
+      record_not_exist: Payment Method Does not Exist
+    organizations:
+      delete_job_message: Organization will be Deleted Shortly
+      record_not_exist: Organization Does not Exist
+    credits:
+      cancel_message: 'Credits Cancelled Successfully'
+    users:
+      delete_message: User Deleted Successfully
+    resource:
+      index:
+        deactivate: 'Deactivate'
+
+  admin:
+    product_categories:
+      activate:
+        notice: 'Product Category is visible'
+      deactivate:
+        notice: 'Product Category is hidden'
+
+  multiple_organizations:
+    one: "%{count} organization, %{enrolled} enrolled"
+    other: "%{count} organizations, %{enrolled} enrolled"
+
+  overview:
+    budget:
+      remaining: Remaining
+    customer_card_load:
+      organization: Organization
+      usd_spent: '$ Spent'
+      bridge_revenue: Bridge Revenue
+      members: Members
+      division: Program Type
+      billing_period: Billing Period
+    index:
+      credits_available: Account Credits Available
+      budget:
+        title: Load Value YTD
+        total: "%{amount} Total Loaded"
+      billing:
+        title: Billing
+        due: "%{amount} Due"
+      transactions:
+        title: Customer Card Load
+
+  pages:
+    home:
+      sign_up: Sign Up
+      sign_in: Log In
+      jumbotron: Nationwide access to affordable vision care for employers and health plans.
+      lead: |
+        Bridge Advantage Vision is changing the way you buy vision products
+        and services. We connect you to everyday low pricing on fashion eyewear,
+        contact lenses, and vision services with the nationwide network of Walmart
+        Vision Centers, Sam's Club Optical Centers and optometrist locations.
+    no_dashboard:
+      title: Incomplete Order
+      message: Your dashboard will appear here when you have finished ordering your plan.
+      action: Continue
+    dashboard:
+      credits_available: Account Credits Available
+      budget:
+        title: Load Value YTD
+        total: "%{amount} Total Loaded"
+        remaining: Remaining
+      billing:
+        title: Billing
+        due: "%{amount} Due"
+      transactions:
+        title: Customer Card Load
+      members:
+        overall_usage: Overall Usage
+        overall_ytd: Year to Date
+        used_funds: "%{used}% of funds have been used."
+        average_days: "Average Usage is %{average_days} days."
+        title: Members
+        count:
+          one: "%{count} Member"
+          other: "%{count} Members"
+        count_html:
+          one: "<span class='standout'>%{count}</span> Member"
+          other: "<span class='standout'>%{count}</span> Members"
+        add: Add Members
+        have_usage:
+          one: "has used a code"
+          other: "have used a code"
+        have_no_usage:
+          one: "has not used a code"
+          other: "have not used a code"
+    terms_and_conditions:
+      body: WIP Terms and Conditions.
+
+  fee:
+    bridge_fee: "%{charge_description} - Fees"
+
+  enrollment:
+    back: Go Back
+    skip: Skip for Now
+    next: Continue
+    create_account: Create Account
+    members:
+      new:
+        header: Add Members
+        or: or
+      csv:
+        name: Batch Upload
+        instructions: To upload member information, you must format your spreadsheet to match the template below. For your convenience, a template has been provided below.
+        complete: Complete & Go To Billing
+      manual:
+        name: Manual Entry
+        instructions: After completing an entry, click "Add Member" to save and continue to the next entry. The members you've added will appear on a list to the left.
+        complete: Complete & Go To Billing
+        member: Member
+        saved: Saved
+      search:
+        name: Search Members
+        instructions: Add or remove saved members, by searching for first name, last name, email, phone or member id.
+        complete: Complete & Go To Billing
+        member: Member
+        saved: Saved
+      member_table:
+        first_name: First Name
+        last_name: Last Name
+        email: Email
+        external_id: External ID
+      form:
+        legend:
+          new_member: New Member
+          edit_member: Update Member
+          contact: Member Contact Information
+          address: Home Address
+        address: "Address"
+      mode_choice:
+        csv:
+          title: Upload
+          desc: Add members using a .csv file (recommended)
+        manual:
+          title: Type
+          desc: Enter member information manually
+        search:
+          title: Search
+          desc: Add previous saved members to the order
+    billings:
+      new:
+        header: Billing
+    orders:
+      edit:
+        title: Product Details | Bridge Purchasing Solutions
+        header: Product Details
+      form:
+        start_and_end_date: Start & End Date
+        start_date: Start Date
+        start_and_end_date_info: Choose the start date you want these funds to be available to your member(s). Electronic code will expire based on Ends on. Upon expiration, any remaining balance will be automatically transferred to credits on your account. Credits can be used toward a future order.
+        one_year: 1 year
+        card_amount: Code Amount
+        card_amount_info: Use the slider to select the dollar amount you would like to offer assigned members.
+      special_offers:
+        special_offers: Special Offers
+        special_offers_info: Pay less per member by opting into one of our special offers
+        decline_special_offers: "I'll skip participating in any special offers at this time. Thanks, but maybe next time."
+        usage_instructions_anchor: '?'
+        usage_instructions: Redemption Instructions
+      code_amount:
+        product_description: Product Description
+        product_description_anchor: '?'
+        redemption_requirements: Redemption Requirements
+        redemption_requirements_anchor: 'i'
+        redemption_requirements_info: Input the specific product requirements your organization allows to be purchased by the member.
+        card_amount: Code Amount
+        card_amount_info: Use the slider to select the dollar amount you would like to offer assigned members.
+        redemption_instructions: Redemption Requirements
+        redemption_instructions_anchor: '?'
+        price_points_info: 'Price Limit should be between %{min} and %{max}.'
+
+    payments:
+      process_order:
+        header: Thank you, we've received your order.
+        message: Please wait while we process your order.
+      new:
+        header: Billing
+      confirm:
+        error_occured: "An error occured during payment processing; Please contact support."
+      form:
+        apply_credit: Apply Credit
+        billing_amount: Billing Amount
+        credits_to_apply: Amount of Credits to Apply
+        total: Total
+        due_date_hint: 10 days prior to start date
+        no_due_date_warning: No due date available until the Plan section of the Enrollment Process is completed.
+        billing_method: Billing Method
+        billing_contact: Billing Contact
+        billing_address: Billing Address
+        terms_and_conditions_agreement: I agree to the Bridge Vision Terms & Conditions.
+        due_date: "Due %{due_date}"
+        billing_method_body: Select a billing method for the above ordered amount. This billing method may be changed in the future.
+        billing_contact_body: Send order to additional contact below.
+        billing_address_body: Enter the billing address associated with the payment method above.
+        email_address_hint: "If left blank, email orders will be sent to %{user_email}."
+        fees: Admin Fee
+        applied_credits: Credits
+        description: DESCRIPTION
+        rate: RATE
+        qty: QTY
+        amount: AMOUNT
+        ach_account_token: "ACH Routing and Account Number"
+        ach_account_token_hint_html: "Should be entered in the following format: <pre>RoutingNumber/AccountNumber</pre>"
+        credit_card_token: "Credit Card Number"
+        credit_card_expiry_hint: Please use format MM/YY
+        billing_methods:
+          buttons:
+            credits: Credits
+            ach_bank_draft: eCheck/ACH Bank Draft
+            credit_card: Credit Card
+          ach_bank_draft:
+            modal:
+              click_text: ACH Terms
+              title: ACH Agreement
+              body: place_holder 0
+              button_text: Agree
+          direct_deposit:
+            modal:
+              click_text: 'Direct/Wire Deposit Terms'
+              title: Direct/Wire Deposit Agreement
+              body: place_holder 1
+              button_text: Agree
+          credit_card:
+            modal:
+              click_text: Credit Card Terms
+              title: Credit Card Agreement
+              body: place_holder 2
+              button_text: Agree
+          credits:
+            accounts_available_html: <b>Account Credit Available</b>
+            body_html: |
+              <i>To apply account credit to your order, select the location and enter the credit amount in
+              the box below. You may add credit from multiple locations (if applicable) by adding them
+              one at a time. You can see the credit applied to your order at the the bottom of the page.
+              Credit is not charged, reserved or taken from the account until you submit the order.</i>
+            organization: 'Organization:'
+        view_terms_and_conditions_html: |
+          <i class='fas fa-file-alt p-1'></i><strong>Please review and accept the Terms and Conditions before proceeding</strong>
+        terms: Commercial Account Agreement
+        terms_and_conditions:
+          button_text: Accept
+          title_html: Commercial Account Agreement
+
+    redemption_instructions:
+      form:
+        create: Create Instruction
+      modal:
+        new: New Redemption Instruction
+    brokers:
+      new:
+        employer_redirect: Are you an Employer?
+        create_employer_account_link: Create an Employer Account
+        create_broker_account: Create a TPA/Broker Account
+        your_info: Your Information
+
+    sign_ups:
+      new:
+        create_broker_account_link: Create a TPA/Broker Account
+        broker_redirect: Are you a broker or third-party administrator?
+        your_organization: 'Your Organization'
+        primary_contact: Primary Contact
+        product_categories: Products
+        email_address_info: This will be the email you use to log in. You can use a different email for receiving orders later.
+        products_information: Which products do you want to provide to members of your organization? You may select one or multiple options.
+        organization_info: Organization Info
+
+  credit_purchases:
+    index:
+      columns:
+        id: Credit Purchase ID
+        paid_at: Paid At
+        voided_at: Voided At
+        po_number: PO Number
+        error_message: Error Message
+        processing: Processing
+        amount: Amount
+        amount_currency: Amount Currency
+        organization_id: Organization ID
+        payment_method_id: Payment Method ID
+        created_at: Created At
+        updated_at: Updated At
+        deleted_at: Deleted At
+
+  credits:
+    index:
+      columns:
+        id: Credit ID
+        source_type: Source Type
+        source_id: Source ID
+        amount: Amount
+        amount_currency: Amount Currency
+        created_at: Created At
+        updated_at: Update At
+        organization_id: Organization ID
+
+  members:
+    member:
+      codes: Codes
+      usage: Usage
+      resend:
+        confirm: Are you sure you want to resend this member's code e-mail?
+      deactivate:
+        confirm: Are you sure you want to deactivate this member and all the member's active codes?
+      actions:
+        view: View
+        edit: Edit
+        deactivate: De-activate
+        reactivate: Re-activate
+        resend: Send Code E-mail
+    all: All Members
+    overall_usage: Overall Usage
+    overall_ytd: Year to Date
+    used_funds: "%{used}% of funds have been used."
+    average_days: "Average Usage is %{average_days} days."
+    title: Members
+    count:
+      one: "%{count} Member"
+      other: "%{count} Members"
+    count_html:
+      one: "<span class='standout'>%{count}</span> Member"
+      other: "<span class='standout'>%{count}</span> Members"
+    add: Add Members
+    have_usage:
+      one: "has used a code"
+      other: "have used a code"
+    have_no_usage:
+      one: "has not used a code"
+      other: "have not used a code"
+    usages_alert: "Reminder: This member's code has usage."
+    index:
+      header: Members
+      subheader: "Count: %{count}"
+      new_member: + Member
+      columns:
+        organization_id: Organization ID
+        id: Member ID
+        name: Name
+        phone: Phone Number
+        email: E-mail
+        order_id: Order ID
+        code_id: Code ID
+        limit: Limit
+        limit_cents: Limit
+        deactivated_at: Deactivated
+        created_at: Started
+        external_id: External ID
+        product_category_id: Product Category ID
+        balance_cents: Remaining Balance (Cents)
+      member:
+        codes: Codes
+        usage: Usage
+        resend:
+          confirm: Are you sure you want to resend this member's code e-mail?
+        deactivate:
+          confirm: Are you sure you want to deactivate this member and all the member's active codes?
+        actions:
+          view: View
+          edit: Edit
+          deactivate: De-activate
+          reactivate: Re-activate
+          resend: Send Code E-mail
+      export:
+        members: Download Members/Codes as CSV
+        usages: Download Usages as CSV
+      member_import_errors: Uh oh, we ran into issues importing your members. Click here to review them.
+      nav:
+        members: Members
+        codes: Codes
+    form:
+      legend:
+        edit_member: Edit Member
+        contact: Contact
+        address: Address
+    header:
+      balance_inquiry: Refresh Balance
+      codes: Codes
+      details: Details
+      deactivate: De-activate
+      reactivate: Re-activate
+    search:
+      advanced: Advanced Search for Members
+
+  organizations:
+    all: All Organizations
+    index:
+      your_organizations: Your Organizations
+      add_an_organization: Add an Organization
+      columns:
+        members: Members
+        account_status: Account Status
+        start_date: Start Date
+        ytd_load: YTD Load
+    statuses:
+      no_order: No Order
+      no_order_in_six_months: No Order in 6 Months
+      billing_issue: Billing Issue
+      good: Good
+    codes:
+      id: Code ID
+      external_id: External ID
+      invoice_id: Order ID
+      product_category: Product Category
+      purchase_date: Purchase Date
+      delivered: Delivered
+      balance: Balance
+      status: Status
+      actions: Actions
+  codes:
+    codes:
+      usage: Usage
+      product_description: Product Description
+      reason: Reason
+      no_codes: No results found within the given parameters.
+      redemption_instructions: Redemption Instructions
+      product_description: Product Description
+    lock: Lock
+    unlock: Unlock
+    deactivate: De-activate
+    damaged: Damaged
+    replaced: Replaced
+    lost: Lost
+    found: Found
+    office_error: Office Error
+    expired: Past Expiration Date
+    renewed: Renewed
+    stolen: Stolen
+    unclaimed: Unclaimed Property
+    misc: Miscellaneous
+    view_all: View All
+    view_codes: View Codes
+    view_code:  View Code
+    legacy: Legacy
+    statuses:
+      generated: Generated
+      activating: Activating
+      activated: Activated
+      registered: Registered
+      locking: Locking
+      locked: Locked
+      unlocking: Unlocking
+      partially_used: Partially Used
+      used: Used
+      deactivated: Deactivated
+    action_buttons:
+      reason: Reason
+    index:
+      no_codes: No results found within the given parameters.
+      usage: Usage
+      redemption_instructions: Redemption Instructions
+      product_description: Product Description
+      no_product_description: No description has been given for this product.
+      external_id_search: Search
+      columns:
+        id: Code ID
+        external_id: External ID
+        balance: Balance
+        status: Status
+        actions: Actions
+        invoice_id: Order ID
+        product_category: Product Category
+        purchase_date: Purchase Date
+        delivered: Delivered
+    search:
+      advanced: Advanced Search for Codes
+  usages:
+    transaction: Transaction ID
+    code: Code ID
+    amount: Amount
+    activity: Activity
+    reason: Reason
+    result: Result
+    notes: Notes
+    timestamp: Time
+    table:
+      no_usage: No usage records found.
+      code_inactive: Code inactive
+    index:
+      columns:
+        id: Usage ID
+        code_id: Code ID
+        amount: Amount
+        created_at: Date Created
+        updated_at: Updated At
+        activity: Activity
+        reason: Reason
+        result: Result
+        notes: Notes
+        used_at: Date Used
+        order: Order ID
+        member: Member ID
+        member_name: Member Name
+        bridge_usage: Bridge Usage
+        external_id: External ID
+        amount_currency: Amount Currency
+        visit_number: Visit Number
+        store_city: Store City
+        store_state: Store State
+        total_usage: Total Usage
+        total_usage_currency: Total Usage Currency
+        total_per_visit: Total Per Visit
+        total_per_visit_currency: Total Per Visit Currency
+        retail_price: Retail Price
+        retail_price_currency: Retail Price Currency
+        store_number: Store Number
+        department_category: Dept Category
+        upc_number: UPC Number
+        upc_description: UPC Description
+        company_type: Company Type
+        transaction_detail_identifier: Transaction Detail ID
+        deleted_at: Deleted At
+
+  product_categories:
+    card_name: "%{name} Code"
+
+  organization_portal:
+    credits:
+      search_table:
+        nil_source: No Source
+        columns:
+          code: source ID
+          remaining_balance: Remaining Balance
+          type: Type
+        types:
+          added: Added
+          used: Used
+          cancelled: Cancelled
+      advanced_search:
+        header: Advanced Search
+        labels:
+          created_at: Date
+          start_date: Starting On
+          end_date: Ending On
+      index:
+        export: Export as CSV
+        credit_history:
+          header: Credit History
+        header: "Organization Credit: "
+        edit: Edit Credits
+        submit: Update Credits
+        columns:
+          name: Name
+          credits: Credit
+        purchase_credits: Purchased Credits
+      update:
+        error: There was an error. Credits have not been updated.
+    credit_purchases:
+      index:
+        export: Export as CSV
+        header: Credit Purchases
+        labels:
+          po_number: Purchase Order
+          payment_method: Payment Method
+          amount: Credit Amount
+          updated: Date Changed
+          error_message: Error(s)
+          processing: In Progress
+          status: Status
+          actions: Actions
+        buttons:
+          new: Buy Credit
+      new:
+        header: Buy Credit
+      edit:
+        header: Edit Credit Purchase
+      print:
+        invoice:
+          header: Account Credit Order
+        status: Status
+        statuses:
+          none: Pending
+          paid: PAID
+          void: VOID
+        po_number: 'Purchase Order #'
+        processing: Processing
+        amount: Credit Amount
+        organization: Organization
+        payment_method: Payment Method
+        updated_at: Last Changed At
+        error_message: Error(s)
+
+      credit_purchase:
+        confirm_void: Are you sure you want to void this credit purchase?
+        confirm_pay: Are you sure you want to process this credit purchase?
+        processing:
+          "false": "No"
+          "true": "Yes"
+        status:
+          paid: Paid
+          void: Voided
+          none: Pending
+      show:
+        contact_name: "Contact Name: %{contact_name}"
+        email: "Email: %{email}"
+        edit_link: Edit
+        nav:
+          back: Back
+
+    member_imports:
+      index:
+        header: Member Import Issues
+        columns:
+          id: Import ID
+          updated_at: Imported At
+          order_id: Order ID
+          problems: Import Issues
+        actions:
+          clear: Clear warnings
+      member_import:
+        action:
+          clear: Clear
+          confirm: Are you sure you want to clear the import warnings?
+
+    users:
+      edit:
+        title: Edit User
+      form:
+        legend:
+          contact: Contact Info
+      index:
+        title: Users
+        new_user: New User
+        header: Users
+        subheader: "Count: %{count}"
+        columns:
+          id: ID
+          name: Name
+          phone_number: Phone Number
+          email: Email
+        actions:
+          view: View
+          edit: Edit
+      new:
+        title: New User
+      show:
+        nav:
+          back: Back
+        email: Email
+        permission_groups: Permission Groups
+        edit_link: Edit
+
+    commercial_agreements:
+      index:
+        header: Contracts
+        columns:
+          file: Agreement
+          date_signed: Date Signed
+
+    organizations:
+      edit:
+        billing_contact: Billing Contact
+        organization_info: Organization
+        organization_address: Main Address
+    redemption_instructions:
+      index:
+        header: Redemption Instructions
+        new_redemption_instruction: + Redemption Instruction
+        columns:
+          instruction_title: Title
+          instruction_description: Instruction Description
+          description: Description
+          active_status: Active?
+          product_category: Product
+          product_category_description: Product Description
+        no_instructions_available: No instructions are available to be set for the products you have chosen.
+        no_instructions_set: No redemption instructions have been set for your orgranization.
+        actions:
+          edit: Edit
+          view: View
+          delete: Delete
+      new:
+        header: New Redemption Instruction
+      edit:
+        header: Edit Redemption Instruction
+      show:
+        product_category: Product
+        instruction: Instruction
+        instruction_title: Instruction Title
+        instruction_description: Instruction Description
+        delete_instruction: Delete Instruction
+        instruction_active: Instruction Active?
+        nav:
+          back: Back
+  orders:
+    customer: Customer
+    due: Due Date
+    status: Status
+    view_all: View All
+    amount: Amount
+    credits_applied_from: 'Applied Credit from %{source_name}'
+    search:
+      advanced: Advanced Search for Orders
+    statuses:
+      paid: Paid
+      pending: Pending Payment
+      cancelled: Order Cancelled
+      fulfilled: Fulfilled
+      failed: Payment Failed
+    billing_status:
+      members: MEMBERS
+      account_status: ACCOUNT STATUS
+      first_order_date: FIRST ORDER DATE
+      sign_up_date: SIGN UP DATE
+      ytd_load: YTD LOAD
+      lifetime_load: LIFETIME LOAD
+      green: Good
+      red: Outstanding
+    index:
+      edit_btn: View Billing Information
+      payment_methods: Payment Methods
+      export: Export .csv
+      new_order: New Order
+      header: Orders
+      subheader: "Count: %{count}"
+      print_order: Print Order
+      edit_order: Edit
+      pdf_order: PDF
+      cancel_order: Cancel
+      actions:
+        view: View
+      columns:
+        id: Order ID
+        po: P.O. Number
+        note: Note
+        status: Status
+        order_date: Order Date
+        amount: Amount
+        options: Options
+        plan_id: Plan ID
+        paid_at: Paid At
+        created_at: Creation Date
+        updated_at: Updated Date
+        starts_on: Order Starts
+        ends_on: Order Ends
+        po_number: PO Number
+        payment_method_id: Payment Method ID
+        error_message: Error Message
+        started_at: Order Started
+        amount: Amount
+        paid: 'Paid ?'
+        legacy_identifier: Legacy Identifier
+        legacy: Legacy
+      invoicing:
+        invoice_info: "Order #: %{id} \n P.O. #: %{po_number} \n Order Date: %{date}"
+        bridgemart_info: "BridgeMart \n P.O. Box 10950 \n Fayetteville, Ar. 72703 \n USA"
+        total: "Total: %{total}"
+        status: "Order Status: %{status}"
+        headers:
+          - 'Qty'
+          - 'Description'
+          - 'Rate'
+          - 'Amount'
+    order_details:
+      thank_you: Thank you for your business.
+      order_processing: Order being processed.
+      paid_with_credit: Payment was paid with Credit Card
+      paid_with_ach: Payment was paid via ACH
+      ach_info: '%{name}: %{acct_number}'
+      credit_info: 'Credit Card: %{acct_number}'
+      subtotal: 'Subtotal:'
+      administration_fee: 'Administration Fee:'
+      credits: 'Credits:'
+      total_invoice: 'Total Order:'
+      total_due: 'Total Due:'
+    order_header:
+      bill_to: 'Bill To:'
+      invoice_date: 'Order Date:'
+      terms: 'Terms:'
+      terms_verbiage: Payment due upon receipt or date shown
+      due_date: 'Due Date:'
+      purchase_order: 'P.O.#:'
+      purchase_note: 'Note:'
+      legacy: Legacy
+    show:
+      nav:
+        back: Back
+      quantity: Quantity
+      description: Description
+      amount: Amount
+      print_button: Print
+
+  payment_methods:
+    credit:
+      labels:
+        credit_card_number: 'Card Number'
+        credit_card_expiration_date: 'Expires On'
+    ach:
+      labels:
+        ach_account_name: 'Account Name'
+        ach_account_number: 'Account Number'
+        ach_account_type: 'Type'
+    index:
+      header: Payment Methods
+      labels:
+        edit: "Edit %{type_label} Details"
+        payment_types:
+          credit: Credit Card
+          ach: ACH Bank Account
+      columns:
+        payment_id: ID
+        updated_at: Last Updated
+        payment_type: Payment Type
+        payment_details: Details
+    edit:
+      header: Edit Payment Method
+    form:
+      payment_information: Payment Information
+      billing_contact: Billing Contact
+      address: Billing Address
+      email_address_hint: "If left blank, email orders will be sent to %{user_email}."
+      headers:
+        current_details: Current Payment Details
+      submit: Save Billing and Payment Information
+
+  users:
+    phone_number_hint: (000) 000-0000
+    save: Save Member
+    search:
+      advanced: Advanced Search for Users
+
+  mobile:
+    codes:
+      index:
+        instructions: Click on the code image below to view your redemption barcode
+      show:
+        member_authorization_message: The member is authorized to receive the product or service listed under 'What You Can Buy.'
+        what_this_code_buys: What You Can Buy
+        price_point_verbiage: "%{limit} for %{verbiage}"
+        loading: Loading...
+        not_activated: Card/Code is not Activated.
+
+      barcode:
+        not_present: Barcode is not present.

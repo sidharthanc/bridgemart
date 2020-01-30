@@ -1,0 +1,3 @@
+management_fee:
+  description: 'First Month Program Management Fee'
+  rate_cents: 125

@@ -1,0 +1,24 @@
+.background-slant-wrapper {
+  position: relative;
+
+  .background-slant {
+    width: 150%;
+    top: 0%;
+    left: 20%;
+    transform: rotate(-65deg);
+    height: 11em;
+    position: absolute;
+  }
+
+  .lightgreen {
+    background-color: lightgreen;
+  }
+
+  .lightblue {
+    background-color: lightblue;
+  }
+
+  .lightsalmon {
+    background-color: lightsalmon;
+  }
+}

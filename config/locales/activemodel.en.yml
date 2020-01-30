@@ -1,0 +1,25 @@
+en:
+  activemodel:
+    attributes:
+    errors:
+      models:
+        sign_up:
+          attributes:
+            product_categories:
+              too_short: Please select at least one product
+            phone:
+              invalid: must use the format (000) 000-0000
+            email:
+              taken: has already been taken. If this is your email address, please log in instead.
+  activerecord:
+    errors:
+      models:
+        member:
+          attributes:
+            phone:
+              phone_format_error: must use the format (000) 000-0000
+        address:
+          attributes:
+            zip:
+              zip_code_invalid: please enter a valid zip code
+        

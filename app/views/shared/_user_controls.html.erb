@@ -1,0 +1,8 @@
+<% cache [current_user, current_organization] do %>
+  <div class="current-user">
+    <%= link_to current_user.email, edit_user_registration_path %>
+    <%= link_to t('.admin'), admin_root_path if current_user.admin? %>
+    <%= link_to t('.new_order'), new_organization_enrollment_sign_up_path(current_organization), style: 'font-size:20px;' if current_organization && policy(Order).new? %>
+    <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete %>
+  </div>
+<% end %>

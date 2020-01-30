@@ -1,0 +1,21 @@
+<h2><%= current_organization.name %></h2>
+
+<div class="index-table-container">
+  <header>
+    <%= t('.header') %>
+  </header>
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t '.columns.id' %></th>
+        <th><%= t '.columns.updated_at' %></th>
+        <th><%= t '.columns.order_id' %></th>
+        <th><%= t '.columns.problems' %></th>
+        <th><%= t '.actions.clear' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @member_imports %>
+    </tbody>
+  </table>
+</div>

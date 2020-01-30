@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <style type="text/css" media="all">
+      @font-face {
+        font-family: "Roboto";
+        src:url("<%= asset_data_base64('Roboto-Regular.otf') %>");
+        font-weight: 100;
+        font-style: normal;
+      }
+
+      * {
+        font-family: "Roboto";
+      }
+    </style>
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+  </head>
+  <body>
+    <div id="header">
+      <div class="logo">
+      <% if @code&.show_organization_logo? %>
+        <%= show_attached_image @code.organization.logo, width: "90" %>
+      <% else %>
+        <%= wicked_pdf_image_tag 'bridge-tri-color-logo.png', :width => "90" %>
+      <% end %>
+      </div>
+
+      <% if @code.member.barcode_image.attached? %>
+      <div class="member-barcode">
+        <%= show_attached_image @code.member.barcode_image, width: "90" %>
+      </div>
+      <% end %>
+
+    </div>
+    <div id="content" class="container">
+      <%= yield %>
+    </div>
+    <div style='page-break-after:always;'></div>
+  </body>
+</html>

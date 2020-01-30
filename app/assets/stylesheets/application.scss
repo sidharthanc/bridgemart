@@ -1,0 +1,22 @@
+//= require bootstrap-datepicker
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "colors";
+@import "variables";
+@import "mixins";
+
+@import "bootstrap";
+@import "components/*";
+
+body {
+  background-color: $body-bg-color;
+  color: $gray-font-color;
+}
+
+.translation_missing {
+  color: red;
+}
+
+.fa-exclamation-triangle {
+  color: red;
+}

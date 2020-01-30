@@ -1,0 +1,85 @@
+@import '../colors';
+
+$th-color: $gray-font-color;
+$row-border-color: $dark-gray;
+
+.index-table-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.index-table-actions {
+  display: flex;
+
+  & > * {
+    margin: 0 5px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.index-table-container {
+  @extend .card;
+  padding: 2em;
+
+  header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+
+    small {
+      font-size: 1rem;
+    }
+  }
+
+  table {
+    width: 100%;
+
+    thead {
+      text-transform: uppercase;
+      color: $th-color;
+    }
+
+    tbody {
+      tr {
+        border-top: 1px solid $row-border-color;
+        &:first-child { border: 0; }
+      }
+
+      td {
+        cursor: auto;
+        padding: .5rem 0;
+        color: $primary-color;
+      }
+    }
+
+    .tr-expanded {
+      border: 0;
+
+      td {
+        color: $gray-font-color;
+      }
+
+      header {
+        font-size: 1.25rem;
+        color: $gray-font-color;
+        margin-bottom: .5rem;
+      }
+    }
+
+    .tr-options {
+      display: flex;
+      justify-content: flex-end;
+
+      a {
+        padding-left: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      html: '<span title="required">*</span>'
+
+    error_notification:
+      default_message: "Please review the problems below:"
+
+    plan_input: "%{starts_on} until %{ends_on}"
+
+    labels:
+      defaults:
+      enrollment_organization:
+        contact_first_name: First Name
+        contact_last_name: Last Name
+        contact_email: Email Address
+        role: Role
+        contact_phone: Phone Number
+        organization_name: Organization Name
+        broker_organization_name: TPA/Broker Organization
+        organization_industry: Industry
+        organization_number_of_employees: Approx. Number of Employees
+        number_of_employees_with_safety_rx_eyewear: Approx. Number of Employees with Safety Prescription Eyewear
+      address: &address
+        street1: Address 1
+        street2: Address 2
+        city: City
+        state: State
+        zip: ZIP Code
+      enrollment_member: &member
+        first_name: First Name
+        middle_name: Middle Name
+        last_name: Last Name
+        email: Email Address
+        phone: Phone Number
+        external_member_id: External Member Id
+        <<: *address
+      enrollment_plan:
+        starts_on: Start Date
+        ends_on: End Date
+      payment_method: &payment_method
+        ach_account_name: Account Name
+        ach_account_type: Account Type
+        ach_account_token: Routing/Account Number
+        ach_routing_number: Routing Number
+        ach_account_number: Account Number
+        ach_payment_terms: I agree to the
+        credit_card_number: Credit Card Number
+        credit_card_token: Credit Card Number
+        credit_card_expiration_date: Exp. Date
+        credit_card_cvv: CVV
+      payment:
+        credit_payment_terms: I agree to the
+        po_number: Purchase Order
+        <<: *address
+        <<: *payment_method
+      member:
+        <<: *member
+      location:
+        email: Contact Email
+        name: Location Name
+        contact_name: Contact Name
+      organization_portal_organization:
+        contact_phone: Phone Number
+        organization_name: Name
+        organization_industry: Industry
+        organization_number_of_employees: Approx. Number of Employees
+        number_of_employees_with_safety_rx_eyewear: Approx. Number of Employees with Safety Prescription Eyewear
+
+
+    hints:
+      defaults:
+        contact_phone: (000) 000-0000
+        contact_email: someone@example.com
+
+    options:
+      enrollment_billing:
+        ach_account_type:
+          checking: Checking
+          savings: Savings
+
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

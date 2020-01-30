@@ -1,0 +1,41 @@
+{
+  "count": 3,
+  "transactions": [
+    {
+      "timestamp": "/Date(1497389473030)/",
+      "user": "User Name",
+      "activity": "Manual Adjustment",
+      "location": "Location",
+      "reason": "Manual Adjustment",
+      "result": "Adjusted",
+      "amount": -1.01,
+      "currency": "EUR",
+      "notes": "test",
+      "system_transaction_id": 58569654
+    },
+    {
+      "timestamp": "/Date(1497387301427)/",
+      "activity": "Authorization Request",
+      "location": "Location",
+      "reason": "Transaction currency does not match card currency",
+      "result": "Declined",
+      "amount": -5,
+      "currency": "EUR",
+      "system_transaction_id": 85624587,
+      "merchant_country": " AUT",
+      "merchant_category_code": "Miscellaneous General Merchandise Stores (1234)"
+    },
+    {
+      "timestamp": "/Date(1497389473031)/",
+      "user": "User Name",
+      "activity": "Manual Adjustment",
+      "location": "Location",
+      "reason": "Manual Adjustment",
+      "result": "Adjusted",
+      "amount": 0,
+      "currency": "EUR",
+      "notes": "test",
+      "system_transaction_id": 58569652
+    }
+  ]
+}

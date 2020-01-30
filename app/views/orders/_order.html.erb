@@ -1,0 +1,14 @@
+<tr>
+  <td class="order-organization-name"><%= order.organization.name %></td>
+  <td class="order-total-charges"><%= order.total_charges.format %></td>
+  <td class="order-total-fees"><%= order.total_fees.format %></td>
+  <td class="order-total-members"><%= order.members.count %></td>
+  <td class="order-program-type">
+    <ul class="list-unstyled">
+    <% order.program_types.each do |program_type| %>
+      <li><%= program_type %></li>
+    <% end %>
+    </ul>
+  </td>
+  <td class="order-billing-period"><%= l order.starts_on, format: :mmyy %> — <%= l order.ends_on, format: :mmyy %></td>
+</tr>

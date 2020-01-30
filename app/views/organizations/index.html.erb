@@ -1,0 +1,76 @@
+<div class="container organization-cards">
+  <h2 class="pb-3"> <%= t('.your_organizations') %></h2>
+
+  <div class="index-table-controls">
+    <div class="organization-search">
+      <%= search_form_for @search, url: organizations_path do |f| %>
+        <div class="form-group">
+          <%= f.search_field :name_cont, placeholder: t('helpers.search.placeholder'), class: "form-control" %>
+          <div class="action-group">
+            <button class="btn btn-primary" id="organization-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <%= link_to t('helpers.search.clear'), organizations_path, class: 'btn btn-outline-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% @organizations.each do |organization| %>
+    <div class="status-container">
+      <div class="row">
+        <div class="col-md-4">
+          <header>
+            <%= link_to organization.name, organization_path(organization), id: "organization" %>
+          </header>
+        </div>
+
+        <div class="col-md-2 text-center">
+          <div class="status-label">
+            <%= t('.columns.members') %>
+          </div>
+          <div>
+            <%= organization.members_count %>
+          </div>
+        </div>
+
+        <div class="col-md-2 text-center">
+          <div class="status-label">
+            <%= t('.columns.account_status') %>
+          </div>
+          <div>
+            <%= t("organizations.statuses.#{organization.account_status}") %>
+          </div>
+        </div>
+
+        <div class="col-md-2 text-center">
+          <div class="status-label">
+            <%= t('.columns.start_date') %>
+          </div>
+          <div>
+            <%= l(organization.created_at, format: :mmddyyyy) %>
+          </div>
+        </div>
+
+        <div class="col-md-2 text-center">
+          <div class="status-label">
+            <%= t('.columns.ytd_load') %>
+          </div>
+          <div>
+            <%= organization.ytd_load.format %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if current_user.managing_multiple_organizations? %>
+    <div class="dashboard">
+      <div class="card card-body">
+        <div class="row">
+          <h3 class="card-title col-12"><%= link_to t('.add_an_organization'), new_enrollment_sign_up_path(skip_current_organization: true) %></h3>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<div>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

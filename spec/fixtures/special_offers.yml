@@ -1,0 +1,9 @@
+one:
+  name: Special Offer A
+  description: Look at this net, that I just found.
+  product_category: safety
+
+two:
+  name: Special Offer B
+  description: WHAT ARE YOU DOING?
+  product_category: exam

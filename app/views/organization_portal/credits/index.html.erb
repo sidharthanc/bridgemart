@@ -1,0 +1,29 @@
+<h2><%= t('.header') %><%= @organization.credit_total.currency.symbol %><span id='organization-credit-total'><%= (humanized_money @organization.credit_total) %></span></h2>
+
+<%= link_to t('.purchase_credits'), organization_credit_purchases_path(@organization), class: 'btn btn-gray' %>
+
+<section class="credit-history">
+  <h2 class="credit-history__header">
+    <%= t '.credit_history.header' %>
+    <% if current_organization.credits.any? %>
+      <%= link_to t('.export'), export_organization_credits_path(current_organization, format: :csv, params: request.query_parameters), class: 'add-action btn btn-outline-primary' %>
+    <% end %>
+  </h2>
+
+  <div class="credit-history__controls">
+    <div class="credit-history__search-form">
+      <%= search_form_for @search, url: organization_credits_path(current_organization) do |f| %>
+        <div class="form-group">
+          <%= f.search_field :credit_cont, placeholder: t('helpers.search.placeholder'), class: "form-control", value: params.dig(:q, :credit_cont) %>
+          <div class="action-group">
+            <button class="btn btn-primary" id="credit-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <%= link_to t('helpers.search.clear'), organization_credits_path(current_organization), class: 'btn btn-outline-primary' %>
+            <%= link_to t('helpers.search.advanced'), advanced_search_organization_credits_path(current_organization), class: 'advanced-search-button btn btn-outline-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'search_table', results: @history %>
+</section>

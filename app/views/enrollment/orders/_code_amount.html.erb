@@ -1,0 +1,107 @@
+<div class="container">
+  <section class="enrollment-section">
+    <div class="section-name">
+      <h2><%= t('.card_amount') %></h2>
+    </div>
+    <div class="section-content">
+      <medium><%= t('.card_amount_info') %></medium>
+    </div>
+  </section>
+</div>
+<div class="container">
+  <section id="product-detail-amounts" class="enrollment-section">
+    <div class="section-name">
+    </div>
+    <div class="section-content">
+      <%= f.simple_fields_for :plan_product_categories, f.object.plan_product_categories do |ff| %>
+        <div class="product card mb-4" id="plan-product-category-<%= ff.object.id %>">
+          <div class="card-body  <%= (params[:controller] == "enrollment/orders" && params[:action] == 'edit') ? 'align-code-amount-block row' : '' %>">
+            <h3 class="card-title product-title">
+              <%= image_tag(ff.object.product_category.icon, class: 'title-img') %>
+              <%= ff.object.product_category.card_name %>
+            </h3>
+            <i><h5 class="subtitle"><%= ff.object.product_category.description %></h5></i>
+            <div class="card-text">
+              <% price_points = ff.object.product_category.price_points %>
+              <card-amount
+                :price-points="<%= price_points.to_json %>"
+                :basic-price-point="<%= ff.object.product_category.price_boundary(limit_type: :basic)&.limit.to_i %>"
+                :original-input="<%= ff.object.budget.to_i %>">
+                <template slot-scope="slotProps">
+                  <%= ff.input :budget, label: false, value: ff.object.budget, wrapper: :inline, input_html: { class: 'budget-amount',:type => "number" ,"v-model" => "slotProps.inputValue", "v-on:keydown.enter.prevent" => "slotProps.changeInputAmount", "v-on:blur" => "slotProps.changeInputAmount",:max =>1000,:min=>1,:onInput=>"
+                    if(this.value==1000){this.value=1000;}else if(this.value>1000){
+                   if(this.value.includes('.')){this.value=this.value.substring(0, (this.value.length-2))}else{this.value=this.value.substring(0, (this.value.length-1))}}else if(this.value<0){this.value='1';}",:onpaste=>"return false",:onkeypress=>"if (event.which != 8 && event.which != 0 && event.which < 46 || event.which > 57){event.preventDefault();}" } %>
+                    <span class="product-description">
+                      <span class="bi-tooltip"><%= t('.redemption_requirements_anchor') %>
+                        <span class="bi-tooltiptext"><%= t('.price_points_info', min: price_points.where(limit_type: [:opening, :basic]).minimum(:limit).to_i, max: price_points.maximum(:limit).to_i) %>
+                        </span>
+                      </span>
+                    </span>
+                </template>
+              </card-amount>
+              <% if ff.object.product_category.product_description.present? %>
+                <div class="product-description">
+                  <%= t('.product_description') %>
+                  <span class="ri-tooltip"><%= t('.product_description_anchor') %>
+                    <span class="ri-tooltiptext"><%= ff.object.product_category.product_description %></span>
+                  </span>
+                </div>
+              <% end %>
+              
+                <div class="redemption-instruction">
+                  <%= t('.redemption_requirements') %>
+                  <span class="ri-tooltip"><%= t('.redemption_requirements_anchor') %>
+                    <span class="ri-tooltiptext"><%= t('.redemption_requirements_info') %></span>
+                  </span>
+                </div>
+                <div class="section-content">
+                  <%= ff.simple_fields_for :redemption_instruction do |o| %>
+                    <%= o.input :instruction, collection: redemption_instruction_collection(f.object.organization, ff.object.product_category),
+                      include_blank: true, input_html: { class: 'inputs-25', data: { behavior: 'new-redemption-instruction',
+                      product_category_id: ff.object.product_category.id, attributes_index: ff.index } },
+                      selected: current_redemption_instruction(f.object.organization, ff.object.product_category)&.id %>
+                  <% end %>
+                </div>
+                <div class="card mb-3 pb-3">
+                  <div class="card-body" id="product-category-<%= ff.index %>-instruction-text">
+                    <%= current_redemption_instruction(f.object.organization, ff.object.product_category)&.description %>
+                  </div>
+                </div>
+
+
+              <% if ff.object.product_category.single_use_only %>
+                <%= ff.collection_radio_buttons(:usage_type, [["single_use"]], :first, :first, { checked: "single_use" }, {}) do |radio| %>
+                  <div class="col-sm-12 float-left single-option">
+                    <%=
+                      radio.label do
+                        label = t("enumerize.plan_product_category.usage_type.#{radio.text}")
+                        subtitle = t("enumerize.plan_product_category.subtitle.#{radio.text}")
+                        radio.radio_button +
+                        content_tag(:span, label, class: 'usage-type-title') +
+                        content_tag(:p, content_tag(:em, subtitle)).html_safe
+                      end
+                    %>
+                  </div>
+                <% end %>
+              <% else %>
+                <%= ff.collection_radio_buttons(:usage_type, PlanProductCategory.usage_types.values, :to_s, :to_s) do |radio| %>
+                  <div class="col-sm-6 float-left">
+                    <%=
+                      radio.label do
+                        label = t("enumerize.plan_product_category.usage_type.#{radio.text}")
+                        subtitle = t("enumerize.plan_product_category.subtitle.#{radio.text}")
+                        radio.radio_button +
+                        content_tag(:span, label, class: 'usage-type-title') +
+                        content_tag(:p, content_tag(:em, subtitle)).html_safe
+                      end
+                    %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>

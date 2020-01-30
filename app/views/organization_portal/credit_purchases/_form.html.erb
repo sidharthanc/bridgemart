@@ -1,0 +1,17 @@
+<%= simple_form_for [@organization, @credit_purchase] do |f| %>
+  <div class="inputs-33">
+    <%= f.input :po_number, label: 'PO Number' %>
+  </div>
+
+  <div class="inputs-33">
+    <%= f.input :amount, required: true %>
+  </div>
+
+  <div class="inputs-33">
+    <%= f.association :payment_method, label_method: :payment_card_number, collection: @organization.payment_methods, include_blank: false %>
+  </div>
+
+  <%= f.hidden_field :organization_id %>
+
+  <%= f.submit class: 'btn btn-wide btn-gray' %>
+<% end %>

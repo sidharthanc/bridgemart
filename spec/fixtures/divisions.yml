@@ -1,0 +1,5 @@
+bridge_safety:
+  name: Bridge Safety
+
+bridge_vision:
+  name: Bridge Vision

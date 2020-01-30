@@ -1,0 +1,18 @@
+<div class="index-table-container" id="customer-card-load">
+  <table class="index-table">
+    <thead>
+      <tr>
+        <td class="order-organization-name"><%= t('.organization') %></td>
+        <td class="order-total-charges"><%= t('.usd_spent') %></td>
+        <td class="order-total-fees"><%= t('.bridge_revenue') %></td>
+        <td class="order-total-members"><%= t('.members') %></td>
+        <td class="order-program-type"><%= t('.division') %></td>
+        <td class="order-billing-period"><%= t('.billing_period') %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render orders %>
+    </tbody>
+  </table>
+  <%= link_to t('organizations.all'), organizations_path, class: 'btn btn-primary' %>
+</div>

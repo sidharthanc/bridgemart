@@ -1,0 +1,13 @@
+<%=
+  link_to \
+    @order ? new_enrollment_order_member_path(@order, mode: mode, anchor: 'mode-choices') : new_member_path(mode: mode, anchor: 'mode-choices'),
+    class: "enrollment-card #{'active' if params.fetch(:mode, 'manual') == mode.to_s}" do
+%>
+  <div class="media">
+    <%= image_tag "add-member/#{mode}-icon.png", class: 'pr-2' %>
+    <div class="media-body">
+      <header class="text-primary"><strong><%= t ".#{mode}.title" %></strong></header>
+      <small><%= t ".#{mode}.desc" %></small>
+    </div>
+  </div>
+<% end %>

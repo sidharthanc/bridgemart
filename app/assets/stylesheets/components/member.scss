@@ -1,0 +1,11 @@
+.member-search {
+  @include search-form;
+
+  select {
+    width: 50em;
+  }
+}
+
+.member-import-errors {
+  color: red;
+}

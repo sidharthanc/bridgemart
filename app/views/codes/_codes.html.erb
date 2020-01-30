@@ -1,0 +1,37 @@
+<% cache code do %>
+  <tr data-controller="table-row" data-action="click->table-row#toggleExpansion" data-target="table-row.tr">
+    <td>
+      <%= code.code_identifier %>
+      <% if code.legacy? %>
+        <span class="alert alert-warning"><%= t('codes.legacy') %></span>
+      <% end %>
+    </td>
+    <td><%= code.card_number %></td>
+    <td><%= code.order.id %></td>
+    <td><%= code.product_category.name %></td>
+    <td><%= l(code.created_at, format: :mmddyyyy) %></td>
+    <td><%= humanized_money_with_symbol code.balance %></td>
+    <td><span class="badge badge-secondary text-uppercase"><%= t "codes.statuses.#{code.status}" %></span></td>
+    <td><%= check_box_tag 'delivered', 1, code.delivered?, disabled: true %></td>
+    <td class="index-table-actions">
+      <%= render 'codes/action_buttons', code: code %>
+    </td>
+    <td><%= link_to t("codes.view_code"), mobile_code_path(code, token: code.authentication_token), class: 'dropdown-item' %></td>
+  </tr>
+  <tr class="tr-expanded d-none">
+    <td colspan="4">
+      <header><%= t '.usage' %></header>
+      <%= render 'usages/table', usages: code.usages %>
+      <% if code.product_category.redemption_instructions_editable? && code_redemption_instruction(code, current_organization) %>
+        <hr>
+        <header><%= t 'codes.index.redemption_instructions' %></header>
+        <%= code_redemption_instruction(code, current_organization).description %>
+      <% end %>
+      <% if code.product_category %>
+        <hr>
+        <header><%= t '.product_description' %></header>
+        <%= code.product_category.product_description.presence || t('codes.index.no_product_description') %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

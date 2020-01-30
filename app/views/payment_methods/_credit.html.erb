@@ -1,0 +1,16 @@
+<div class="payment-details__row">
+  <div class="payment-details__header">
+    <%= t '.labels.credit_card_number' %>
+  </div>
+  <div class="payment-details__data">
+    <%= payment_method.credit_card_number %>
+  </div>
+</div>
+<div class="payment-details__row">
+  <div class="payment-details__header">
+    <%= t '.labels.credit_card_expiration_date' %>
+  </div>
+  <div class="payment-details__data">
+    <%= payment_method.credit_card_expiration_date_formatted %>
+  </div>
+</div>

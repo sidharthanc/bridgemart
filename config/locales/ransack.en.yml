@@ -1,0 +1,7 @@
+en:
+  ransack:
+    attributes:
+      credit:
+        created_at: Date
+        type: Type
+        amount_cents: Amount

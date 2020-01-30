@@ -1,0 +1,19 @@
+metova:
+  organization: metova
+  payment_method: ach
+  amount_cents: 200
+  po_number: PO NUMBER
+  paid_at: <%= Date.current %>
+
+unpaid:
+  organization: metova
+  payment_method: credit
+  amount_cents: 300
+  po_number: UNPAID PO NUMBER
+
+voided:
+  organization: metova
+  payment_method: credit
+  amount_cents: 300
+  po_number: VOID PO NUMBER
+  voided_at: <%= Date.current %>

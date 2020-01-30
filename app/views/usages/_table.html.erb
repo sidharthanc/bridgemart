@@ -1,0 +1,25 @@
+ <table>
+    <thead>
+      <tr>
+        <th><%= t('usages.transaction') %></th>
+        <th><%= t('usages.code') %></th>
+        <th><%= t('usages.amount') %></th>
+        <th><%= t('usages.timestamp') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if usages.none? %>
+        <tr><td colspan="99"><%= t 'usages.table.no_usage' %></td></tr>
+      <% else %>
+        <% usages.each do |usage| %>
+          <tr>
+            <td><%= usage.external_id %></td>
+            <td><%= usage.code_identifier %></td>
+            <td><%= humanized_money_with_symbol usage.amount %></td>
+            <td><%= l usage.used_at, format: :mmddyyyy %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+

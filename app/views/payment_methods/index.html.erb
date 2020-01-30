@@ -1,0 +1,39 @@
+<h2><%= current_organization.name %></h2>
+
+<%= render 'orders/nav_header' %>
+
+<div class="index-table-container">
+  <header>
+    <%= t('.header') %>
+  </header>
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t '.columns.payment_id' %></th>
+        <th><%= t '.columns.payment_type' %></th>
+        <th><%= t '.columns.payment_details' %></th>
+        <th><%= t '.columns.updated_at' %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payment_methods.each do |payment_method| %>
+        <tr class="payment-method payment-method--<%= payment_method.id %>">
+          <td><%= payment_method.id %></td>
+          <td><%= t ".labels.payment_types.#{payment_method.payment_type}" %></td>
+          <td>
+            <%= render 'details', payment_method: payment_method %>
+          </td>
+          <td><%= payment_method.updated_at %></td>
+          <td>
+            <% if @can_edit_payment_method %>
+              <%= link_to t('.labels.edit', type_label: t(".labels.payment_types.#{payment_method.payment_type}") ), edit_organization_payment_method_path(current_organization, payment_method), class: 'btn btn-outline-primary payment-method__edit-button' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

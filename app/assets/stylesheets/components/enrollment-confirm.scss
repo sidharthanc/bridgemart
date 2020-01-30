@@ -1,0 +1,7 @@
+.enrollment-confirm {
+  &__spinner {
+    animation: 2s fa-spin linear infinite;
+    color: $primary-color;
+    margin-right: 5px;
+  }
+}

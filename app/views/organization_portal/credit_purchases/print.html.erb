@@ -1,0 +1,33 @@
+<h2><%= t '.invoice.header' %></h2>
+
+<div class="container">
+  <div class="credit_purchase_status">
+    <label><%= t('.status') %></label> <%= t(".statuses.#{@credit_purchase.status}") %>
+  </div>
+
+  <div class="credit_purchase_po_number">
+    <label><%= t('.po_number') %></label> <%= @credit_purchase.po_number %>
+  </div>
+
+  <% if @credit_purchase.error_message.present? %>
+    <div class="credit_purchase_error_message">
+      <label><%= t('.error_message') %></label> <%= @credit_purchase.error_message %>
+    </div>
+  <% end %>
+
+  <div class="credit_purchase_amount">
+    <label><%= t('.amount') %></label> <%= @credit_purchase.amount.format %>
+  </div>
+
+  <div class="credit_purchase_organization">
+    <label><%= t('.organization') %></label> <%= @credit_purchase.organization.name %>
+  </div>
+
+  <div class="credit_purchase_payment_method">
+    <label><%= t('.payment_method') %></label> <%= @credit_purchase.payment_method.payment_type %>
+  </div>
+
+  <div class="credit_purchase_updated_at">
+    <label><%= t('.updated_at') %></label> <%= l(@credit_purchase.updated_at, format: :mmddyyyy) %>
+  </div>
+</div>

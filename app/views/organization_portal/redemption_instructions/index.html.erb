@@ -1,0 +1,47 @@
+<div class="index-table-controls">
+  <h2><%= t('.header') %></h2>
+  <% if policy(RedemptionInstruction).new? && @organization.product_categories_for_redemption_instructions.any? %>
+    <div class="table-action">
+      <%= link_to t('.new_redemption_instruction'), new_organization_redemption_instruction_path(current_organization), class: 'add-action btn btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="index-table-container">
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th><%= t '.columns.product_category' %></th>
+        <th><%= t '.columns.instruction_title' %></th>
+        <th><%= t '.columns.description' %></th>
+        <th><%= t '.columns.active_status' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @organization.product_categories_for_redemption_instructions.empty? %>
+        <tr>
+          <td colspan="99"><%= t('.no_instructions_available') %></tr>
+        </tr>
+      <% elsif @redemption_instructions.none? %>
+        <tr>
+          <td colspan="99"><%= t('.no_instructions_set') %></td>
+        </tr>
+      <% else %>
+        <% @redemption_instructions.each do |redemption_instruction| %>
+          <tr>
+            <td><%= redemption_instruction.product_category.name %></td>
+            <td><%= redemption_instruction.title %></td>
+            <td><%= redemption_instruction.description %></td>
+            <td><%= redemption_instruction.active? %></td>
+            <td colspan="2" class="tr-options">
+              <%= link_to t('.actions.edit'), edit_organization_redemption_instruction_path(current_organization, redemption_instruction) %>
+              <% unless redemption_instruction.active? %>
+                <%= link_to t('.actions.delete'), organization_redemption_instruction_path(current_organization, redemption_instruction), method: :delete if policy(redemption_instruction).destroy? %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

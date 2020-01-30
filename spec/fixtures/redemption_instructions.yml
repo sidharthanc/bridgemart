@@ -1,0 +1,18 @@
+fashion_instruction:
+  product_category: fashion
+  organization: metova
+  description: You must do this to redeem
+  title: fashion instruction title
+
+fashion_instruction_two:
+  product_category: fashion
+  organization: metova
+  description: Do that to redeem
+  title: other fashion instruction title
+
+exam:
+  product_category: exam
+  organization: metova
+  description: Do exam thing to redeem
+  title: exam instruction title
+  active: false

@@ -1,0 +1,6 @@
+<h3><%= service %></h3>
+<ul>
+  <% entries.each do |entry| %>
+  <li><%= "#{entry.service}##{entry.action} [#{entry.message}] #{entry.success_or_failure} #{entry.created_at.to_s}" %></li>
+  <% end %>
+</ul>

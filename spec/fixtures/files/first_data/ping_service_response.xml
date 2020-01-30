@@ -1,0 +1,14 @@
+<!DOCTYPE Response SYSTEM "dwxmlapi3.dtd">
+<Response Version="3">
+ <RespClientID>
+  <DID>00033232230868286473</DID>
+  <ClientRef>99026809996</ClientRef>
+ </RespClientID>
+ <Status StatusCode="OK"></Status>
+ <PingResponse>
+  <ServiceCost>
+   <ServiceID>104</ServiceID>
+   <TransactionTimeMs>10000</TransactionTimeMs>
+  </ServiceCost>
+ </PingResponse>
+</Response>

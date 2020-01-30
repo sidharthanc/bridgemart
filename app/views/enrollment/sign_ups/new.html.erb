@@ -1,0 +1,115 @@
+<section class="enrollment-header">
+  <div class="container">
+    <h1><%= current_organization.present? ? current_organization.name.titleize : t('.your_organization') %></h1>
+    <% unless current_user&.managing_multiple_organizations? %>
+      <div><i><%= t('.broker_redirect') %></i><span class="text-space"><%= link_to t('.create_broker_account_link'), new_enrollment_broker_path %><span></div>
+    <% end %>
+  </div>
+</section>
+<%= simple_form_for @sign_up, url: current_user&.managing_multiple_organizations? ? broker_sign_ups_path : [:enrollment, @sign_up] do |f| %>
+  <div class="container">
+    <% unless signed_in? && current_organization %>
+      <section class="enrollment-section enrollment-section--top">
+        <div class="section-name">
+          <h2 class="no-scroll"><%= t('.primary_contact') %></h2>
+        </div>
+        <div class="section-content">
+          <div class="inputs-33">
+            <%= f.input :first_name, required: true %>
+            <%= f.input :last_name, required: true %>
+          </div>
+          <div class="inputs-50">
+            <%= f.input :title %>
+          </div>
+          <div class="inputs-span-33">
+            <%= f.input :email, required: true, hint: @sign_up&.errors&.details&.dig(:email)&.include?(error: :taken) ? link_to(t('pages.home.sign_in'), new_user_session_path) : nil, id: 'email' %>
+          </div>
+          <div class="inputs-50">
+            <%= f.input :phone, input_html: { class: 'masked-phone' }, hint: t('users.phone_number_hint') %>
+          </div>
+        </div>
+      </section>
+
+      <section class="enrollment-section">
+        <div class="section-name">
+          <h2 class="no-scroll"><%= t('.organization_info') %></h2>
+        </div>
+
+        <div class="section-content">
+          <div class="row">
+            <div class="col-8">
+              <%= f.input :organization_name, required: true %>
+              <%= f.input :industry, required: true, as: :select, collection: SignUp::INDUSTRIES %>
+              <%= f.input :approx_employees_count, as: :select, collection: SignUp::EMPLOYEE_COUNT_RANGES, required: false %>
+            </div>
+            <div class="col-9">
+              <%= f.input :approx_employees_with_safety_prescription_eyewear_count, as: :select, collection: SignUp::EMPLOYEE_COUNT_RANGES, required: false %>
+            </div>
+          </div>
+        </div>
+      </section>
+    <% end %>
+
+    <%= f.hidden_field :organization_id, value: current_organization&.id %>
+
+    <section class="enrollment-section pb-0 <%= 'enrollment-section--top' if signed_in? %>">
+      <div class="section-name">
+        <h2 class="no-scroll"><%= t '.product_categories' %></h2>
+      </div>
+
+      <div class="section-content">
+        <%= t('.products_information') %>
+
+        <% Array.wrap(@sign_up.errors[:product_categories]).each do |error| %>
+          <p class="error-message pt-4">
+            <%= error %>
+          </p>
+        <% end %>
+      </div>
+    </section>
+    <% Division.joins(:product_categories).distinct.with_attached_logo.order(:created_at).each do |division| %>
+      <section class="enrollment-section enrollment-section__division pb-4">
+        <div class="section-name section-name__logo">
+          <%= attached_image_tag division.logo %>
+        </div>
+        <div class="section-content">
+          <div class="enrollment-organization-product-categories" data-behavior='select-images'>
+            <%= f.collection_check_boxes(:product_category_ids, division.product_categories.visible.with_attached_icon, :id, :icon, item_wrapper_class: :inline, checked: f.object&.product_category_ids) do |option| %>
+              <%= option.label(class: 'mb-4 organization__product-category-option', 'data-toggle' => 'tooltip', title: option.object.tooltip_description) { option.check_box + image_tag(option.text) + option.object.name } %>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    <% end %>
+  </div>
+
+  <section class="enrollment-footer">
+    <div class="container">
+      <div class="enrollment-section">
+        <div class="section-name">
+        </div>
+        <div class="section-content">
+          <div class="enrollment-footer-actions">
+            <%= f.submit t('enrollment.next'), class: 'btn btn-wide btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<!-- Javascript code to filter employee count based on selection -->
+<script>
+  $('#sign_up_approx_employees_count').on("change", function () {
+    update_approx_employees_with_safety_prescription_eyewear_count();
+  });
+  function update_approx_employees_with_safety_prescription_eyewear_count(){
+    var count_index = $('#sign_up_approx_employees_count option:selected').index();
+    var count_option = ['Less than 100', '100-500', '500-1000', '1000-5000', '5000+'].slice(0, count_index);
+    $('#sign_up_approx_employees_with_safety_prescription_eyewear_count').empty();
+    $.each(count_option, function (key, value) {
+      $('#sign_up_approx_employees_with_safety_prescription_eyewear_count').append($("<option></option>").attr("value", key).text(value));
+    });
+  }
+  update_approx_employees_with_safety_prescription_eyewear_count();
+</script>

@@ -1,0 +1,51 @@
+<%= in_layout :application do %>
+  <% content_for :header do %>
+    <nav class="navbar navbar-expand-lg enrollment-nav">
+      <%= link_to root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'bridge-tri-color-logo.png' %>
+      <% end %>
+
+      <%= render 'shared/user_controls' %>
+    </nav>
+  <% end %>
+  <% if (params[:controller] == "enrollment/orders" && ['edit', 'update'].include?(params[:action])) || (params[:controller] == "enrollment/members" && ['new', 'edit', 'create'].include?(params[:action])) || (params[:controller] == "enrollment/payments" && ['new'].include?(params[:action])) %>
+    <div class="page-title-create-order">
+      <span><%= current_user.present? ? I18n.t('layouts.enrollment.create_order') : I18n.t('layouts.enrollment.page_title') %></span>
+    </div>
+    <div class="enrollment-progress container">
+      <ul>
+        <li><%= link_to t('.nav.organization'), new_enrollment_sign_up_path if @plan %></li>
+        <% if @order %>
+          <li><%= link_to t('.nav.products'), edit_enrollment_order_path(@order) %></li>
+          <li><%= (@order.ends_on?) ? (link_to t('.nav.members'), new_enrollment_order_member_path(@order)) : (t('.nav.members')) %></li>
+          <li><%= (@order.has_members?) ? (link_to t('.nav.billing'), new_enrollment_order_payment_path(@order)) : (t('.nav.billing')) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="dashboard container-fluid">
+    <div class="row">
+      <nav class="dashboard-nav">
+        <ul>
+          <%= link_to t('.nav.overview'), overview_index_path if current_user.managing_multiple_organizations? %>
+          <%= link_to t('.nav.dashboard'), dashboard_path(organization_id: current_organization.id) if current_organization %>
+          <%= link_to(t('.nav.admin'), admin_root_path) if current_user.admin? %>
+          <%= link_to organization_members_path(current_organization) do %>
+            <%= t('.nav.members') %>
+            <% if false %>
+            <%# if current_organization.member_import_errors? %>
+              <span class="fa fa-exclamation-triangle"></span>
+            <% end %>
+          <% end if current_organization %>
+          <%= link_to t('.nav.billing'), organization_orders_path(current_organization) if current_organization %>
+          <%= link_to t('.nav.locator'), Setting[:external_locator_url], target: :_blank  %>
+          <%= link_to t('.nav.account'), edit_organization_organization_path(current_organization) if current_organization %>
+          <%= link_to t('.nav.organizations'), organizations_path if current_user.managing_multiple_organizations? %>
+        </ul>
+      </nav>
+      <div class="dashboard-content">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>

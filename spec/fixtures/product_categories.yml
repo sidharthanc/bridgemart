@@ -1,0 +1,33 @@
+DEFAULTS: &DEFAULTS
+  division: bridge_vision
+
+exam:
+  name: Eye Exam
+  tooltip_description: This product category covers eye exams
+  division: bridge_vision
+  fee_type: flat
+  flat_fee_cents: 1500
+  card_type: :eml
+
+fashion:
+  name: Fashion Eyewear
+  tooltip_description: This product category covers fashion eyewear
+  division: bridge_vision
+  fee_type: percentage
+  percentage_fee: 25
+  redemption_instructions_editable: true
+  card_type: :first_data
+
+safety:
+  name: Safety Eyewear
+  tooltip_description: This product category covers safety eyewear
+  division: bridge_safety
+  fee_type: flat
+  flat_fee_cents: 1500
+  card_type: :first_data
+
+unused:
+  name: Unused Product category
+  tooltip_description: This product category is not used.
+  division: bridge_safety
+  card_type: :first_data

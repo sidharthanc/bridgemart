@@ -1,0 +1,10 @@
+<section class="enrollment-header">
+  <div class="container">
+    <nav>
+      <%= link_to t('enrollment.back'), navigation.back_path %>
+    </nav>
+    <h1><%= t '.header' %></h1>
+  </div>
+</section>
+
+<%= render 'form', payment: @payment %>

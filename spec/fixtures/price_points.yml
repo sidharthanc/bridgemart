@@ -1,0 +1,98 @@
+eye_exam:
+  product_category: exam
+  limit: 60
+  verbiage: Each member can afford a routine eye exam.
+  limit_type: basic
+  tooltip: Members can afford a routine eye exam
+  upgrade_verbiage: $35 more to upgrade to a contact lens fitting.
+  item_name: routine exam
+
+contact_lens_fitting:
+  product_category: exam
+  limit: 95
+  verbiage: Each member can afford a contact lens fitting.
+  limit_type: high_end
+  tooltip: Members can afford a contact lens fitting
+  upgrade_verbiage: 
+  item_name: contact lens fitting
+
+fashion_opening:
+  product_category: fashion
+  limit: 38
+  verbiage: Each member can afford a pair of glasses or contacts.
+  limit_type: opening
+  tooltip: Members can afford a pair of glasses or contacts
+  upgrade_verbiage: $82 more to upgrade to a basic pair of glasses or contacts.
+  item_name: pair of glasses
+
+fashion_basic:
+  product_category: fashion
+  limit: 120
+  verbiage: Each member can afford a basic pair of glasses or contacts.
+  limit_type: basic
+  tooltip: Members can afford a basic pair of glasses or contacts
+  upgrade_verbiage: $60 more to upgrade to a mid-range pair of glasses or contacts.
+  item_name: basic pair of glasses or contacts
+
+fashion_mid_range:
+  product_category: fashion
+  limit: 180
+  verbiage: Each member can afford a mid-range pair of glasses or contacts.
+  limit_type: mid_range
+  tooltip: Members can afford a mid-range pair of glasses or contacts
+  upgrade_verbiage: $60 more to upgrade to a high-end pair of glasses or contacts.
+  item_name: mid-range pair of glasses or contacts
+
+fashion_high_end:
+  product_category: fashion
+  limit: 240
+  verbiage: Each member can afford a high-end pair of glasses or contacts.
+  limit_type: high_end
+  tooltip: Members can afford a high-end pair of glasses or contacts
+  upgrade_verbiage: 
+  item_name: high-end pair of glasses
+
+safety_opening:
+  product_category: safety
+  limit: 38
+  verbiage: Each member can afford a pair of safety eyewear
+  limit_type: opening
+  tooltip: Members can afford a pair of safety eyewear
+  upgrade_verbiage: $82 more to upgrade to a basic pair of safety eyewear.
+  item_name: pair of safety eyewear
+
+safety_basic:
+  product_category: safety
+  limit: 120
+  limit_type: basic
+  verbiage: Each member can afford a basic pair of safety eyewear.
+  tooltip: Members can afford a basic pair of safety eyewear
+  upgrade_verbiage: $60 more to upgrade to a good pair of safety eyewear.
+  item_name: basic pair of safety eyewear
+
+safety_good_range:
+  product_category: safety
+  limit: 180
+  verbiage: Each member can afford a good pair of safety eyewear.
+  limit_type: mid_range
+  tooltip: Members can afford a good pair of safety eyewear
+  upgrade_verbiage: $20 more to upgrade to a pretty good pair of safety eyewear.
+  item_name: good pair of safety eyewear
+
+safety_pretty_good_range:
+  product_category: safety
+  limit: 200
+  verbiage: Each member can afford a pretty good pair of safety eyewear.
+  limit_type: mid_range
+  tooltip: Members can afford a pretty good pair of safety eyewear
+  upgrade_verbiage: $40 more to upgrade to a great pair of safety eyewear.
+  item_name: pretty good pair of safety eyewear
+
+safety_great_end:
+  product_category: safety
+  limit: 240
+  verbiage: Each member can afford a great pair of safety eyewear.
+  limit_type: high_end
+  tooltip: Members can afford a great pair of safety eyewear
+  upgrade_verbiage: 
+  item_name: great pair of safety eyewear

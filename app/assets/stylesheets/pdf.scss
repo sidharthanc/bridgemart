@@ -1,0 +1,281 @@
+@import "bootstrap";
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$code-card-max-width: 400px;
+$code-card-min-width: 270px;
+$gray-font-color: #757e81;
+$light-gray-font-color: lighten($gray-font-color, 10%);
+$small-font-size: 90%;
+$body-bg-color: #f6f9fa;
+$action-button-bg-color: $body-bg-color;
+$primary-color: #0c9c4a;
+
+body {
+  color: $gray-font-color;
+}
+
+.dashboard .card {
+  box-shadow: 0px 1px 3px 0px rgba(215, 230, 235, 1);
+  border: 0;
+
+  .standout {
+    font-size: 125%;
+    font-weight: bold;
+  }
+
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: baseline;
+    padding: 2em;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    background: none;
+    border: 0;
+    width: 100%;
+    padding: 0;
+    align-items: center;
+  }
+
+  .card-title {
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .card-subtitle {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .card-content {
+    flex: 1 1 auto;
+  }
+
+  .card-action {
+    background-color: $action-button-bg-color;
+    color: $primary-color;
+    border: none;
+    height: auto;
+    padding: 0.3em 2em 0.3em 2em;
+  }
+}
+
+.multiple-code-cards {
+  display: -webkit-box;
+  flex-direction: row;
+
+  ul, ol {
+    margin-left: 1rem;
+  }
+
+  .card-section {
+    box-shadow: 0px 1px 3px 0px rgba(215, 230, 235, 1);
+    max-width: 50%;
+    min-width: 50%;
+    padding: 1rem;
+  }
+}
+
+.barcode-container{
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.barcode-content{
+  width: 336px;
+  height: 115px;
+  margin: 40px auto 0 auto;
+  text-align: center;
+}
+
+.code-card {
+  @extend .card;
+  box-shadow: 0px 1px 3px 0px rgba(215, 230, 235, 1);
+  max-width: $code-card-max-width;
+  min-width: $code-card-min-width;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem;
+  margin: 0 auto;
+
+  .code-card-content {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .code-title {
+    margin-bottom: 3rem;
+    font-size: 1.25rem;
+  }
+
+  .code-buys-header {
+    margin-top: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .price-point-verbiage {
+    margin-bottom: 0.5rem;
+  }
+
+  .code-pricing {
+    min-height: 4rem;
+    .code-limit {
+      font-size: 1.75rem;
+    }
+
+    .code-exp-date {
+      display: block;
+      color: $light-gray-font-color;
+      font-size: $small-font-size;
+      font-weight: bold;
+
+      &:before {
+        content: 'EXP ';
+      }
+    }
+  }
+
+  .code-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.cardInfoElement, #cardNumber {
+  margin: 0 !important;
+  color: #444 !important;
+  position: static !important;
+  top: 0 !important;
+  left: 0 !important;
+  font-style: normal !important;
+  text-align: left !important;
+  font-weight: normal !important;
+  font-size: 1rem !important;
+
+  font-family: "mr-eaves-xl-sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+              "Segoe UI Symbol" !important;
+}
+
+.cardInfoBody{
+  margin: 0 auto 0 auto;
+  width: 400px;
+  padding: 1rem;
+}
+
+.background-slant-wrapper {
+  position: relative;
+
+  .background-slant {
+    width: 150%;
+    top: 0%;
+    left: 20%;
+    transform: rotate(-65deg);
+    height: 11em;
+    position: absolute;
+  }
+
+  .lightgreen {
+    background-color: lightgreen;
+  }
+
+  .lightblue {
+    background-color: lightblue;
+  }
+
+  .lightsalmon {
+    background-color: lightsalmon;
+  }
+}
+
+#cardNumber {
+  width: 100% !important;
+  margin: 1em 0 !important;
+}
+
+#cardNumber .cardNumberSegment {
+  font-size: 1.25em !important;
+}
+
+#pin, #code-id {
+  width: 25% !important;
+  float: left;
+}
+
+#code-id::before,
+#pin::before,
+#expirationDate::before {
+  display: block;
+  color: #8f979a;
+  font-size: 75%;
+  text-transform: uppercase;
+}
+
+#code-id::before {
+  content: 'ID';
+}
+
+#pin::before {
+  content: 'PIN';
+}
+
+#expirationDate::before {
+  content: 'Expires';
+}
+
+#cvv {
+  float: left;
+  margin-right: 62px;
+}
+
+#cardData{
+  margin: auto;
+  width: 322px;
+}
+
+#cardNumber > div{
+  display: inline;
+}
+
+#securityCode {
+    display: none;
+}
+
+#cvv {
+  width: 25% !important;
+}
+
+#cvv::before,
+#expirationDate::before {
+  display: block;
+  color: #8f979a;
+  font-size: 75%;
+  text-transform: uppercase;
+}
+
+#cvv::before {
+  content: 'CVV';
+}
+
+.emlBarcode{
+  text-align: center;
+  margin-top: 25px;
+}

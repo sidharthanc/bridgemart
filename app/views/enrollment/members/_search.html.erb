@@ -1,0 +1,72 @@
+<div>
+  <div class="container">
+    <section class="enrollment-section pb-0">
+      <div class="section-name">
+        <h2><%= t '.name' %></h2>
+      </div>
+      <div class="section-content">
+        <%= t '.instructions' %>
+      </div>
+    </section>
+
+    <hr class="my-4"/>
+  </div>
+  <div class="container">
+    <section class="enrollment-section pt-0">
+      <div class="section-name" id="member-list">
+        <ul>
+          <% member_session.each do |member| %>
+            <li class="enrollment-card enrollment-card--list-item">
+              <span><%= member.to_s %></span>
+              <%= link_to t('edit'), edit_enrollment_order_member_path(@order, member.id, mode: :manual, anchor: 'member-form') if member.id %>
+            </li>
+          <% end %>
+
+          <% if member_session.any? %>
+            <li>
+              <strong><%= pluralize member_session.count, t('.member') %>
+                <%= t '.saved' %></strong>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="section-content">
+        <div class="enrollment-card" data-wrapper="member-form">
+          <%= search_form_for @search, url: new_enrollment_order_member_path(@order) do |f| %>
+          <fieldset class="pb-4">
+            <div class="inputs-33">
+              <div class="form-group">
+                <%= f.search_field :member_cont, placeholder: t('helpers.search.placeholder'), class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <input type="submit" name="commit" value="Search" class="btn btn-primary" data-disable-with="Search">
+              </div>
+              <input type="hidden" name="mode" id="mode" value="search">
+            </div>
+          </fieldset>
+        <% end %>
+
+        <% if @members.present? %>
+          <%= render 'member_table', members: @members %>
+        <% end %>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="enrollment-footer">
+  <div class="container">
+    <div class="enrollment-section">
+      <div class="section-name">
+      </div>
+      <div class="section-content">
+        <div class="enrollment-footer-actions" v-else>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

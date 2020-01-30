@@ -1,0 +1,9 @@
+<!DOCTYPE Response SYSTEM "dwxmlapi3.dtd">
+<Response Version="3">
+ <RespClientID>
+  <DID>_DID_</DID>
+  <ClientRef>_CLIENT_REF_</ClientRef>
+ </RespClientID>
+ <Status StatusCode="OK"></Status>
+ <TransactionResponse></TransactionResponse>
+</Response>

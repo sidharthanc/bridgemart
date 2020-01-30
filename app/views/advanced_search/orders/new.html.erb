@@ -1,0 +1,25 @@
+<h2><%= t('orders.search.advanced') %></h2>
+
+<div class="dashboard-form">
+  <div class="advanced-order-search">
+    <%= search_form_for @search, url: search_organization_orders_path(current_organization), method: :post do |f| %>
+      <fieldset class="form-group">
+        <label for="q[created_at_between]"><%= t('helpers.search.orders.due_date_between') %></label>
+        <%= f.search_field :created_at_gteq, class: :datepicker %>
+        <%= f.search_field :created_at_lteq, class: :datepicker %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[id_cont]"><%= t('helpers.search.orders.order_id') %></label>
+        <%= f.text_field :id_cont, { class: "form-control" } %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="q[status_in]"><%= t('helpers.search.orders.status') %></label>
+        <%= f.collection_select :status_in, [['Paid'], ['Pending Payment'], ['Fulfilled']], :first, :last, { include_blank: true }, { class: "form-control" } %>
+      </fieldset>
+
+      <%= f.submit t('helpers.search.apply_filter'), class: 'btn btn-wide btn-gray' %>
+    <% end %>
+  </div>
+</div>

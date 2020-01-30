@@ -1,0 +1,17 @@
+<% content_for :page_title, @member.name %>
+<% content_for :page_subtitle, @member.organization.name %>
+<h5 class="code-instructions">
+  <%= t '.instructions' %>
+</h5>
+<div class="code-cards">
+  <% @codes.each do |code| %>
+    <%# <% next unless code.barcode.attached? %>
+    <%= link_to mobile_code_path(code, token: code.authentication_token) do %>
+      <%= render 'shared/mobile/code_card', code: code, options: {} %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if @member.organization.logo.attached? %>
+  <p>Powered by Bridge Vision</p>
+<% end %>

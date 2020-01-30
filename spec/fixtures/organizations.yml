@@ -1,0 +1,14 @@
+metova:
+  name: Metova
+  industry: Technology
+  primary_user: joseph
+
+walmart:
+  name: walmart
+  industry: Retail
+  primary_user: broker
+
+bridge:
+  name: Bridge
+  industry: Technology
+  primary_user: andrew

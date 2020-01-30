@@ -1,0 +1,21 @@
+<%= simple_form_for [@organization, @redemption_instruction] do |f| %>
+  <div class="inputs-50">
+    <%= f.association :product_category, collection: @organization.product_categories_for_redemption_instructions, include_blank: false %>
+  </div>
+
+  <div class="inputs-50">
+    <%= f.input :title, required: true %>
+  </div>
+
+  <div class="inputs-50">
+    <%= f.input :description, as: :text, maxlength: 200, required: true %>
+  </div>
+
+  <% unless @redemption_instruction.last_active_instruction? %>
+    <div class="inputs-50">
+      <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false, required: true %>
+    </div>
+  <% end %>
+
+  <%= f.submit class: 'btn btn-wide btn-gray' %>
+<% end %>

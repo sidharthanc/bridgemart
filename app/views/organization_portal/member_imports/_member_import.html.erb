@@ -1,0 +1,7 @@
+<tr>
+  <td> <%= member_import.id %> </td>
+  <td> <%= member_import.updated_at %> </td>
+  <td> <%= member_import.order_id %> </td>
+  <td> <%= member_import.humanized_problems.split.join('<br>').html_safe %> </td>
+  <td> <%= link_to t('.action.clear'), organization_member_import_clear_path(current_organization, member_import), method: :patch, class: 'btn btn-info', data: { behavior: 'no-expand', confirm: t('.action.confirm') } %></td>
+</tr>

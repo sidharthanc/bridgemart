@@ -1,0 +1,13 @@
+<nav class="navbar navbar-white navbar-expand-lg">
+  <%= link_to root_path, class: 'navbar-brand' do %>
+    <%= image_tag 'bridge-tri-color-logo.png' %>
+  <% end %>
+
+  <div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <%= link_to t('.nav.sign_up'), new_enrollment_sign_up_path, class: 'nav-link', id: 'sign-up' %>
+      </li>
+    </ul>
+  </div>
+</nav>

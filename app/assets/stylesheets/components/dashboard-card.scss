@@ -1,0 +1,69 @@
+$action-button-bg-color: $body-bg-color;
+
+.dashboard-cards {
+  &__row {
+    @include make-row();
+    margin-bottom: $grid-gutter-width / 2;
+  }
+
+  &__credits {
+    font-size: 1.25rem;
+    text-align: right;
+
+    &-amount {
+      font-weight: bold;
+      padding-left: 10px;
+    }
+  }
+}
+
+.dashboard .card {
+  box-shadow: 0px 1px 3px 0px rgba(215, 230, 235, 1);
+  border: 0;
+
+  .standout {
+    font-size: 125%;
+    font-weight: bold;
+  }
+
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: baseline;
+    padding: 2em;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    background: none;
+    border: 0;
+    width: 100%;
+    padding: 0;
+    align-items: center;
+  }
+
+  .card-title {
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .card-subtitle {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .card-content {
+    flex: 1 1 auto;
+  }
+
+  .card-action {
+    background-color: $action-button-bg-color;
+    color: $primary-color;
+    border: none;
+    height: auto;
+    padding: 0.3em 2em 0.3em 2em;
+  }
+}

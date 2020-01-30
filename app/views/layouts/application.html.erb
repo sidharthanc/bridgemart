@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || t('.title') %></title>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'https://static.zdassets.com/ekr/snippet.js?key=7e8a840d-faae-428b-a572-64e3c57f4e3d',id:'ze-snippet' %>
+    <%= javascript_include_tag 'https://d3js.org/d3.v5.min.js' %>
+
+    <%= javascript_pack_tag 'vue-app-bootstrapper' %>
+    <%= stylesheet_pack_tag 'vue-app-bootstrapper' %>
+    <%= javascript_pack_tag 'pie-chart' %>
+    <%= stylesheet_pack_tag 'pie-chart' %>
+    <%= javascript_pack_tag 'stacked-area' %>
+    <%= stylesheet_pack_tag 'stacked-area' %>
+    <%= javascript_pack_tag 'single-bar' %>
+    <%= stylesheet_pack_tag 'single-bar' %>
+    <%= javascript_pack_tag 'payment-form' %>
+    <%= javascript_pack_tag 'product-detail' %>
+    <%= stylesheet_pack_tag 'product-detail' %>
+    <%= javascript_pack_tag 'modal-template' %>
+    <%= stylesheet_pack_tag 'modal-template' %>
+    <%= javascript_pack_tag 'app' %>
+
+    <link rel="stylesheet" href="https://use.typekit.net/cwm7qka.css">
+
+    <% if Rails.env.production? %>
+      <%= render partial: 'shared/google_analytics' %>
+    <% end %>
+  </head>
+  <body>
+    <%= query_diet_widget if defined?(QueryDiet) %>
+    <div style='float: left;'>
+      
+    </div>
+    <% if content_for? :header %>
+      <%= content_for :header %>
+    <% else %>
+      <%= render 'shared/header' %>
+    <% end %>
+
+    <%= render 'shared/flash', flash: flash if flash.any? %>
+    <%= yield %>
+
+  </body>
+</html>

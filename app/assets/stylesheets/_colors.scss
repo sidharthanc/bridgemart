@@ -1,0 +1,17 @@
+// Define your app's color palette here using SASS variables
+
+$primary-color: #0c9c4a;
+$alert-color: #ff4136;
+$body-bg-color: #f6f9fa;
+$gray-font-color: #757e81;
+$light-gray-font-color: lighten($gray-font-color, 10%);
+$lighter-gray-font-color: lighten($gray-font-color, 30%);
+$red-error-color: #dc3545;
+
+$dark-gray: #eff3f6;
+$white: #fff;
+
+$theme-colors: (
+  "primary": $primary-color,
+  "alert": $alert-color
+);

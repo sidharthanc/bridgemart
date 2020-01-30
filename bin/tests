@@ -1,0 +1,3 @@
+#!/bin/sh
+
+bundle exec rspec --exclude-pattern "spec/{requests}/**/*_spec.rb"

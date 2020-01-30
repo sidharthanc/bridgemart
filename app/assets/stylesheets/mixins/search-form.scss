@@ -1,0 +1,30 @@
+@mixin search-form {
+  flex: 1;
+  display: flex;
+
+  form {
+    flex: 1;
+  }
+
+  .form-group {
+    display: flex;
+    margin: 0;
+
+    input {
+      flex: 1;
+    }
+
+    .action-group {
+      margin: 0 15px;
+
+      .btn {
+        margin-right: 10px;
+        min-width: auto;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

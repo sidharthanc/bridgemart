@@ -1,0 +1,23 @@
+<div class="dashboard-header">
+  <header>
+    <%= member.name %>
+    <%= render 'shared/badges/inactive' if member.inactive? %>
+  </header>
+  <nav>
+    <ul>
+      <li><%= active_link_to t('.codes'), organization_member_codes_path(current_organization, member), activate: [:self] %></li>
+      <% if policy(member).edit? %>
+        <li><%= active_link_to t('.details'), edit_organization_member_path(current_organization, member), activate: [:self, organization_member_path(current_organization, member)] %></li>
+      <% end %>
+      <% if member.active? && member.first_data? %>
+        <li><%= active_link_to t('.balance_inquiry'), balance_inquiry_organization_member_path(current_organization, member), method: :post, activate: [:self] %></li>
+      <% end %>
+      <% if policy(member).deactivate? %>
+        <li><%= active_link_to t('.deactivate'), deactivate_organization_member_path(current_organization, member), method: :patch, activate: [:self], data: { confirm: t('confirm') } %></li>
+      <% end %>
+      <% if policy(member).reactivate? %>
+        <li><%= active_link_to t('.reactivate'), reactivate_organization_member_path(current_organization, member), method: :patch, activate: [:self], data: { confirm: t('confirm') } %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

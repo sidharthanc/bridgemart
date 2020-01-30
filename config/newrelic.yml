@@ -1,0 +1,70 @@
+common: &common
+  app_name: Bridgemart Vision
+  license_key: <%= Rails.application.credentials.dig(Rails.env.to_sym, :newrelic_key) %>
+
+  # When "true", the agent collects performance data about your
+  # application and reports this data to the New Relic service at
+  # newrelic.com. This global switch is normally overridden for each
+  # environment below. (formerly called 'enabled')
+  monitor_mode: false
+
+  # Developer mode should be off in every environment but
+  # development as it has very high overhead in memory.
+  developer_mode: false
+
+  # The newrelic agent generates its own log file to keep its logging
+  # information separate from that of your application. Specify its
+  # log level here.
+  log_level: info
+  log_file_name: 'newrelic.log'
+
+  # By default the agent automatically injects the monitoring JavaScript
+  # into web pages. Set this attribute to false to turn off this behavior.
+  browser_monitoring:
+    auto_instrument: true
+
+  # Tells transaction tracer and error collector (when enabled)
+  # whether or not to capture HTTP params.  When true, frameworks can
+  # exclude HTTP parameters from being captured.
+  # Rails: the RoR filter_parameter_logging excludes parameters
+  # Java: create a config setting called "ignored_params" and set it to
+  #     a comma separated list of HTTP parameter names.
+  #     ex: ignored_params: credit_card, ssn, password
+  capture_params: false
+
+  # Transaction tracer captures deep information about slow
+  # transactions and sends this to the New Relic service once a
+  # minute. Included in the transaction is the exact call sequence of
+  # the transactions including any SQL statements issued.
+  transaction_tracer:
+    enabled: true
+    transaction_threshold: apdex_f
+    record_sql: obfuscated
+    stack_trace_threshold: 0.500
+
+    # Slow query config
+    explain_enabled: true
+    explain_threshold: 0.5
+
+  # Error collector captures information about uncaught exceptions and
+  # sends them to New Relic for viewing
+  error_collector:
+    enabled: true
+    ignore_errors: "ActionController::RoutingError,Sinatra::NotFound"
+
+development:
+  <<: *common
+  app_name: Bridgemart Vision (Development)
+
+test:
+  <<: *common
+
+staging:
+  <<: *common
+  monitor_mode: true
+  app_name: Bridgemart Vision (Staging)
+
+production:
+  <<: *common
+  monitor_mode: true
+  app_name: Bridgemart Vision (Production)

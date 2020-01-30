@@ -1,0 +1,20 @@
+<div class="background-slant-wrapper code-card-content">
+  <div class="background-slant lightgreen" style="background-color: <%= code.product_category.background_color %>"></div>
+
+  <div class="code-title">
+    <%= code.plan_product_category.name %>
+  </div>
+
+  <div class="code-pricing">
+    <% unless options.fetch(:hide_dollar_amount, false) %>
+    <span class="code-limit"><%= code.limit.format(:no_cents_if_whole) || "Unknown" %></span>
+    <% end %>
+    <% unless options.fetch(:hide_expiration_date, false) %>
+    <span class="code-exp-date"><%= code.order.ends_on ? l(code.order.ends_on, format: :mmddyyyy) : 'None' %></span>
+    <% end %>
+  </div>
+
+  <div class="code-image">
+    <%= show_attached_image(code.plan_product_category.product_category.icon) %>
+  </div>
+</div>

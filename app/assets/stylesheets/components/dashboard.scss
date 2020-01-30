@@ -1,0 +1,151 @@
+.budget-card-container .card-content {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+}
+
+.billing-card-container {
+  .table {
+
+    thead th {
+      border-top: none;
+      border-bottom: 1px solid $lighter-gray-font-color;
+      color: $light-gray-font-color;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    tbody td {
+      color: $gray-font-color;
+      font-size: 14px;
+    }
+  }
+}
+
+.current-user {
+  height: $nav-logo-height;
+  @extend .nav;
+  @extend .navbar-nav;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
+
+  a {
+    padding-left: 2em;
+  }
+}
+
+.dashboard {
+  $dashboard-nav-cols: 2;
+  margin-top: 1em;
+
+  .dashboard-nav, .dashboard-content {
+    @include make-col-ready();
+  }
+
+  .dashboard-nav {
+    @include make-col($dashboard-nav-cols);
+
+    a {
+      display: block;
+      padding: 0 0 1rem 1rem;
+      font-weight: bold;
+    }
+  }
+
+  .dashboard-content {
+    @include make-col(12 - $dashboard-nav-cols);
+    padding-bottom: 1em;
+  }
+}
+
+.dashboard-header {
+  header {
+    font-size: 1.5em;
+    margin-bottom: .5rem;
+  }
+
+  nav {
+    margin-bottom: 1rem;
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      display: inline-block;
+
+      a {
+        display: block;
+        color: $gray-font-color;
+        padding-right: 2rem;
+        font-weight: bold;
+
+        &.active {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+.dashboard-page {
+  @extend .card;
+  padding: 2em 10em 2em 2em;
+  width: $dashboard-form-width;
+}
+
+.products-card-container {
+  .product {
+    padding-top: 1rem;
+    overflow: hidden;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+
+    &:last-of-type {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .product-header {
+    border-bottom: solid $dark-gray 1px;
+    margin-bottom: 0.5em;
+
+    img {
+      height: 2.5rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+  }
+
+  .content-column {
+    padding-left: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-flow: column;
+  }
+
+  .member-multiplier {
+    color: $light-gray-font-color;
+    font-style: italic;
+  }
+}
+
+.members-card-container {
+  .member-usage-legend {
+    font-size: large;
+    .col-md-5 {
+      padding-left: 0;
+    }
+  }
+
+  .add-members-column {
+    margin-bottom: 20px;
+  }
+}

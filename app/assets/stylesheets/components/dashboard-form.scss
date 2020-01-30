@@ -1,0 +1,16 @@
+$dashboard-form-width: 75%;
+
+.dashboard-form {
+  @extend .dashboard-page;
+
+  fieldset, legend {
+    padding-bottom: 1em;
+  }
+
+  legend {
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}

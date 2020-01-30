@@ -1,0 +1,28 @@
+<% cache member do %>
+  <tr class="tr-member" data-controller="table-row" data-action="click->table-row#toggleExpansion" data-target="table-row.tr">
+    <td><%= member.id %></td>
+    <td><%= member.name %>&nbsp;<%= render 'shared/badges/inactive' if member.inactive? %></td>
+    <td><%= member.phone %></td>
+    <td><%= member.email %></td>
+  </tr>
+  <tr class="tr-expanded tr-member-data d-none">
+    <td colspan="4">
+      <div class="tr-options">
+        <% if policy(Member).edit? %>
+          <%= link_to t('.actions.edit'), edit_organization_member_path(current_organization, member), class: 'btn btn-edit' %>
+          <% if member.codes.present? %>
+          <%= link_to t('.actions.resend'), resend_organization_member_path(current_organization, member), method: :post, class: 'btn btn-edit', data: { behavior: 'no-expand', confirm: t('.resend.confirm') }%>
+          <%= link_to t('codes.view_codes'), organization_member_codes_path(current_organization, member), activate: [:self], class: 'btn btn-lock' %>
+          <% end %>
+          <% if member.active? %>
+            <%= link_to t('.actions.deactivate'), deactivate_organization_member_path(current_organization, member), method: :patch, class: 'btn btn-delete', data: { behavior: 'no-expand', confirm: t('.deactivate.confirm') } %>
+          <% else %>
+            <%= link_to t('.actions.reactivate'), reactivate_organization_member_path(current_organization, member), method: :patch, class: 'btn btn-delete', data: { behavior: 'no-expand', confirm: t('.deactivate.confirm') } %>
+          <% end %>
+        <% else %>
+          <%= link_to t('.actions.view'), organization_member_path(current_organization, member), class: 'btn btn-lock' %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,39 @@
+variables:
+  azureContainerRegistry: '{"loginServer":"bridgepurchasing.azurecr.io", "id" : "/subscriptions/9590c724-1e29-4d73-98fa-22059c66f597/resourceGroups/bridge/providers/Microsoft.ContainerRegistry/registries/bridgepurchasing"}'
+  azureSubscriptionEndpoint: 'Bridge Purchasing Service Endpoint'
+  RAILS_MASTER_KEY: $(railsMasterKey)
+  imageLabel: bridge-rails-$(Build.SourceBranchName)
+steps:
+  - task: Docker@1
+    displayName: Build Deploy Image
+    inputs:
+        command: build
+        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+        azureContainerRegistry: $(azureContainerRegistry)
+        dockerFile: Dockerfile.deploy
+        imageName: $(imageLabel):$(Build.SourceVersion)
+        arguments: '--build-arg RAILS_MASTER_KEY=$(railsMasterKey)'
+        tags: latest
+  - task: Docker@1
+    displayName: 'Push an image'
+    inputs:
+        command: push
+        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+        azureContainerRegistry: $(azureContainerRegistry)
+        imageName: $(imageLabel):$(Build.SourceVersion)
+        tags: |
+          $(Build.SourceVersion)
+          latest
+  - script: |
+      docker run --env IMAGE=bridgepurchasing.azurecr.io/$(imageLabel):$(Build.SourceVersion) \
+                 --env RAILS_MASTER_KEY=$(railsMasterKey) \
+                 bridgepurchasing.azurecr.io/$(imageLabel):$(Build.SourceVersion) \
+                 bundle exec bin/manifest_generator staging | tee .k8s-manifest
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'develop'))
+    displayName: 'Generate Manifest'
+  - script: |
+      az login --service-principal --username $(azUsername) --password $(azPassword) --tenant $(azTenant)
+      az aks get-credentials --name bridge-k8s-staging --resource-group bridge-staging
+      kubectl apply -f .k8s-manifest
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'develop'))
+    displayName: 'Deploy to Staging'

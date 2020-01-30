@@ -1,0 +1,44 @@
+.cardInfoElement, #cardNumber {
+  margin: 0 !important;
+  color: #444 !important;
+  position: static !important;
+  top: 0 !important;
+  left: 0 !important;
+  font-style: normal !important;
+  text-align: left !important;
+  font-weight: normal !important;
+  font-size: 1rem !important;
+
+  font-family: "mr-eaves-xl-sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+              "Segoe UI Symbol" !important;
+}
+
+#cardNumber {
+  width: 100% !important;
+  margin: 1em 0 !important;
+}
+
+#cardNumber .cardNumberSegment {
+  font-size: 1.25em !important;
+}
+
+#cvv {
+  width: 25% !important;
+}
+
+#cvv::before,
+#expirationDate::before {
+  display: block;
+  color: #8f979a;
+  font-size: 75%;
+  text-transform: uppercase;
+}
+
+#cvv::before {
+  content: 'CVV';
+}
+
+#expirationDate::before {
+  content: 'Expires';
+}

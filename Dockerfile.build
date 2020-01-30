@@ -1,0 +1,25 @@
+FROM ruby:2.4.6-alpine
+# This file is tracked by the build pipeline and will automatically
+# build the image on updates
+# Use this line to bump: 2019-04-12.0
+
+# Minimal requirements for Rails
+RUN apk update && apk add --no-cache --update build-base \
+                                imagemagick6 imagemagick6-dev \
+                                autoconf automake libtool pkgconfig \
+                                linux-headers \
+                                git \
+                                postgresql-dev \
+                                nodejs \
+                                wkhtmltopdf \
+                                tzdata
+
+WORKDIR /tmp
+RUN wget https://github.com/dmtx/libdmtx/archive/master.zip && unzip master.zip && rm master.zip
+WORKDIR /tmp/libdmtx-master
+RUN ./autogen.sh && ./configure && make && make install
+
+ENV APP_PATH /usr/src/app
+WORKDIR $APP_PATH
+
+CMD ["bin/ash"]

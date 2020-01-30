@@ -1,0 +1,27 @@
+<div class="index-table-container">
+  <table class="index-table credit-history__table">
+    <thead>
+      <tr>
+        <th><%= sort_link @search, :created_at %></th>
+        <th><%= t '.columns.code' %></th>
+        <th><%= t '.columns.type' %></th>
+        <th class="credit-history__money-column"><%= sort_link @search, :amount_cents %></th>
+        <th class="credit-history__money-column"><%= t '.columns.remaining_balance' %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="credit-history-records" class="credit-history__table-body">
+      <% results.each do |credit| %>
+        <tr class="credit-history__row credit-history__row--<%= credit.type %>">
+          <td><%= credit.created_at %></td>
+          <td><%= credit.source_type&.titleize || 'Unknown' %> <%= credit.source_id || '' %></td>
+          <td><%= t ".types.#{credit.type}" %></td>
+          <td class="credit-history__money-column"><%= credit.amount.format %></td>
+          <td class="credit-history__money-column"><%= credit.organization.remaining_balance_at(credit).format %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

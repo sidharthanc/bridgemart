@@ -1,0 +1,19 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="jumbotron-text"><%= t('.jumbotron') %></div>
+        <nav class="user-links">
+          <%= link_to t('.sign_up'), new_enrollment_sign_up_path, class: 'btn btn-white' %>
+          <%= link_to t('.sign_in'), new_user_session_path, class: 'btn btn-white' %>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lead">
+  <p class="container product-lead">
+    <%= t('.lead') %>
+  </p>
+</div>

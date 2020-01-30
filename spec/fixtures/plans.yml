@@ -1,0 +1,11 @@
+metova:
+  organization: metova
+
+bridge:
+  organization: bridge
+
+walmart:
+  organization: walmart
+
+new_order:
+  organization: bridge

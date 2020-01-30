@@ -1,0 +1,507 @@
+openapi: 3.0.0
+servers:
+  - description: (Planned) Sandbox Environment
+    url: https://sandbox-api.bridge-vision.com
+info:
+  title: Bridge Purchasing Code API
+  description: A RESTful, JSON API for Bridge Purchasing Codes
+  version: "1.0.0"
+  contact:
+    email: colin@ross.solutions
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: organizations
+    description: Operations available to organizations
+paths:
+  /products:
+    get:
+      tags:
+        - organizations
+      summary: searches products
+      operationId: searchProducts
+      description: |
+        By passing in the appropriate options, you can search for
+        available products in the system
+      parameters:
+        - in: query
+          name: search
+          description: pass an optional search string for looking up products
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: skip
+          description: number of records to skip for pagination
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          name: limit
+          description: maximum number of records to return
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - admins
+      summary: adds an product item
+      operationId: addProduct
+      description: Adds a product to the system
+      responses:
+        '201':
+          description: item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing product already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: Product to add
+        
+  /products/{product_id}:
+    get:
+      tags:
+        - organizations
+      summary: show a product's details
+      parameters:
+        - in: path
+          name: product_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        '200':
+          description: product found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: access key invalid or not included
+        '403':
+          description: access key does not have access to product
+        '404':
+          description: product not found
+  /organizations:
+    post:
+      tags:
+        - admins
+      summary: create a new Organization
+      operationId: createOrganization
+      description: Adds an organization to the system
+      responses:
+        '201':
+          description: organization created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing organization already exists
+      
+  /organizations/{organization_id}:
+    get:
+      tags:
+        - organizations
+      summary: show an organzation's details
+      parameters:
+        - in: path
+          name: organization_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        '200':
+          description: organization found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: access key invalid or not included
+        '403':
+          description: access key does not have access to organization
+        '404':
+          description: organization not found
+  /organizations/{organization_id}/members:
+    get:
+      tags:
+        - organizations
+      summary: list an organization's membership
+      parameters:
+        - in: path
+          name: organization_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        '200':
+          description: an array of members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: access key invalid or not included
+        '403':
+          description: access key does not have access to code
+        '404':
+          description: organization not found
+    post:
+      tags:
+        - organizations
+      summary: list an organization's membership
+      parameters:
+        - in: path
+          name: organization_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '201':
+          description: Member Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '202':
+          description: Member Creation accepted. (Background / Scheduled)
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: Member Creation Not Acceptable
+  /codes:
+    post:
+      tags:
+        - organizations
+      summary: create a new Code
+      operationId: createCode
+      description: Schedules a Code for creation (and activation) in the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Code'
+      responses:
+        '201':
+          description: Code Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '202':
+          description: Code Request accepted. (Background / Scheduled)
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: Code Request Not Acceptable
+  /codes/{code_id}:
+    get:
+      tags:
+        - organizations
+      summary: show a code's details
+      parameters:
+        - in: path
+          name: code_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        '200':
+          description: code found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '401':
+          description: access key invalid or not included
+        '403':
+          description: access key does not have access to code
+        '404':
+          description: code not found
+  /codes/{code_id}/{action}:
+    put:
+      tags:
+        - organizations
+      summary: Perform action on code
+      parameters:
+        - in: path
+          name: code_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - in: path
+          name: action
+          schema:
+            type: string
+            enum: ['activate', 'lock', 'unlock', 'deliver', 'close']
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeAction'
+      responses:
+        '200':
+          description: action performed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '202':
+          $ref: '#/components/responses/RequestAccepted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/ResourceNotFoundError'
+    
+
+components:
+  schemas:
+    Organization:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          readOnly: true
+        name:
+          type: string
+          example: Elmer Fudd's Hunting Supply
+        credit_balance:
+          type: number
+          format: double
+          readOnly: true
+        created_at:
+          type: string
+          format: datetime
+          readOnly: true
+        updated_at:
+          type: string
+          format: datetime
+          readOnly: true
+    Product:
+      type: object
+      required:
+        - name
+        - logo
+        - redemption_method
+        - redemption_method_options
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: e996748-6c54-4b01-90e6-d290f1eef0851
+          readOnly: true
+        name:
+          type: string
+          example: Safety Eyewear
+        logo:
+          type: string
+          format: url
+          example: 'https://www.acme-corp.com/logo.png'
+        redemption_method:
+          type: string
+          enum: ['first-data', 'eml', 'custom']
+          example: "first-data"
+        redemption_method_options:
+          type: object
+          properties:
+            min_value:
+              type: number
+              format: double
+              minimum: 0
+            max_value:
+              type: number
+              format: double
+              minimum: 0
+              maximum: 1000
+            redemption_frequency:
+              type: string
+              enum: ['one-time', 'multiple-use']
+        available_from:
+          type: string
+          format: date
+        available_to:
+          type: string
+          format: date
+          nullable: true
+        self_service:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    Code:
+      type: object
+      required:
+        - product_id
+        - limit
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        product_id:
+          type: string
+          format: uuid
+        organization_id:
+          type: string
+          format: uuid
+          description: Required for multi-organization access keys
+        members:
+          type: array
+          items:
+            type: string
+            format: uuid
+          writeOnly: true
+        member_id:
+          type: string
+          format: uuid
+          readOnly: true
+        limit:
+          type: number
+          format: double
+          minimum: 5
+          example: 150.00
+        deliver:
+          type: boolean
+          writeOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expires_at:
+          type: string
+          format: date
+        balance:
+          type: number
+          format: double
+          readOnly: true
+          example: 17.65
+        status:
+          type: string
+          enum: ["scheduled", "active", "locked", "expired", "closed"]
+          readOnly: true
+        extended_information:
+          type: object
+          readOnly: true
+          properties:
+            registered:
+              type: boolean
+              nullable: true
+            delivered_at:
+              type: string
+              format: date-time
+            registered_at:
+              type: string
+              format: date-time
+              nullable: true
+            locked_at:
+              type: string
+              format: date-time
+              nullable: true
+            lock_reason:
+              type: string
+              example: "Lost or Stolen"
+              nullable: true
+            closed_at:
+              type: string
+              format: date-time
+              nullable: true
+              example: null
+            closing_amount:
+              type: number
+              format: double
+              nullable: true
+              example: null
+    CodeAction:
+      type: object
+      writeOnly: true
+      properties:
+        lock_reason:
+          type: string
+        unlock_reason:
+          type: string
+    Member:
+      type: object
+      required:
+        - email
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+  responses:
+    RequestAccepted:
+      description: The request was accepted, but will be completed in the background
+    ResourceNotFoundError:
+      description: The requested resource cannot be found
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    ForbiddenError:
+      description: Access token is valid, but does not allow access to resource
+  securitySchemes:  
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+security:
+  - ApiKeyAuth: []
