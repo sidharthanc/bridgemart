@@ -13,7 +13,7 @@ gem 'audited', '~> 4.7'
 gem 'azure-storage', require: false
 gem 'barby'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap4-kaminari-views'
 gem 'cardconnect'
