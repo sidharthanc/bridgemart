@@ -9,7 +9,7 @@
     "jquery-mask-plugin": "^1.14.15",
     "jquery-ui": "^1.12.1",
     "mjml": "^4.4.0",
-    "papaparse": "^4.3.7",
+    "papaparse": "^5.2.0",
     "stimulus": "^1.0.1",
     "vue": "^2.5.16",
     "vue-i18n": "^7.7.0",
